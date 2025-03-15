@@ -68,26 +68,33 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #7d7777;
+            background-color: #ffffff;
             border-radius: 5px;
             padding: 10px;
             top: 100%;
             left: 0;
             min-width: 150px;
         }
-        .nav-item:hover .dropdown-menu,
-        .dropdown-menu:hover {
-            display: block;
-        }
         .dropdown-menu a {
             display: block;
             padding: 5px 10px;
-            color: white;
+            color: #000000;
             text-decoration: none;
         }
         .dropdown-menu a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(168, 161, 161, 0.47);
         }
+
+        /*Na velkej obrazovke sa po prejdeni myši ukaze vnoreny zoznam a na malej az po kliknuti*/
+        @media (min-width: 992px) {
+            .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+            .dropdown-toggle {
+                pointer-events: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -132,7 +139,7 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Muži</a>
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Muži</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Tričká</a></li>
                             <li><a class="dropdown-item" href="#">Nohavice</a></li>
@@ -140,7 +147,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Ženy</a>
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Ženy</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Tričká</a></li>
                             <li><a class="dropdown-item" href="#">Nohavice</a></li>
@@ -148,7 +155,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Deti</a>
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Deti</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Tričká</a></li>
                             <li><a class="dropdown-item" href="#">Nohavice</a></li>
