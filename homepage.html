@@ -54,18 +54,52 @@
         footer {
             flex-shrink: 0;
         }
+        .navbar-nav .nav-item {
+            position: relative;
+        }
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+            border-radius: 5px;
+        }
+        .navbar-nav .nav-item:hover .nav-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #7d7777;
+            border-radius: 5px;
+            padding: 10px;
+            top: 100%;
+            left: 0;
+            min-width: 150px;
+        }
+        .nav-item:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="navbar-top">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar text-white logo" href="#">
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#">
                 <img
                         src="img/outfitspot-high-resolution-logo.png"
                         alt="Logo"
-                        width="200"
+                        width="150"
                         class=" align-text-top"
                 />
             </a>
@@ -88,35 +122,41 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand custom-navbar">
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container">
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-            >
+<!--            <a class="navbar-brand" href="#"></a>-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white mx-3" href="#">Item 1</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Muži</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Ženy</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white mx-3" href="#">Item 2</a>
+                        <a class="nav-link dropdown-toggle text-white mx-3" href="#">Deti</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white mx-3" href="#">Item 3</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white mx-3" href="#">Item 4</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white mx-3" href="#">Item 5</a>
+                        <a class="nav-link text-white mx-3" href="#">Kontakt</a>
                     </li>
                 </ul>
             </div>
