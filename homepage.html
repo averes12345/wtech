@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OutfitSpot</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .custom-navbar {
+            background-color: #7d7777;
+        }
+        .navbar-top {
+            background-color: #696969;
+            padding: 10px 0;
+        }
+        .search-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .col-2{
+            flex-basis: 50%;
+            min-width: 300px;
+        }
+        .col-2 img{
+            max-width: 100%;
+            padding: 50px 0;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+        .navbar-nav .nav-item {
+            position: relative;
+        }
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+            border-radius: 5px;
+        }
+        .navbar-nav .nav-item:hover .nav-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            top: 100%;
+            left: 0;
+            min-width: 150px;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 5px 10px;
+            color: #000000;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: rgba(168, 161, 161, 0.47);
+        }
+
+        /*Na velkej obrazovke sa po prejdeni myši ukaze vnoreny zoznam a na malej az po kliknuti*/
+        @media (min-width: 992px) {
+            .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+            .dropdown-toggle {
+                pointer-events: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar-top">
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#">
+                <img
+                        src="img/outfitspot-high-resolution-logo.png"
+                        alt="Logo"
+                        width="150"
+                        class=" align-text-top"
+                />
+            </a>
+            <div class="search-container d-flex">
+                <input
+                        class="form-control me-1"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                />
+                <button class="btn btn-light" type="submit">Search</button>
+            </div>
+            <div class="d-flex">
+                <a href="#" class="btn btn-link text-white me-3">
+                    <i class="bi bi-person-circle fs-4"></i>
+                </a>
+                <a href="#" class="btn btn-link text-white">
+                    <i class="bi bi-cart fs-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+<!--            <a class="navbar-brand" href="#"></a>-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Muži</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Ženy</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Deti</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tričká</a></li>
+                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
+                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-3" href="#">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <h1>Dress to Impress<br>Every Single Day</h1>
+                <p>Your style is a reflection of your attitude and personality.<br> Own it, wear it, live it.</p>
+            </div>
+            <div class="col-2">
+                <img src="img/home2.jpg" alt="Homepage Photo">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-5">
+    <h2 class="mb-4">Kategórie</h2>
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img
+                        src="img/category1.jpg"
+                        class="card-img-top"
+                        alt="Kategória 1"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">Kategória 1</h5>
+                    <p class="card-text">
+                        Krátky popis prvej kategórie.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img
+                        src="img/category2.jpg"
+                        class="card-img-top"
+                        alt="Kategória 2"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">Kategória 2</h5>
+                    <p class="card-text">
+                        Krátky popis druhej kategórie.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img
+                        src="img/category3.jpg"
+                        class="card-img-top"
+                        alt="Kategória 3"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">Kategória 3</h5>
+                    <p class="card-text">
+                        Krátky popis tretej kategórie.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img
+                        src="img/category4.jpg"
+                        class="card-img-top"
+                        alt="Kategória 4"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">Kategória 4</h5>
+                    <p class="card-text">
+                        Krátky popis štvrtej kategórie.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <div class="mb-2 mb-md-0">
+            &copy; 2005 - Company, Inc. All rights reserved. Address Address
+        </div>
+        <div class="mb-2 mb-md-0">
+            <a href="#" class="text-white me-3">Item 1</a>
+            <a href="#" class="text-white me-3">Item 2</a>
+            <a href="#" class="text-white">Item 3</a>
+        </div>
+        <div>
+            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
