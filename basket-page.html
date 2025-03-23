@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+
+<head>
+    <link rel="stylesheet" href="css/basket-page.css">
+</head>
+
+<body>
+    <div class="grid">
+        <header>
+            <a class="logo" href="homepage.html"> </a>
+        </header>
+        <main>
+            <div class="inner-grid review">
+
+            </div>
+            <div class="inner-grid shipping">
+            </div>
+            <div class="inner-grid payment">
+                <input class="payment" type="radio" name="payment-method" value="card" id="card">
+                <label for="card">
+                    <div class="inner-grid card">
+                        <div class="small-payment-img" id="visa"> </div>
+                        <div class="small-payment-img" id="master-card"></div>
+                        <div class="small-payment-img" id="american-express"></div>
+                    </div>
+                </label>
+                <input class="payment" type="radio" name="payment-method" value="google-pay" id="google-pay">
+                <label for="google-pay">
+                    <div class="large-payment-img" id="google-pay"></div>
+                </label>
+                <input class="payment" type="radio" name="payment-method" value="apple-pay" id="apple-pay">
+                <label for="apple-pay">
+                    <div class="large-payment-img" id="apple-pay"></div>
+                </label>
+            </div>
+
+        </main>
+        <div>
+        </div>
+        <aside>
+            <div class="summary">
+                <!-- Dont even need all the stupid classes it just falls into the correct cells XD -->
+                <span class="items-anotation">Item(s)</span> <span class="value items-value">165.94€</span>
+                <span class="shipping-anotation">Shipping</span><span class="value shipping-value">14€</span>
+                <!-- Probably not even necessart this is US bullshit  -->
+                <span class="vat-anotation">VAT</span><span class="value vat-value">9€</span>
+            </div>
+            <hr>
+            <button href="temp.html" class="button">
+                <span class="button-text">Confirm and pay</span>
+            </button>
+
+        </aside>
+        <footer>
+            <section class="help-&-contact">
+                <h5>
+                    <a href="temp.html"> Help & Contact</a>
+                </h5>
+                <p>
+                    <a href="temp.html">Contact Us</a>
+                    <br>
+                    <a href="temp.html">Returns</a>
+                </p>
+            </section>
+
+            <section class="company">
+                <h5>
+                    <a href="temp.html">Company</a>
+                </h5>
+                <p>
+                    <a href="temp.html">Company info</a>
+                    <br>
+                    <a href="temp.html">News</a>
+                    <br>
+                    <a href="temp.html">Careers</a>
+                </p>
+            </section>
+
+            <section class="social-media">
+                <h5>
+                    <a href="temp.html">Stay connected</a>
+                </h5>
+                <p>
+                    <a class="facebook-link" href="https://www.facebook.com">
+                        <span class="icon"></span><span class="label">Facebook</span>
+                    </a>
+                    <br>
+                    <a class="x-link" href="https://www.x.com">
+                        <span class="icon"></span><span class="label">X (Twitter)</span>
+                    </a>
+                    <br>
+                    <a class="instagram-link" href="https://www.instagram.com">
+                        <span class="icon"></span><span class="label">Instagram</span>
+                    </a>
+                </p>
+            </section>
+        </footer>
+    </div>
+</body>
+
+</html>

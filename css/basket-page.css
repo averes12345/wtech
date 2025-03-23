@@ -1,0 +1,197 @@
+/*staging*/
+* {
+        box-sizing: inherit;
+}
+
+html {
+        height: 100%;
+        box-sizing: border-box;
+}
+
+body {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        margin-bottom: 0;
+}
+
+.grid {
+        width: 60%;
+        min-width: 600px;
+        min-height: 150%;
+        /* for testing remove later*/
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: "header header header"
+                "main main aside"
+                "footer footer footer";
+}
+
+/*header styles*/
+.logo {
+        width: 100px;
+        height: 100px;
+
+        display: inline-block;
+        background-image: url('../img/logo-black.svg');
+        background-size: cover;
+}
+
+/* main styles */
+
+
+
+.inner-grid {
+        display: grid;
+}
+
+/* review styles */
+
+
+/* shipping styles */
+
+
+
+/* payment styles */
+
+input.payment {
+        margin: 0;
+}
+
+div.payment {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto;
+        column-gap: 15px;
+}
+
+
+.card {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+}
+
+
+.small-payment-img,
+.large-payment-img {
+        display: block;
+        background-size: cover;
+}
+
+.small-payment-img {
+        width: 25px;
+        height: 25px;
+}
+
+.large-payment-img {
+        width: 75px;
+        height: 75px;
+}
+
+#visa {
+        background-image: url('../img/visa-color.svg');
+}
+
+#master-card {
+        background-image: url('../img/master-card-color.svg');
+}
+
+#american-express {
+        background-image: url('../img/amex-color.svg');
+}
+
+#google-pay {
+        background-image: url('../img/google-pay-color.svg');
+}
+
+#apple-pay {
+        background-image: url('../img/apple-pay-black.svg');
+}
+
+
+
+/* aside styling */
+aside {
+        position: sticky;
+        top: 2rem;
+        right: 2rem;
+        width: 250px;
+        max-height: 250px;
+
+        border: 1px solid red;
+        z-index: 10;
+        justify-self: center;
+}
+
+.summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "items-anotation items-value"
+                "shipping-anotation shipping-value"
+                "vat-anotation vat-value";
+}
+
+.value {
+        text-align: right;
+}
+
+/*footer styles*/
+/*section.social-media p a {
+        
+        display: flex;
+        flex-direction: row;
+}
+*/
+a span.label {
+        font-size: 1em;
+}
+
+.icon {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        background-size: cover;
+        margin-right: 2px;
+}
+
+.facebook-link .icon {
+        background-image: url('../img/facebook-black.svg');
+}
+
+.x-link .icon {
+        background-image: url('../img/x-black.svg');
+}
+
+.instagram-link .icon {
+        background-image: url('../img/instagram-black.svg');
+}
+
+footer {
+        display: flex;
+        flex-direction: row;
+}
+
+footer section {
+        flex: 1;
+        text-align: center;
+}
+
+/* Grid staging*/
+header {
+        grid-area: header;
+}
+
+main {
+        grid-area: main;
+}
+
+aside {
+        grid-area: aside;
+}
+
+footer {
+        grid-area: footer;
+}
