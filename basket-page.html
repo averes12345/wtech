@@ -15,11 +15,29 @@
 
             </div>
             <div class="inner-grid shipping">
+                <label for="country"></label>
+                <select id="country">
+                    <option value="sk">Slovakia</option>
+                    <option value="cz">Czech Republic</option>
+                    <option value="us">United States</option>
+                    <option value="de">Germany</option>
+                </select>
+                <input type="text" id="first-name" placeholder="first name">
+                <input type="text" id="last-name" placeholder="last name">
+                <input type="text" id="street-address" placeholder="street address">
+                <input type="text" id="city" placeholder="city">
+                <input type="text" id="region" placeholder="region">
+                <input type="text" id="zip-code" placeholder="zip">
+                <input type="email" id="email" placeholder="email">
+                <input type="email" id="email-confirm" placeholder="confirm email">
+                <input type="tel" id="phone-number" placeholder="phone number">
+                <button id="submit" class="continue-button">Done
+                </button>
             </div>
             <div class="inner-grid payment">
                 <input class="payment" type="radio" name="payment-method" value="card" id="card">
                 <label for="card">
-                    <div class="inner-grid card">
+                    <div class="card">
                         <div class="small-payment-img" id="visa"> </div>
                         <div class="small-payment-img" id="master-card"></div>
                         <div class="small-payment-img" id="american-express"></div>
@@ -45,12 +63,13 @@
                 <span class="shipping-anotation">Shipping</span><span class="value shipping-value">14€</span>
                 <!-- Probably not even necessart this is US bullshit  -->
                 <span class="vat-anotation">VAT</span><span class="value vat-value">9€</span>
+                <hr>
+                <div class="spacer"> </div>
+                <span class="total-anotation">Order total</span><span class="value total-value">188.94</span>
+                <button href="temp.html" class="button continue-button">
+                    <span class="button-text">Confirm and pay</span>
+                </button>
             </div>
-            <hr>
-            <button href="temp.html" class="button">
-                <span class="button-text">Confirm and pay</span>
-            </button>
-
         </aside>
         <footer>
             <section class="help-&-contact">

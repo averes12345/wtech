@@ -9,25 +9,22 @@ html {
 }
 
 body {
-        display: flex;
+        font-family: "Market Sans", Arial;
         height: 100%;
-        flex-direction: column;
-        justify-items: center;
-        align-items: center;
         margin-bottom: 0;
 }
 
 .grid {
-        width: 60%;
         min-width: 600px;
         min-height: 150%;
         /* for testing remove later*/
         display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
+        column-gap: 5vw;
+        grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
         grid-template-rows: auto 1fr auto;
-        grid-template-areas: "header header header"
-                "main main aside"
-                "footer footer footer";
+        grid-template-areas: "header header header header header"
+                ". main main aside ."
+                "footer footer footer footer footer";
 }
 
 /*header styles*/
@@ -46,14 +43,90 @@ body {
 
 .inner-grid {
         display: grid;
+        border: 1px solid black;
+}
+
+main {
+        display: grid;
+        row-gap: 5vh;
+        margin-bottom: 5vh;
+}
+
+button {
+        height: 40px;
+        border-radius: 24px;
+        border: solid black;
+        border-width: 1px;
 }
 
 /* review styles */
-
+div.review {}
 
 /* shipping styles */
+div.shipping {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-areas: "country country country country country country"
+                "first-name first-name first-name last-name last-name last-name"
+                "street-address street-address street-address street-address street-address street-address"
+                "city city region region zip zip"
+                "email email email email-confirm email-confirm email-confirm"
+                "phone-number phone-number phone-number phone-number phone-number phone-number"
+                "submit submit submit submit submit submit";
+}
 
+#country {
+        grid-area: country;
+}
 
+#first-name {
+        grid-area: first-name;
+}
+
+#last-name {
+        grid-area: last-name;
+}
+
+#street-number {
+        grid-area: street-number;
+}
+
+#city {
+        grid-area: city;
+}
+
+#region {
+        grid-area: region;
+}
+
+#zip-code {
+        grid-area: zip;
+}
+
+#email {
+        grid-area: email;
+}
+
+#email-confirm {
+        grid-area: email-confirm;
+}
+
+#phone-number {
+        grid-area: phone-number;
+}
+
+div.shipping button {
+        width: 30%;
+        padding: 1px 2px;
+        box-sizing: border-box;
+        grid-area: submit;
+}
+
+.continue-button {
+        border: none;
+        background-color: #3565f3;
+        color: white;
+}
 
 /* payment styles */
 
@@ -62,13 +135,16 @@ input.payment {
 }
 
 div.payment {
+        max-height: calc(3*75px + 3*15px);
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto auto;
         column-gap: 15px;
+        align-items: center;
 }
 
 
 .card {
+        display: grid;
         grid-template-columns: auto;
         grid-template-rows: auto auto auto;
 }
@@ -116,26 +192,51 @@ div.payment {
 aside {
         position: sticky;
         top: 2rem;
-        right: 2rem;
         width: 250px;
         max-height: 250px;
 
-        border: 1px solid red;
+
         z-index: 10;
         justify-self: center;
 }
 
-.summary {
+div.summary {
+        max-height: fit-content;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto auto auto 1fr auto auto;
         grid-template-areas: "items-anotation items-value"
                 "shipping-anotation shipping-value"
-                "vat-anotation vat-value";
+                "vat-anotation vat-value"
+                "hr hr"
+                "spacer spacer"
+                "total total"
+                "button button";
+        border: 1px solid black;
+}
+
+div.summary div.spacer {
+        grid-area: spacer;
 }
 
 .value {
         text-align: right;
+}
+
+div.summary hr {
+        grid-area: hr;
+        display: inline-block;
+        width: 90%;
+        height: 1px;
+        /* to make it thinner than 1px*/
+        transform: scaleY(0.5);
+        transform-origin: top;
+}
+
+aside div.summary button {
+        width: 80%;
+        grid-area: button;
+        justify-self: center;
 }
 
 /*footer styles*/
