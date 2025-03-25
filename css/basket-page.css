@@ -1,3 +1,29 @@
+/*global styles*/
+.small-img,
+.large-img {
+        display: block;
+        background-size: cover;
+}
+
+.small-img {
+        width: 25px;
+        height: 25px;
+}
+
+.large-img {
+        width: 75px;
+        height: 75px;
+}
+
+:root {
+        --border-color: #dee2e6;
+        --background-color: #F7F7F7;
+}
+
+.box {
+        border: 1px solid var(--border-color);
+}
+
 /*staging*/
 * {
         box-sizing: inherit;
@@ -16,7 +42,6 @@ body {
 
 .grid {
         min-width: 600px;
-        min-height: 150%;
         /* for testing remove later*/
         display: grid;
         column-gap: 5vw;
@@ -26,6 +51,8 @@ body {
                 ". main main aside ."
                 "footer footer footer footer footer";
 }
+
+
 
 /*header styles*/
 .logo {
@@ -43,27 +70,63 @@ body {
 
 .inner-grid {
         display: grid;
-        border: 1px solid black;
+        border: 1px solid var(--border-color);
+        height: fit-content;
 }
 
 main {
         display: grid;
-        row-gap: 5vh;
+        row-gap: 10vh;
         margin-bottom: 5vh;
 }
 
 button {
         height: 40px;
         border-radius: 24px;
-        border: solid black;
+        border: solid var(--border-color);
         border-width: 1px;
 }
 
 /* review styles */
-div.review {}
+
+div.review {
+        padding: 0 5%;
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: "review review review"
+                "img body body"
+                ". . controls";
+        column-gap: 5%;
+}
+
+.product-description {
+        color: gray;
+}
+
+#product-img-1 {
+        background-image: url('../img/unsplash_licence-640x640-nike-shoe-black.jpg');
+        grid-area: img;
+}
+
+
+
+div.review h4 {
+        grid-area: review;
+}
+
+div.review div.product-body {
+        grid-area: body;
+        font-size: 0.8rem;
+}
+
+div.review div.product-remove {
+        grid-area: controls;
+}
+
 
 /* shipping styles */
 div.shipping {
+        min-width: 400px;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(7, 1fr);
         grid-template-areas: "country country country country country country"
@@ -73,7 +136,22 @@ div.shipping {
                 "email email email email-confirm email-confirm email-confirm"
                 "phone-number phone-number phone-number phone-number phone-number phone-number"
                 "submit submit submit submit submit submit";
+        column-gap: 2%;
+        row-gap: 1vh;
+        padding: 5% 5%;
 }
+
+div.shipping :is(input, select) {
+        font-size: 1rem;
+        width: 100%;
+        max-height: 3rem;
+        box-sizing: border-box;
+        outline: none;
+        background-color: var(--background-color);
+
+        border-radius: 10px;
+}
+
 
 #country {
         grid-area: country;
@@ -87,8 +165,8 @@ div.shipping {
         grid-area: last-name;
 }
 
-#street-number {
-        grid-area: street-number;
+#street-address {
+        grid-area: street-address;
 }
 
 #city {
@@ -140,6 +218,7 @@ div.payment {
         grid-template-rows: auto auto auto;
         column-gap: 15px;
         align-items: center;
+        padding: 0 5%;
 }
 
 
@@ -150,21 +229,7 @@ div.payment {
 }
 
 
-.small-payment-img,
-.large-payment-img {
-        display: block;
-        background-size: cover;
-}
 
-.small-payment-img {
-        width: 25px;
-        height: 25px;
-}
-
-.large-payment-img {
-        width: 75px;
-        height: 75px;
-}
 
 #visa {
         background-image: url('../img/visa-color.svg');
@@ -212,7 +277,7 @@ div.summary {
                 "spacer spacer"
                 "total total"
                 "button button";
-        border: 1px solid black;
+        border: 1px solid var(--border-color);
 }
 
 div.summary div.spacer {
@@ -228,6 +293,7 @@ div.summary hr {
         display: inline-block;
         width: 90%;
         height: 1px;
+        color: var(--border-color);
         /* to make it thinner than 1px*/
         transform: scaleY(0.5);
         transform-origin: top;

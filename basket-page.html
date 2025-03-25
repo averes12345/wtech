@@ -3,6 +3,8 @@
 
 <head>
     <link rel="stylesheet" href="css/basket-page.css">
+    <!-- really bad favicon on the account of it not being visible maybe change later -->
+    <link rel="icon" href="img/logo-black.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -12,7 +14,23 @@
         </header>
         <main>
             <div class="inner-grid review">
-
+                <h4 class="bold-text">Review order</h4>
+                <div class="large-img" id="product-img-1"></div>
+                <div class="product-body" id="product-body-1">
+                    <span class="product-information">
+                        <span class="product-name"><b>Nike shoe</b></span>
+                        <br>
+                        <span class="product-description">Sleek and lightweight black Nike running shoe designed for
+                            comfort, speed, and everyday performance.
+                        </span>
+                        <br>
+                        <span class="product-price">165.94€</span>
+                    </span>
+                    <div class="controls">
+                        <input type="number" value="1" min="0">
+                    </div>
+                </div>
+                <div class="product-remove" id="product-">remove</div>
             </div>
             <div class="inner-grid shipping">
                 <label for="country"></label>
@@ -35,21 +53,21 @@
                 </button>
             </div>
             <div class="inner-grid payment">
-                <input class="payment" type="radio" name="payment-method" value="card" id="card">
+                <input class="payment box" type="radio" name="payment-method" value="card" id="card">
                 <label for="card">
                     <div class="card">
-                        <div class="small-payment-img" id="visa"> </div>
-                        <div class="small-payment-img" id="master-card"></div>
-                        <div class="small-payment-img" id="american-express"></div>
+                        <div class="small-img" id="visa"> </div>
+                        <div class="small-img" id="master-card"></div>
+                        <div class="small-img" id="american-express"></div>
                     </div>
                 </label>
-                <input class="payment" type="radio" name="payment-method" value="google-pay" id="google-pay">
+                <input class="payment box" type="radio" name="payment-method" value="google-pay" id="google-pay">
                 <label for="google-pay">
-                    <div class="large-payment-img" id="google-pay"></div>
+                    <div class="large-img" id="google-pay"></div>
                 </label>
-                <input class="payment" type="radio" name="payment-method" value="apple-pay" id="apple-pay">
+                <input class="payment box" type="radio" name="payment-method" value="apple-pay" id="apple-pay">
                 <label for="apple-pay">
-                    <div class="large-payment-img" id="apple-pay"></div>
+                    <div class="large-img" id="apple-pay"></div>
                 </label>
             </div>
 
