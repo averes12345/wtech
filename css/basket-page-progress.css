@@ -1,0 +1,88 @@
+/*staging*/
+
+
+/* This was not the brightest idea. Using the grid by it-self is much better.
+body {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+}
+*/
+
+.grid {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: "header header header header header"
+                "spacer main main aside spacer"
+                "footer footer footer footer footer";
+}
+
+/*header styles*/
+.logo {
+        width: 100px;
+        height: 100px;
+
+        display: inline-block;
+        background-image: url('../img/logo-black.svg');
+        background-size: cover;
+}
+
+/*footer styles*/
+/*section.social-media p a {
+        
+        display: flex;
+        flex-direction: row;
+}
+*/
+a span.label {
+        font-size: 1em;
+}
+
+.icon {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        background-size: cover;
+        margin-right: 2px;
+}
+
+.facebook-link .icon {
+        background-image: url('../img/facebook-black.svg');
+}
+
+.x-link .icon {
+        background-image: url('../img/x-black.svg');
+}
+
+.instagram-link .icon {
+        background-image: url('../img/instagram-black.svg');
+}
+
+footer {
+        display: flex;
+        flex-direction: row;
+}
+
+footer section {
+        flex: 1;
+}
+
+/* Grid staging*/
+header {
+        grid-area: header;
+}
+
+main {
+        grid-area: main;
+}
+
+aside {
+        grid-area: aside;
+}
+
+footer {
+        grid-area: footer;
+}

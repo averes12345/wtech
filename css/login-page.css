@@ -1,0 +1,145 @@
+html,
+body {
+        box-sizing: border-box;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+}
+
+.login-container {
+        box-sizing: border-box;
+        min-height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+}
+
+
+.page-head {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        margin: 10px 0 0 10px;
+}
+
+.logo {
+        width: 100px;
+        height: 100px;
+
+        align-self: flex-start;
+        display: inline-block;
+        background-image: url('../img/logo-black.svg');
+        background-size: cover;
+}
+
+.page-body {
+        margin-top: 75px;
+        width: 355px;
+        font-family: "Market Sans", Arial;
+        flex-grow: 1;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+}
+
+.heading {
+        font-size: 24px;
+}
+
+h2,
+p {
+        margin: 2px 0;
+}
+
+
+input,
+button {
+        width: 100%;
+        padding: 1px 2px;
+        margin-top: 5%;
+        box-sizing: border-box;
+
+}
+
+.input {
+        height: 40px;
+        border-radius: 10px;
+        background-color: ghostwhite;
+}
+
+.button {
+        height: 50px;
+        border-radius: 24px;
+        border: solid black;
+        border-width: 1px;
+}
+
+.continue-button {
+        border: none;
+        background-color: #3565f3;
+        color: white;
+}
+
+/* Might want to impelemnt using grid, using blanc spacers seems dirty */
+button {
+        width: 100%;
+        background-color: initial;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+}
+
+.spacer {
+        flex: 1;
+        display: flex;
+}
+
+button img {
+        margin-left: 10px;
+        align-self: center;
+}
+
+button span {
+        align-self: center;
+        display: inline-block;
+}
+
+
+.button-text {
+        color: initial;
+        text-decoration: black;
+        cursor: initial;
+}
+
+/* This is a stack overflow solution https://stackoverflow.com/questions/5214127/css-technique-for-a-horizontal-line-with-words-in-the-middle*/
+/* Need to rewrite it to be something more complicated if I decide to change the background color. */
+.horizontal-or-divider {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid black;
+        line-height: 0.1em;
+        margin: 20px 0;
+}
+
+.horizontal-or-divider span {
+        background: #fff;
+        padding: 0 10px;
+}
+
+/* Solution end*/
+
+
+
+.page-head,
+footer {
+        min-height: 15px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+}
