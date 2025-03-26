@@ -64,11 +64,24 @@ button {
 
 }
 
-.input {
+input.input {
+        background-color: var(--background-color);
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        color: #212529;
+
+        font-size: 1rem;
         height: 40px;
+        width: 100%;
+        max-height: 3rem;
+        box-sizing: border-box;
+        outline: none;
+
         border-radius: 10px;
-        background-color: ghostwhite;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
 }
+
 
 .button {
         height: 50px;
