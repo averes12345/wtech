@@ -16,6 +16,7 @@
                 <main>
                         <img id="registration-page-img" src="/img/registration-page-640x960.jpg">
                         <div class="registration-form">
+                                <h2 style="grid-column: span 2; text-align: center;">Register</h2>
                                 <input type="text" id="first-name" placeholder="first name">
                                 <input type="text" id="second-name" placeholder="second name">
                                 <input type="email" id="email" placeholder="email">
@@ -23,8 +24,11 @@
                                 <button class="button blue-button">Continue</button>
 
 
-                                <div class="horizontal-or-divider">
-                                        <span>or</span>
+                                <!-- horizontal or divider trick only works for block elements so wrapping it inside a container is necessary -->
+                                <div style="grid-column: span 2;">
+                                        <div class="horizontal-or-divider">
+                                                <span>or</span>
+                                        </div>
                                 </div>
 
                                 <button href="/src/login-with-google-page.html" class="button minimal-button">

@@ -34,17 +34,19 @@ body {
 header {
         display: grid;
         grid-template-columns: 2fr 3fr 2fr;
-        grid-template-rows: 1fr;
+        grid-template-rows: auto;
         grid-template-areas: "logo . redirection";
 }
 
 
 
 .logo {
-        margin: 10px 10px;
+        margin: 20vh 20vw;
+        min-height: 100px;
+        min-width: 100px;
 
-        width: 100px;
-        height: 100px;
+        height: 5vh;
+        width: 5vw;
 
         display: inline-block;
         background-image: url('../img/logo-black.svg');
@@ -63,6 +65,7 @@ header p {
 main {
         /*justify-self: center;*/
         display: grid;
+        align-items: center;
         grid-template-columns: 1fr 1fr;
         align-self: center;
         height: 100%;
@@ -75,16 +78,16 @@ img {
 }
 
 .registration-form {
-        margin: 10vh;
         justify-self: center;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        row-gap: 1vh;
-        column-gap: 1vw;
+        row-gap: 0.5vh;
+        column-gap: 2%;
 
-        width: 80%;
-        max-height: 40%;
-        min-width: 355px;
+        height: 40%;
+        max-height: 450px;
+        width: 50%;
+        max-width: 500px;
 }
 
 #password,
@@ -126,6 +129,7 @@ input {
 }
 
 .horizontal-or-divider {
+        grid-column: span 2;
         width: 100%;
         text-align: center;
         border-bottom: 1px solid black;
@@ -159,7 +163,11 @@ footer {
                 display: none;
         }
 
-        main {
-                grid-template-columns: 1fr;
+        div.registration-form {
+                grid-column: span 2;
         }
+}
+
+@media (min-height:1200px) {
+        main {}
 }
