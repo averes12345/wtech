@@ -75,7 +75,7 @@ img {
 }
 
 .registration-form {
-        margin: 10vh;
+        margin: 10% 5%;
         justify-self: center;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -87,6 +87,7 @@ img {
         min-width: 355px;
 }
 
+#heading,
 #password,
 #email {
         grid-column: span 2;
@@ -154,12 +155,19 @@ footer {
 
 /* media queries */
 
-@media (max-width:1200px) {
+@media (max-width:1200px) or (max-height:1000px) {
         #registration-page-img {
                 display: none;
         }
 
         main {
                 grid-template-columns: 1fr;
+        }
+}
+
+
+@media (max-width:800px) {
+        div.registration-form>* {
+                grid-column: span 2;
         }
 }
