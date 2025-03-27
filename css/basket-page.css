@@ -85,7 +85,7 @@ body {
 
 main {
         display: grid;
-        row-gap: 10vh;
+        row-gap: 5vh;
         margin-bottom: 5vh;
 }
 
@@ -128,6 +128,10 @@ div.review div.product-body {
         font-size: 0.8rem;
 }
 
+div.review input {
+        max-width: 200px;
+}
+
 div.review div.product-remove {
         grid-area: controls;
 }
@@ -135,7 +139,7 @@ div.review div.product-remove {
 
 /* shipping styles */
 div.shipping {
-        min-width: 400px;
+        min-width: 250px;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(8, 1fr);
         grid-template-areas: "heading heading heading heading heading heading"
@@ -155,7 +159,7 @@ div.shipping h4 {
         grid-area: heading;
 }
 
-div.shipping :is(input, select) {
+div :is(input, select) {
         background-color: var(--background-color);
         border: 1px solid #ced4da;
         border-radius: 4px;
@@ -397,4 +401,9 @@ aside {
 
 footer {
         grid-area: footer;
+}
+
+
+@media (max-width:850px) {
+        /* redo the grid so that the aside is at the bottom*/
 }
