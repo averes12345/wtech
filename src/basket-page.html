@@ -2,15 +2,16 @@
 <html lang='en-US'>
 
 <head>
-    <link rel="stylesheet" href="css/basket-page.css">
+    <link rel="stylesheet" href="/css/basket-page.css">
     <!-- really bad favicon on the account of it not being visible maybe change later -->
-    <link rel="icon" href="img/logo-black.svg" type="image/svg+xml">
+    <link rel="icon" href="/img/logo-white.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div class="grid">
         <header>
-            <a class="logo" href="homepage.html"> </a>
+            <a class="logo" href="/src/homePage.html"> </a>
         </header>
         <main>
             <div class="inner-grid review">
@@ -36,6 +37,7 @@
                 <h4 class="bold-text">Ship to</h4>
                 <label for="country"></label>
                 <select id="country">
+                    <option value="" disabled selected>Select a country</option>
                     <option value="sk">Slovakia</option>
                     <option value="cz">Czech Republic</option>
                     <option value="us">United States</option>
@@ -77,16 +79,16 @@
         <div>
         </div>
         <aside>
-            <div class="summary">
+            <div class="inner-grid summary">
+                <h4 class="bold-text">Summary</h4>
                 <!-- Dont even need all the stupid classes it just falls into the correct cells XD -->
                 <span class="items-anotation">Item(s)</span> <span class="value items-value">165.94€</span>
                 <span class="shipping-anotation">Shipping</span><span class="value shipping-value">14€</span>
                 <!-- Probably not even necessart this is US bullshit  -->
                 <span class="vat-anotation">VAT</span><span class="value vat-value">9€</span>
                 <hr>
-                <div class="spacer"> </div>
                 <span class="total-anotation">Order total</span><span class="value total-value">188.94</span>
-                <button href="temp.html" class="button continue-button">
+                <button href="/src/temp.html" class="button continue-button">
                     <span class="button-text">Confirm and pay</span>
                 </button>
             </div>
@@ -94,31 +96,31 @@
         <footer>
             <section class="help-&-contact">
                 <h5>
-                    <a href="temp.html"> Help & Contact</a>
+                    <a href="/src/temp.html"> Help & Contact</a>
                 </h5>
                 <p>
-                    <a href="temp.html">Contact Us</a>
+                    <a href="/src/temp.html">Contact Us</a>
                     <br>
-                    <a href="temp.html">Returns</a>
+                    <a href="/src/temp.html">Returns</a>
                 </p>
             </section>
 
             <section class="company">
                 <h5>
-                    <a href="temp.html">Company</a>
+                    <a href="/src/temp.html">Company</a>
                 </h5>
                 <p>
-                    <a href="temp.html">Company info</a>
+                    <a href="/src/temp.html">Company info</a>
                     <br>
-                    <a href="temp.html">News</a>
+                    <a href="/src/temp.html">News</a>
                     <br>
-                    <a href="temp.html">Careers</a>
+                    <a href="/src/temp.html">Careers</a>
                 </p>
             </section>
 
             <section class="social-media">
                 <h5>
-                    <a href="temp.html">Stay connected</a>
+                    <a href="/src/temp.html">Stay connected</a>
                 </h5>
                 <p>
                     <a class="facebook-link" href="https://www.facebook.com">

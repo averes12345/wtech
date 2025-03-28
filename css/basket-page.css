@@ -22,6 +22,8 @@
         --footer-background-color: #191c1f;
 }
 
+
+
 .box {
         border: 1px solid var(--border-color);
 }
@@ -49,7 +51,7 @@ body {
         /* for testing remove later*/
         display: grid;
         column-gap: 5vw;
-        grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+        grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
         grid-template-rows: auto 1fr auto;
         grid-template-areas: "header header header header header"
                 ". main main aside ."
@@ -77,12 +79,13 @@ body {
 .inner-grid {
         display: grid;
         border: 1px solid var(--border-color);
+        border-radius: 10px;
         height: fit-content;
 }
 
 main {
         display: grid;
-        row-gap: 10vh;
+        row-gap: 5vh;
         margin-bottom: 5vh;
 }
 
@@ -125,6 +128,10 @@ div.review div.product-body {
         font-size: 0.8rem;
 }
 
+div.review input {
+        max-width: 200px;
+}
+
 div.review div.product-remove {
         grid-area: controls;
 }
@@ -132,7 +139,7 @@ div.review div.product-remove {
 
 /* shipping styles */
 div.shipping {
-        min-width: 400px;
+        min-width: 250px;
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(8, 1fr);
         grid-template-areas: "heading heading heading heading heading heading"
@@ -152,17 +159,28 @@ div.shipping h4 {
         grid-area: heading;
 }
 
-div.shipping :is(input, select) {
+div :is(input, select) {
+        background-color: var(--background-color);
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        color: #212529;
+
         font-size: 1rem;
         width: 100%;
         max-height: 3rem;
         box-sizing: border-box;
         outline: none;
-        background-color: var(--background-color);
 
         border-radius: 10px;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
 }
 
+/*
+div.shipping :is(input, select):focus {
+
+}
+*/
 
 #country {
         grid-area: country;
@@ -271,11 +289,12 @@ div.payment h4 {
 
 /* aside styling */
 aside {
+        margin-bottom: 5vh;
         position: sticky;
         top: 2rem;
-        width: 250px;
+        min-width: 250px;
+        width: 100%;
         max-height: 250px;
-
 
         z-index: 10;
         justify-self: center;
@@ -283,21 +302,21 @@ aside {
 
 div.summary {
         max-height: fit-content;
-        display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto 1fr auto auto;
+        grid-template-rows: auto auto auto auto auto 1fr auto auto;
         grid-template-areas: "items-anotation items-value"
                 "shipping-anotation shipping-value"
                 "vat-anotation vat-value"
                 "hr hr"
-                "spacer spacer"
+                ". ."
                 "total total"
                 "button button";
         border: 1px solid var(--border-color);
+        padding: 0 5%;
 }
 
-div.summary div.spacer {
-        grid-area: spacer;
+div.summary h4 {
+        grid-column: span 2;
 }
 
 .value {
@@ -384,4 +403,27 @@ aside {
 
 footer {
         grid-area: footer;
+}
+
+
+@media (max-width:850px) {
+        /* redo the grid so that the aside is at the bottom*/
+
+        .grid {
+                grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+                grid-template-rows: auto 1fr auto auto;
+                grid-template-areas: "header header header header header"
+                        ". main main main ."
+                        ". aside aside aside ."
+                        "footer footer footer footer footer";
+                min-width: 300px;
+
+        }
+
+
+
+        aside {
+                width: 100%;
+        }
+
 }

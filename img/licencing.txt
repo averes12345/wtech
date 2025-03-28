@@ -1,3 +1,8 @@
 product immages https://unsplash.com/license
+        basket-page nike shoe
+        registration-page shirt beige
 logo created with https://www.canva.com/design/DAGicHDhgNg/YZ39x2E5ME_g2U8H4dYJ9Q/edit
+        logo-white.svg
+        logo-black.svg
 svgs need to ensure individual licences https://www.svgrepo.com/page/licensing/
+        google, apple, facebook, instagran, x, visa, mastercard, amex
