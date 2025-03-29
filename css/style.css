@@ -8,7 +8,7 @@ html, body {
 
 /*Navbar*/
 .custom-navbar {
-    background-color: #f8f8f8;
+    background-color: #b5b5b5;
 }
 
 .navbar-top {
@@ -94,7 +94,7 @@ html, body {
 
 /*HomePage*/
 .homepage-hero .row {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
