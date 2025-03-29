@@ -19,32 +19,32 @@
   <script>
 
     document.addEventListener('DOMContentLoaded', () => {
-      const maxRangeInput = document.getElementById('maxPriceRange');
-      const minRangeInput = document.getElementById('minPriceRange');
-      const minInput = document.getElementById('minPrice');
-      const maxInput = document.getElementById('maxPrice');
+      const maxPriceRange = document.getElementById('maxPriceRange');
+      const minPriceRange = document.getElementById('minPriceRange');
+      const minPrice = document.getElementById('minPrice');
+      const maxPrice = document.getElementById('maxPrice');
 
 
 
-      maxRangeInput.addEventListener('input', () => {
-        maxInput.value = parseInt(maxRangeInput.value);
+      maxPriceRange.addEventListener('input', () => {
+        maxPrice.value = parseInt(maxPriceRange.value);
       });
 
-      minRangeInput.addEventListener('input', () => {
-        minInput.value = parseInt(minRangeInput.value);
+      minPriceRange.addEventListener('input', () => {
+        minPrice.value = parseInt(minPriceRange.value);
       });
 
-      maxInput.addEventListener('change', () => {
-        const value = parseInt(maxInput.value);
+      maxPrice.addEventListener('change', () => {
+        const value = parseInt(maxPrice.value);
         if (!isNaN(value)) {
-          maxRangeInput.value = value;
+          maxPriceRange.value = value;
         }
       });
 
-      minInput.addEventListener('change', () => {
-        const value = parseInt(minInput.value);
+      minPrice.addEventListener('change', () => {
+        const value = parseInt(minPrice.value);
         if (!isNaN(value)) {
-          minRangeInput.value = value;
+          minPriceRange.value = value;
         }
       });
     });
@@ -206,7 +206,7 @@
       </div>
       <div class="product-grid">
         <div class="card product">
-          <img class="img-fluid product-img" alt="Product" src="../img/Mikina1.png">
+          <img class="img-fluid product-img" alt="Product" title="AI Generated Image" src="../img/Mikina1.png">
           <div class="card-body text-center">
             <h5 class="card-title">Model Name</h5>
             <p class="card-text">Price</p>
@@ -214,7 +214,7 @@
           <a href="productPage.html" class="stretched-link"></a>
         </div>
         <div class="card product">
-          <img class="img-fluid product-img" alt="Product" src="../img/Mikina2.png">
+          <img class="img-fluid product-img" alt="Product" title="AI Generated Image" src="../img/Mikina2.png">
           <div class="card-body text-center">
             <h5 class="card-title">Model Name</h5>
             <p class="card-text">Price</p>

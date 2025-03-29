@@ -51,7 +51,7 @@ html, body {
     background-color: rgba(168, 161, 161, 0.47);
 }
 
-/*Na velkej obrazovke sa po prejdeni myši ukaze vnoreny zoznam a na malej az po kliknuti*/
+
 @media (min-width: 992px) {
     .main-navbar .nav-item:hover .dropdown-menu {
         display: block;
@@ -168,7 +168,8 @@ aside.filter-sidebar h5 {
     padding-bottom: 5px;
     margin-bottom: 15px;
 }
-@media (max-width: 991.98px) {
+
+@media (max-width: 1135px) {
     aside.filter-sidebar {
         position: static;
         max-width: 100%;
