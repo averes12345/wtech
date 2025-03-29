@@ -16,11 +16,17 @@
   />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
+
   <style>
     .thumbnail-container img {
-      width: 100px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      max-width: 100px;
     }
   </style>
+
 </head>
 <body>
 <header>
@@ -60,7 +66,7 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Muži</a>
+            <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown" href="#">Muži</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Tričká</a></li>
               <li><a class="dropdown-item" href="#">Mikiny</a></li>
@@ -69,7 +75,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Ženy</a>
+            <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown" href="#">Ženy</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Tričká</a></li>
               <li><a class="dropdown-item" href="#">Mikiny</a></li>
@@ -78,7 +84,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link dropdown-toggle text-white mx-3" role="button" data-bs-toggle="dropdown" href="#">Deti</a>
+            <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown" href="#">Deti</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Tričká</a></li>
               <li><a class="dropdown-item" href="#">Mikiny</a></li>
@@ -87,7 +93,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white mx-3" href="#">Kontakt</a>
+            <a class="nav-link text-black mx-3" href="#">Kontakt</a>
           </li>
         </ul>
       </div>
@@ -107,19 +113,18 @@
 <div class="container my-4">
   <div class="row">
     <div class="col-md-6">
-      <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/hoodies.jpg">
-        <img id="mainImage" src="../img/hoodies.jpg" alt="Hlavný obrázok" class="img-fluid border">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina1.png">
+        <div class="col-md-6 text-center">
+          <img src="../img/Mikina1.png" alt="Produkt" class="img-fluid main-image" />
+        </div>
       </a>
 
       <div class="d-flex gap-3 mt-3 thumbnail-container">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/hoodies.jpg">
-          <img src="../img/hoodies.jpg" alt="Miniatúra 1" class="img-thumbnail" style="width: 150px; height: auto;">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina1.png">
+          <img src="../img/Mikina1.png" alt="Miniatúra 1" class="img-thumbnail" style="width: 100px; height: 100px;">
         </a>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/shoes.jpg">
-          <img src="../img/shoes.jpg" alt="Miniatúra 2" class="img-thumbnail" style="width: 150px; height: auto;">
-        </a>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/hoodies.jpg">
-          <img src="../img/hoodies.jpg" alt="Miniatúra 2" class="img-thumbnail" style="width: 150px; height: auto;">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina2.png">
+          <img src="../img/Mikina2.png" alt="Miniatúra 2" class="img-thumbnail" style="width: 100px; height: 100px;">
         </a>
       </div>
 
@@ -142,7 +147,7 @@
     <div class="col-md-6">
       <h1>Nike Mikina</h1>
       <p><strong>Popis</strong><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-      <div class="text-success h4">$ 9.99</div>
+      <div class="text-success h4">€ 9.99</div>
       <div class="text-success mb-3">Na sklade</div>
 
       <form class="row g-3 align-items-end">
@@ -174,22 +179,49 @@
   </div>
 </div>
 
-<footer class="bg-dark text-white py-4 mt-auto">
-  <div class="container d-flex flex-column flex-md-row justify-content-between">
-    <div class="mb-2 mb-md-0">
-      &copy; 2005 - Company, Inc. All rights reserved. Address Address
-    </div>
-    <div class="mb-2 mb-md-0">
-      <a href="#" class="text-white me-3">Item 1</a>
-      <a href="#" class="text-white me-3">Item 2</a>
-      <a href="#" class="text-white">Item 3</a>
-    </div>
-    <div>
-      <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-      <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-      <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
-    </div>
-  </div>
+<footer>
+  <section class="help-&-contact">
+    <h5>
+      <a href="../src/temp.html"> Help & Contact</a>
+    </h5>
+    <p>
+      <a href="../src/temp.html">Contact Us</a>
+      <br>
+      <a href="../src/temp.html">Returns</a>
+    </p>
+  </section>
+
+  <section class="company">
+    <h5>
+      <a href="../src/temp.html">Company</a>
+    </h5>
+    <p>
+      <a href="../src/temp.html">Company info</a>
+      <br>
+      <a href="../src/temp.html">News</a>
+      <br>
+      <a href="../src/temp.html">Careers</a>
+    </p>
+  </section>
+
+  <section class="social-media">
+    <h5>
+      <a href="../src/temp.html">Stay connected</a>
+    </h5>
+    <p>
+      <a class="facebook-link" href="https://www.facebook.com">
+        <span class="icon"></span><span class="label">Facebook</span>
+      </a>
+      <br>
+      <a class="x-link" href="https://www.x.com">
+        <span class="icon"></span><span class="label">X (Twitter)</span>
+      </a>
+      <br>
+      <a class="instagram-link" href="https://www.instagram.com">
+        <span class="icon"></span><span class="label">Instagram</span>
+      </a>
+    </p>
+  </section>
 </footer>
 
 <script
