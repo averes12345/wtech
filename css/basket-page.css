@@ -48,7 +48,7 @@ body {
 
 .grid {
         min-width: 600px;
-        /* for testing remove later*/
+        height: 100%;
         display: grid;
         column-gap: 5vw;
         grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
@@ -85,7 +85,7 @@ body {
 
 main {
         display: grid;
-        row-gap: 5vh;
+        row-gap: clamp(10px, 2vh, 30px);
         margin-bottom: 5vh;
 }
 
@@ -147,7 +147,7 @@ div.shipping {
                 "first-name first-name first-name last-name last-name last-name"
                 "street-address street-address street-address street-address street-address street-address"
                 "city city region region zip zip"
-                "email email email email-confirm email-confirm email-confirm"
+                "email email email email email email"
                 "phone-number phone-number phone-number phone-number phone-number phone-number"
                 "submit submit submit submit submit submit";
         column-gap: 2%;
@@ -167,7 +167,7 @@ div :is(input, select) {
 
         font-size: 1rem;
         width: 100%;
-        max-height: 3rem;
+        max-height: 4vh;
         box-sizing: border-box;
         outline: none;
 
@@ -426,4 +426,28 @@ footer {
                 width: 100%;
         }
 
+
+
+}
+
+@media (max-width: 600px) {
+        main div.shipping {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(9, 1fr);
+                row-gap: 0.25vh;
+                grid-template-areas: "heading heading"
+                        "country country"
+                        "first-name last-name"
+                        "street-address street-address"
+                        "city city"
+                        "region zip"
+                        "email email"
+                        "phone-number phone-number"
+                        "submit submit";
+
+        }
+
+        .grid {
+                grid-template-columns: 10px 1fr 3fr 1fr 10px;
+        }
 }
