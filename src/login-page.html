@@ -11,14 +11,17 @@
 <body>
     <div class="login-container">
         <div class="page-head">
-            <a class="logo" href="../src/homePage.html"></a>
+            <a class="logo" href="../src/index.html"></a>
         </div>
         <main class="page-body">
             <h2 class="heading"> Sign in to your account</h2>
             <p> New? <span> <a href="../src/registration-page.html"> Create account </a> </span> </p>
-            <input class="input" type="email" id="login-page_mail" name="user_mail" placeholder="Email">
-            <input class="input" type="password" name="user-password" placeholder="password">
-            <input class="button continue-button" type="button" id="login-page_continue" name="continue" value="Log in">
+            <form id="login-form">
+                <input class="input" type="email" id="login-page_mail" name="user_mail" placeholder="email">
+                <input class="input" type="password" id="login-page_pass" name="user_password" placeholder="password">
+                <input class="button continue-button" type="submit" id="login-page_continue" name="continue"
+                    value="Log in">
+            </form>
             <div class="horizontal-or-divider">
                 <span class="floating-or"> or </span>
             </div>
@@ -38,5 +41,20 @@
         </footer>
     </div>
 </body>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('login-page_mail').value.trim();
+        const password = document.getElementById('login-page_pass').value.trim();
+
+        if (email === 'admin@example.com' && password === 'admin123') {
+            window.location.href = '../src/admin-category-page.html';
+        } else if (email !== "" && password !== "") {
+            window.location.href = '../src/index.html';
+        }
+    });
+</script>
 
 </html>
