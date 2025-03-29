@@ -1,0 +1,386 @@
+/*global styles*/
+
+.tiny-img,
+.small-img,
+.large-img {
+        display: block;
+        background-size: cover;
+}
+
+.tiny-img {
+        width: 16px;
+        height: 16px;
+}
+
+.small-img {
+        width: 25px;
+        height: 25px;
+}
+
+.large-img {
+        width: 75px;
+        height: 75px;
+}
+
+.card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+
+:root {
+        --border-color: #dee2e6;
+        --background-color: #F7F7F7;
+        --footer-background-color: #191c1f;
+}
+
+
+
+.box {
+        border: 1px solid var(--border-color);
+}
+
+/*staging*/
+* {
+        box-sizing: inherit;
+}
+
+html {
+        height: 100%;
+        box-sizing: border-box;
+}
+
+body {
+        margin: 0;
+        padding: 0;
+        font-family: "Market Sans", Arial;
+        height: 100%;
+        margin-bottom: 0;
+}
+
+.grid {
+        height: 100%;
+        /* for testing remove later*/
+        display: grid;
+        column-gap: 5vw;
+        row-gap: 5vh;
+        grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: "header header header header header"
+                "aside main main main ."
+                "footer footer footer footer footer";
+}
+
+.inner-grid {
+        display: grid;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        height: fit-content;
+}
+
+/* header styles */
+header {
+        padding: 10px 24px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-area: header;
+        background-color: var(--footer-background-color);
+        align-items: center;
+}
+
+.logo {
+        width: 100px;
+        height: 100px;
+
+        display: inline-block;
+        background-image: url('../img/logo-white.svg');
+        background-size: cover;
+}
+
+search-wrapper {
+        width: 100%;
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+}
+
+.search-bar {
+        display: flex;
+        width: 100%;
+        min-width: 0px;
+        max-width: 800px;
+        /* a really cool hack, but I might want to make it actually responsive time permitting */
+        margin: 0 auto;
+        border-radius: 999px;
+        overflow: hidden;
+}
+
+.search-bar input[type="search"] {
+        min-width: 0px;
+        flex: 1;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        outline: none;
+}
+
+.search-bar button {
+        background-color: #ffffff;
+
+        margin-top: -5px;
+        margin-right: -5px;
+        margin-bottom: -5px;
+
+        padding: 0 1rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border-left: 1px solid #ccc;
+}
+
+.search-bar button:hover {
+        background-color: var(--footer-background-color);
+}
+
+#magnifying-glass {
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+        background-image: url('../img/boost-magnifying-glass.svg');
+        background-size: cover;
+}
+
+#people-circle,
+#cart-fill {
+        display: inline-block;
+        height: 36px;
+        width: 36px;
+        margin: 0 10px;
+}
+
+#people-circle {
+        background-image: url('../img/boost-people-circlize.svg');
+        background-size: cover;
+
+}
+
+#cart-fill {
+        background-image: url('../img/boost-cart-fill.svg');
+        background-size: cover;
+
+}
+
+/* aside styles */
+aside {
+        margin-bottom: 5vh;
+        position: sticky;
+        top: 2rem;
+        margin-left: 20px;
+
+        max-height: 300px;
+
+        z-index: 10;
+        grid-area: aside;
+}
+
+aside button {
+        height: 40px;
+        width: 80%;
+        margin-bottom: 10px;
+        border-radius: 24px;
+        border: solid var(--border-color);
+        border-width: 1px;
+}
+
+aside form hr {
+        display: block;
+        width: 80%;
+        justify-self: center;
+}
+
+aside label div {
+        display: inline-block;
+        width: 0.8em;
+        height: 0.8em;
+        border-radius: 50%;
+        background-color: #000000;
+
+}
+
+form button {
+        justify-self: center;
+}
+
+
+/* main styles */
+main {
+        /* for debugging only 
+        min-height: 150vh;*/
+        height: 100%;
+
+        margin-bottom: 5vh;
+        grid-area: main;
+}
+
+div.products {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-auto-rows: 200px;
+        row-gap: 10px;
+        column-gap: 1vw;
+
+}
+
+
+div.item {
+        border: solid var(--border-color) 1px;
+        border-radius: 10px;
+}
+
+.description-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+}
+
+div.img-wrapper {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+}
+
+main div.item button {
+        background-color: white;
+        border: none;
+}
+
+/* pagination https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Pagination*/
+.nav-wrapper {
+        display: grid;
+        align-items: center;
+}
+
+.visuallyhidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: auto;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        white-space: nowrap;
+}
+
+nav {
+        border-top: 1px solid #eee;
+        margin-top: 1em;
+        margin: auto;
+        padding-top: 0.5em;
+        font: 1.2em sans-serif;
+
+        display: flex;
+        justify-content: center;
+        justify-self: center;
+}
+
+.pagination {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+}
+
+.pagination li {
+        margin: 0 1px;
+}
+
+.pagination a {
+        display: block;
+        padding: 0.5em 1em;
+        border: 1px solid #999;
+        border-radius: 0.2em;
+        text-decoration: none;
+}
+
+.pagination a[aria-current="page"] {
+        background-color: #333;
+        color: #fff;
+}
+
+/* footer styles */
+footer {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        background-color: var(--footer-background-color);
+        grid-area: footer;
+}
+
+footer section {
+        flex: 1;
+        text-align: center;
+}
+
+footer section a {
+        color: white;
+}
+
+.icon {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        background-size: cover;
+        margin-right: 2px;
+}
+
+.facebook-link .icon {
+        background-image: url('../img/facebook-white.svg');
+}
+
+.x-link .icon {
+        background-image: url('../img/x-black.svg');
+}
+
+.instagram-link .icon {
+        background-image: url('../img/instagram-white.svg');
+}
+
+/* at media queries */
+@media (max-width:1000px) {
+        .grid {
+                grid-template-columns: 1fr 5fr 15fr 5fr 1fr;
+                grid-template-rows: auto auto 1fr auto;
+                grid-template-areas: "header header header header header"
+                        ". aside aside aside ."
+                        ". main main main ."
+                        "footer footer footer footer footer";
+                min-width: 300px;
+
+        }
+
+        aside {
+                margin-left: 0px;
+                width: 100%;
+                position: initial;
+        }
+
+}
+
+@media (max-width:734px) {
+        div.products {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-auto-rows: 160px;
+
+        }
+
+        div.img-wrapper {
+                width: 100%;
+                height: 120px;
+                overflow: hidden;
+        }
+}
+
+@media (max-width:480px) {
+        .search-bar {
+                display: none;
+        }
+}

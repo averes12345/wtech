@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang='en-US'>
+
+<head>
+    <link rel="stylesheet" href="../css/admin-category-page.css">
+    <link rel="icon" href="../img/logo-white.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Admin Categories</title>
+</head>
+
+<body>
+    <div class="grid">
+        <header>
+            <a class="logo" href="../src/homePage.html"> </a>
+            <div class="search-wrapper">
+                <form class="search-bar">
+                    <input type="search" placeholder="Search" />
+                    <button type="submit">
+                        <div id="magnifying-glass">
+                        </div>
+                    </button>
+                </form>
+            </div>
+            <div>
+                <a class="people-circle" href="../src/login-page.html">
+                    <div id="people-circle"></div>
+                </a>
+                <a class="cart-fill" href="../src/basket-page.html">
+                    <div id="cart-fill"></div>
+                </a>
+            </div>
+
+
+        </header>
+        <aside>
+            <form id="filter" class="inner-grid">
+                <div>Brand</div>
+                <label>
+                    <input type="checkbox" name="brand" value="Nike"> Nike
+                </label>
+                <label>
+                    <input type="checkbox" name="brand" value="Adidas"> Adidas
+                </label>
+                <label>
+                    <input type="checkbox" name="brand" value="Asics"> Asics
+                </label>
+                <hr>
+                <div>Color</div>
+                <label>
+                    <input type="checkbox" name="color" value="Red"> Red <div class="circle"
+                        style="background-color: red;"></div>
+                </label>
+                <label>
+                    <input type="checkbox" name="color" value="Blue"> Blue <div class="circle"
+                        style="background-color: blue;"></div>
+                </label>
+                <label>
+                    <input type="checkbox" name="color" value="Green"> Green <div class="circle"
+                        style="background-color: green;"></div>
+                </label>
+                <hr>
+                <div>Price</div>
+                <div>
+                    <input type="range">
+                </div>
+                <button type="submit">Filter</button>
+            </form>
+
+        </aside>
+        <script>
+            document.querySelector("#filter").addEventListener("submit", function (e) {
+                e.preventDefault();
+            });
+        </script>
+
+        <main>
+            <div class="inner-grid products">
+                <div class="item">
+                    <div class="img-wrapper">
+                        <img src="../img/unsplash_licence-640x640-nike-shoe-black.jpg" alt="" class="card-img">
+                    </div>
+                    <div class="description-wrapper">
+                        <div class="description">
+                            This is a great product
+                        </div>
+                        <button class="edit">
+                            <img src="../img/svg_repo-edit.svg" alt="" class="tiny-img">
+                        </button>
+                        <button class="remove">
+                            <img src="../img/svg_repo-remove.svg" alt="" class="tiny-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+
+                <div class="item">last</div>
+
+            </div>
+            <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Pagination -->
+            <nav aria-label="pagination">
+                <ul class="pagination">
+                    <li>
+                        <a href="">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="visuallyhidden">previous set of pages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""><span class="visuallyhidden">page </span>1</a>
+                    </li>
+                    <li>
+                        <a href="" aria-current="page">
+                            <span class="visuallyhidden">page </span>2
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""> <span class="visuallyhidden">page </span>3 </a>
+                    </li>
+                    <li>
+                        <a href=""> <span class="visuallyhidden">page </span>4 </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="visuallyhidden">next set of pages</span><span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- reference end -->
+        </main>
+        <footer>
+            <section class="help-&-contact">
+                <h5>
+                    <a href="../src/temp.html"> Help & Contact</a>
+                </h5>
+                <p>
+                    <a href="../src/temp.html">Contact Us</a>
+                    <br>
+                    <a href="../src/temp.html">Returns</a>
+                </p>
+            </section>
+
+            <section class="company">
+                <h5>
+                    <a href="../src/temp.html">Company</a>
+                </h5>
+                <p>
+                    <a href="../src/temp.html">Company info</a>
+                    <br>
+                    <a href="../src/temp.html">News</a>
+                    <br>
+                    <a href="../src/temp.html">Careers</a>
+                </p>
+            </section>
+
+            <section class="social-media">
+                <h5>
+                    <a href="../src/temp.html">Stay connected</a>
+                </h5>
+                <p>
+                    <a class="facebook-link" href="https://www.facebook.com">
+                        <span class="icon"></span><span class="label">Facebook</span>
+                    </a>
+                    <br>
+                    <a class="x-link" href="https://www.x.com">
+                        <span class="icon"></span><span class="label">X (Twitter)</span>
+                    </a>
+                    <br>
+                    <a class="instagram-link" href="https://www.instagram.com">
+                        <span class="icon"></span><span class="label">Instagram</span>
+                    </a>
+                </p>
+            </section>
+        </footer>
+</body>
+
+</html>

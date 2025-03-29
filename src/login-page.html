@@ -2,38 +2,39 @@
 <html lang='en-US'>
 
 <head>
-    <link rel="stylesheet" href="/css/login-page.css">
-    <link rel="icon" href="/img/logo-white.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../css/login-page.css">
+    <link rel="icon" href="../img/logo-white.svg" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
 </head>
 
 <body>
     <div class="login-container">
         <div class="page-head">
-            <a class="logo" href="/src/homePage.html"></a>
+            <a class="logo" href="../src/homePage.html"></a>
         </div>
         <main class="page-body">
             <h2 class="heading"> Sign in to your account</h2>
-            <p> New? <span> <a href="/src/registration-page.html"> Create account </a> </span> </p>
+            <p> New? <span> <a href="../src/registration-page.html"> Create account </a> </span> </p>
             <input class="input" type="email" id="login-page_mail" name="user_mail" placeholder="Email">
-            <input class="button continue-button" type="button" id="login-page_continue" name="continue"
-                value="Continue">
+            <input class="input" type="password" name="user-password" placeholder="password">
+            <input class="button continue-button" type="button" id="login-page_continue" name="continue" value="Log in">
             <div class="horizontal-or-divider">
                 <span class="floating-or"> or </span>
             </div>
-            <button href="/src/login-with-google-page.html" class="button">
+            <button href="../src/login-with-google-page.html" class="button">
                 <div class="spacer">
                     <!-- Need to convert to a different element to reflect semantics -->
-                    <img src="/img/google-logo.svg" alt="Google logo">
+                    <img src="../img/google-logo.svg" alt="Google logo">
                 </div>
-                <span class="button-text"> Continue with Google</span>
+                <span class="button-text">Log in with Google</span>
                 <div class="spacer"></div>
             </button>
         </main>
         <footer>Copyright © 2025-2026 madeup Inc. All Rights Reserved.
-            <a href="/src/privacy-policy.html"> Privacy</a>,
-            <a href="/src/user-agreement.html"> User Agreement </a>,
-            <a href="/src/terms-of-use.html"> Terms of Use </a>
+            <a href="../src/privacy-policy.html"> Privacy</a>,
+            <a href="../src/user-agreement.html"> User Agreement </a>,
+            <a href="../src/terms-of-use.html"> Terms of Use </a>
         </footer>
     </div>
 </body>
