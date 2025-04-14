@@ -1,0 +1,9 @@
+.page-head,
+footer {
+    min-height: 15px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}

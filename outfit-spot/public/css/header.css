@@ -1,0 +1,95 @@
+header {
+    padding: 10px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-area: header;
+    background-color: var(--footer-background-color);
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+
+    display: inline-block;
+    background-image: url('../img/logo-white.svg');
+    background-size: cover;
+}
+
+search-wrapper {
+    width: 100%;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    min-width: 0px;
+    max-width: 800px;
+    /* a really cool hack, but I might want to make it actually responsive time permitting */
+    margin: 0 auto;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.search-bar input[type="search"] {
+    min-width: 0px;
+    flex: 1;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-bar button {
+    background-color: #ffffff;
+
+    margin-top: -5px;
+    margin-right: -5px;
+    margin-bottom: -5px;
+
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-left: 1px solid #ccc;
+}
+
+.search-bar button:hover {
+    background-color: var(--footer-background-color);
+}
+
+#magnifying-glass {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background-image: url('../img/boost-magnifying-glass.svg');
+    background-size: cover;
+}
+
+#log-out-icon,
+#people-circle,
+#cart-fill {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    margin: 0 10px;
+}
+
+#log-out-icon {
+    background-image: url('../img/log-out-white.svg');
+    background-size: cover;
+}
+
+#people-circle {
+    background-image: url('../img/boost-people-circlize.svg');
+    background-size: cover;
+
+}
+
+#cart-fill {
+    background-image: url('../img/boost-cart-fill.svg');
+    background-size: cover;
+
+}

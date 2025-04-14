@@ -1,0 +1,11 @@
+/*header styles*/
+.logo {
+    margin: 10px 10px;
+
+    width: 100px;
+    height: 100px;
+
+    display: inline-block;
+    background-image: url('../img/logo-black.svg');
+    background-size: cover;
+}

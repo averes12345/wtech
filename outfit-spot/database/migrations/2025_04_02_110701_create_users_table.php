@@ -16,11 +16,14 @@ return new class extends Migration
             $table->text('first_name');
             $table->text('last_name');
             $table->text('email')->unique('users_email_key');
+            $table->timestamp('email_verified_at')->nullable();
             $table->integer('phone')->nullable();
             $table->text('password');
             $table->integer('saved_shipping_preference')->nullable();
             $table->integer('saved_payment_preference')->nullable();
             $table->integer('cart_id')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

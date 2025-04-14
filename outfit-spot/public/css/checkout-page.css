@@ -1,0 +1,365 @@
+/*staging*/
+* {
+    box-sizing: inherit;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Market Sans", Arial;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.grid {
+    min-width: 600px;
+    height: 100%;
+    display: grid;
+    column-gap: 5vw;
+    grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "header header header header header"
+        ". main main aside ."
+        "footer footer footer footer footer";
+}
+
+
+
+
+/* main styles */
+
+
+
+.inner-grid {
+    display: grid;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    height: fit-content;
+}
+
+main {
+    display: grid;
+    row-gap: clamp(10px, 2vh, 30px);
+    margin-bottom: 5vh;
+}
+
+button {
+    height: 40px;
+    border-radius: 24px;
+    border: solid var(--border-color);
+    border-width: 1px;
+}
+
+/* review styles */
+
+div.review {
+    padding: 0 5%;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "review review review"
+        "img body body"
+        ". . controls";
+    column-gap: 5%;
+}
+
+.product-description {
+    color: gray;
+}
+
+#product-img-1 {
+    background-image: url('../img/unsplash_licence-640x640-nike-shoe-black.jpg');
+    grid-area: img;
+}
+
+
+
+div.review h4 {
+    grid-area: review;
+}
+
+div.review div.product-body {
+    grid-area: body;
+    font-size: 0.8rem;
+}
+
+div.review input {
+    max-width: 200px;
+}
+
+div.review div.product-remove {
+    grid-area: controls;
+}
+
+
+/* shipping styles */
+div.shipping {
+    min-width: 250px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas: "heading heading heading heading heading heading"
+        "country country country country country country"
+        "first-name first-name first-name last-name last-name last-name"
+        "street-address street-address street-address street-address street-address street-address"
+        "city city region region zip zip"
+        "email email email email email email"
+        "phone-number phone-number phone-number phone-number phone-number phone-number"
+        "submit submit submit submit submit submit";
+    column-gap: 2%;
+    row-gap: 1vh;
+    padding: 0 5%;
+}
+
+div.shipping h4 {
+    grid-area: heading;
+}
+
+div :is(input, select) {
+    background-color: var(--background-color);
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    color: #212529;
+
+    font-size: 1rem;
+    width: 100%;
+    max-height: 4vh;
+    box-sizing: border-box;
+    outline: none;
+
+    border-radius: 10px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+}
+
+/*
+div.shipping :is(input, select):focus {
+
+}
+*/
+
+#country {
+    grid-area: country;
+}
+
+#first-name {
+    grid-area: first-name;
+}
+
+#last-name {
+    grid-area: last-name;
+}
+
+#street-address {
+    grid-area: street-address;
+}
+
+#city {
+    grid-area: city;
+}
+
+#region {
+    grid-area: region;
+}
+
+#zip-code {
+    grid-area: zip;
+}
+
+#email {
+    grid-area: email;
+}
+
+#email-confirm {
+    grid-area: email-confirm;
+}
+
+#phone-number {
+    grid-area: phone-number;
+}
+
+div.shipping button {
+    width: 30%;
+    padding: 1px 2px;
+    box-sizing: border-box;
+    grid-area: submit;
+}
+
+.continue-button {
+    border: none;
+    background-color: #3565f3;
+    color: white;
+}
+
+/* payment styles */
+
+input.payment {
+    margin: 0;
+}
+
+div.payment {
+    max-height: calc(3*75px + 3*15px);
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto auto;
+    column-gap: 15px;
+    align-items: center;
+    padding: 0 5%;
+}
+
+div.payment h4 {
+    grid-column: span 2;
+}
+
+
+
+.card {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+}
+
+
+
+
+#visa {
+    background-image: url('../img/visa-color.svg');
+}
+
+#master-card {
+    background-image: url('../img/master-card-color.svg');
+}
+
+#american-express {
+    background-image: url('../img/amex-color.svg');
+}
+
+#google-pay {
+    background-image: url('../img/google-pay-color.svg');
+}
+
+#apple-pay {
+    background-image: url('../img/apple-pay-black.svg');
+}
+
+
+
+/* aside styling */
+aside {
+    margin-bottom: 5vh;
+    position: sticky;
+    top: 2rem;
+    min-width: 250px;
+    width: 100%;
+    max-height: 250px;
+
+    z-index: 10;
+    justify-self: center;
+}
+
+div.summary {
+    max-height: fit-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto 1fr auto auto;
+    grid-template-areas: "items-anotation items-value"
+        "shipping-anotation shipping-value"
+        "vat-anotation vat-value"
+        "hr hr"
+        ". ."
+        "total total"
+        "button button";
+    border: 1px solid var(--border-color);
+    padding: 0 5%;
+}
+
+div.summary h4 {
+    grid-column: span 2;
+}
+
+.value {
+    text-align: right;
+}
+
+div.summary hr {
+    grid-area: hr;
+    display: inline-block;
+    width: 90%;
+    height: 1px;
+    color: var(--border-color);
+    /* to make it thinner than 1px*/
+    transform: scaleY(0.5);
+    transform-origin: top;
+}
+
+aside div.summary button {
+    width: 80%;
+    grid-area: button;
+    justify-self: center;
+    margin: 10px;
+}
+
+/* Grid staging*/
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+aside {
+    grid-area: aside;
+}
+
+footer {
+    grid-area: footer;
+}
+
+
+@media (max-width:850px) {
+    /* redo the grid so that the aside is at the bottom*/
+
+    .grid {
+        grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+        grid-template-rows: auto 1fr auto auto;
+        grid-template-areas: "header header header header header"
+            ". main main main ."
+            ". aside aside aside ."
+            "footer footer footer footer footer";
+        min-width: 300px;
+
+    }
+
+
+
+    aside {
+        width: 100%;
+    }
+
+
+
+}
+
+@media (max-width: 600px) {
+    main div.shipping {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(9, 1fr);
+        row-gap: 0.25vh;
+        grid-template-areas: "heading heading"
+            "country country"
+            "first-name last-name"
+            "street-address street-address"
+            "city city"
+            "region zip"
+            "email email"
+            "phone-number phone-number"
+            "submit submit";
+
+    }
+
+    .grid {
+        grid-template-columns: 10px 1fr 3fr 1fr 10px;
+    }
+}
