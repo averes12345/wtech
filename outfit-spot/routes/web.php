@@ -15,7 +15,18 @@ Route::middleware(['auth:admin']) ->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
+});
+
+Route::get('/products', function () {
+    return view('category-page');
+});
+
+//Route::get('/products/{id}', function ($id) {
+//    return view('product-page', ['id' => $id]);
+//});
+Route::get('/product', function () {
+    return view('product-page');
 });
 
 Route::get('/checkout', function () {
