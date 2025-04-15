@@ -70,7 +70,7 @@
                         <h5 class="card-title mb-0">Mikiny</h5>
                         <i class="bi bi-arrow-right fs-4"></i>
                     </div>
-                    <a href="categoryPage.html" class="stretched-link"></a>
+                    <a href="/products" class="stretched-link"></a>
                 </div>
             </div>
             <div class="col-md-3 mb-4">

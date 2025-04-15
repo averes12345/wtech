@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/products', function () {
+    return view('category-page');
+});
+
 Route::get('/checkout', function () {
     return view('checkout-page');
 });
