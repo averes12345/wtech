@@ -22,6 +22,13 @@ Route::get('/products', function () {
     return view('category-page');
 });
 
+//Route::get('/products/{id}', function ($id) {
+//    return view('product-page', ['id' => $id]);
+//});
+Route::get('/product', function () {
+    return view('product-page');
+});
+
 Route::get('/checkout', function () {
     return view('checkout-page');
 });

@@ -116,7 +116,7 @@
                             <h5 class="card-title">Model Name</h5>
                             <p class="card-text">Price</p>
                         </div>
-                        <a href="productPage.html" class="stretched-link"></a>
+                        <a href="/product" class="stretched-link"></a>
                     </div>
                     <div class="card product">
                         <img class="img-fluid product-img" alt="Product" title="AI Generated Image" src="../img/Mikina2.png">
