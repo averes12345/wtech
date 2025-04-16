@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,11 +21,18 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)){
+        $credentials['is_admin'] = true;
+        if (Auth::guard('admin')->attempt($credentials)){
             $request->session()->regenerate();
             /* this is temporary until we have the index.html up and running */
             /* return redirect()->intended('/checkout'); */
             return redirect('/checkout');
+        }
+
+        $credentials['is_admin'] = false;
+        if (Auth::guard('web')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([

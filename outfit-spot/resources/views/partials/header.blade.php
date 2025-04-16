@@ -1,5 +1,5 @@
 <header>
-    <a class="logo" href="../src/index.html"> </a>
+    <a class="logo" href="/"> </a>
     <div class="search-wrapper">
         <form class="search-bar">
             <input type="search" placeholder="Search" />
@@ -10,7 +10,7 @@
         </form>
     </div>
     <div>
-        <a class="log-out" href="../src/login-page.html">
+        <a class="log-out" href="/login">
             <div id="log-out-icon"></div>
         </a>
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('saved_payment_preference')->nullable();
             $table->integer('cart_id')->nullable();
             $table->rememberToken();
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }
