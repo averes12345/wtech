@@ -11,9 +11,17 @@
                 </div>
             </div>
             <div class="d-flex">
-                <a href="/login" class="btn btn-link text-white me-3">
-                    <i class="bi bi-person-circle fs-4"></i>
-                </a>
+                @guest
+                    <a href="/login" class="btn btn-link text-white me-3">
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </a>
+                @endguest
+                @auth
+                    <!-- this should point to the profile page if we get to creating one -->
+                    <a href="/" class="btn btn-link text-white me-3">
+                        <p>Welcome, {{Auth::user()->first_name}}!</p>
+                    </a>
+                @endauth
                 <a href="/checkout" class="btn btn-link text-white">
                     <i class="bi bi-cart fs-4"></i>
                 </a>

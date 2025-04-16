@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 /* I decided to merge the logic into a single controller */
 /* use App\Http\Controllers\Auth\AdminLoginController; */
+use App\Http\Controllers\CheckoutController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginFrom')->name('login');
@@ -29,9 +30,7 @@ Route::get('/product', function () {
     return view('product-page');
 });
 
-Route::get('/checkout', function () {
-    return view('checkout-page');
-});
+Route::resource('/checkout', CheckoutController::class);
 
 
 Route::get('/registration', function () {

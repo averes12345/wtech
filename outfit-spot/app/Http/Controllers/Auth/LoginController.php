@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,13 +27,18 @@ class LoginController extends Controller
             $request->session()->regenerate();
             /* this is temporary until we have the index.html up and running */
             /* return redirect()->intended('/checkout'); */
-            return redirect('/checkout');
+            return redirect('/admin/home');
         }
 
         $credentials['is_admin'] = false;
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/');
+        }
+
+        $user = Auth::user() ?? Auth::guard('admin')->user();
+        if ($user !== null ){
+            event(new UserLoggedIn($user));
         }
 
         return back()->withErrors([
