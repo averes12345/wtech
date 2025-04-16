@@ -1,3 +1,3 @@
 <header>
-    <a class="logo" href="../src/index.html"> </a>
+    <a class="logo" href="/"> </a>
 </header>

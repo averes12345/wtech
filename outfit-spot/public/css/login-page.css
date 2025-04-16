@@ -77,10 +77,6 @@ input.input {
 
 }
 
-input:invalid {
-    border-color: red;
-}
-
 
 .button {
     height: 50px;

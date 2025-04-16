@@ -17,8 +17,8 @@
 @section('content')
         <main class="page-body">
             <h2 class="heading"> Sign in to your account</h2>
-            <p> New? <span> <a href="../src/registration-page.html"> Create account </a> </span> </p>
-            <form id="login-form" method="POST" action="{{route('login.submit')}}">
+            <p> New? <span> <a href="/registration"> Create account </a> </span> </p>
+            <form id="login-form" method="POST" action="{{route('login.submit')}}" novalidate>
                 @csrf
 
                 <input class="input" type="email" id="login-page_mail" name="email" placeholder="email" required>
