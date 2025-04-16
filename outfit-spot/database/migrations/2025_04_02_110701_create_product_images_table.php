@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_color_size_id')->nullable();
+            $table->integer('product_color_sizes_id')->nullable();
             $table->text('image_path')->nullable();
             $table->text('alt')->nullable();
+            $table->timestamps();
         });
     }
 

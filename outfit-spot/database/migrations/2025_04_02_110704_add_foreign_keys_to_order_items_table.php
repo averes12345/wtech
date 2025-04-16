@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('order_items', function (Blueprint $table) {
             $table->foreign(['orders_id'], 'order_items_orders_id_fkey')->references(['id'])->on('orders')->onUpdate('no action')->onDelete('no action');
-            $table->foreign(['specific_product_id'], 'order_items_specific_product_id_fkey')->references(['id'])->on('product_color_size')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['specific_product_id'], 'order_items_specific_product_id_fkey')->references(['id'])->on('product_color_sizes')->onUpdate('no action')->onDelete('no action');
         });
     }
 

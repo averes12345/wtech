@@ -36,16 +36,31 @@
                 </div>
             </div>
             <div class="product-remove" id="product-">remove</div>
+            @foreach ($products as $product)
+                <div class="large-img" id="product-img-1"></div>
+                <div class="product-body" id="product-body-1">
+                    <span class="product-information">
+                        <span class="product-name"><b>{{$product->name}}</b></span>
+                        <br>
+                        <span class="product-description">{{$product->description}}</span>
+                        <br>
+                        <span class="product-price">{{$product->price}}</span>
+                    </span>
+                    <div class="controls">
+                        <input type="number" value="{{$product->quantity}}" min="0">
+                    </div>
+                </div>
+            <div class="product-remove" id="product-">remove</div>
+            @endforeach
         </div>
         <div class="inner-grid shipping">
             <h4 class="bold-text">Ship to</h4>
             <label for="country"></label>
             <select id="country">
                 <option value="" disabled selected>Select a country</option>
-                <option value="sk">Slovakia</option>
-                <option value="cz">Czech Republic</option>
-                <option value="us">United States</option>
-                <option value="de">Germany</option>
+                @foreach ($countries as $country)
+                    <option value="{{$country->code}}">{{ $country->name}}</option>
+                @endforeach
             </select>
             <input type="text" id="first-name" placeholder="first name">
             <input type="text" id="last-name" placeholder="last name">

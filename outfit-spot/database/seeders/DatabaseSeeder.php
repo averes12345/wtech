@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use colorObj;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,14 @@ class DatabaseSeeder extends Seeder
      $this->call([
         UserSeeder::class,
         CountrySeeder::class,
+        ColorSeeder::class,
+        SizeSeeder::class,
+        ProductSeeder::class,
+        ProductColorSizeSeeder::class,
+        ProductImageSeeder::class,
         /* AdminSeeder::class, */
     ]);
+
+
     }
 }

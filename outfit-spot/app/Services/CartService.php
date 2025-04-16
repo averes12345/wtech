@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Services;
 
 use App\Models\User;
 use App\Models\Product;
@@ -8,22 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class CartService
 {
-    protected $userId;
     /**
      * Create a new class instance.
      */
-    public function __construct()
-    {
-        $this->userId = Auth::id();
-        //
+    public function getUserId(){
+        return Auth::user() ?? Auth::guard('admin')->user();
     }
 
     public function add(int $productId, int $quantity = 1): void /* quantity has to be unsigned */
     {
         $product = Product::findOrFail($productId);
 
-        if($this->userId){
-           /* this is where I should update the cart in the database */
+        if($this->getUserId()){
+           /* $this is where I should update the cart in the database */
         } else {
             $cart = session()->get('cart', []);
 
@@ -43,8 +40,8 @@ class CartService
 
     public function remove(int $productId, int $quantity) :void /* quantity has to be unsigned */
     {
-        if ($this->userId) {
-           /* this is where I should update the cart in the database */
+        if ($this->getUserId()) {
+           /* $this is where I should update the cart in the database */
         } else {
             $cart = session()->get('cart', []);
             if (isset($cart[$productId])){
@@ -54,10 +51,19 @@ class CartService
         session()->put('cart',$cart);
     }
 
+    public function removeAll(int $productId) {
+        if ($this->getUserId()) {
+           /* $this is where I should update the cart in the database */
+        } else {
+            $cart = session()->get('cart', []);
+            $this->remove($productId, $cart[$productId]['quantity']);
+        }
+    }
+
     public function getCart(): array
     {
-        if($this->userId){
-            /* this is where i need to implement getting the cart from the database */
+        if($this->getUserId()){
+            /* $this is where i need to implement getting the cart from the database */
         } else{
             return session()->get('cart', []);
         }
@@ -66,7 +72,7 @@ class CartService
 
     public function mergeCartOnLogin(User $user)
     {
-    $sessionCart = session()->get('cart',[]);
-
+        $sessionCart = session()->get('cart',[]);
+        /* proceed to query for the cart and merge */
     }
 }
