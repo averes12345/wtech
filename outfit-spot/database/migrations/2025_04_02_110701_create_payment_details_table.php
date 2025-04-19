@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('method', ['card', 'paypal', 'bank'])->nullable();
+            $table->timestamps();
         });
-        DB::statement("alter table \"payment_details\" add column \"method\" payment_method null");
     }
 
     /**

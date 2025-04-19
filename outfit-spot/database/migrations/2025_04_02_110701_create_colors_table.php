@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('colors', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->text('color_name')->nullable();
             $table->text('color_code')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sizes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->text('size')->nullable()->unique('sizes_size_key');
+            $table->timestamps();
         });
     }
 
