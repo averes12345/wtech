@@ -28,6 +28,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_color_size');
+        Schema::table('product_color_sizes', function (Blueprint $table) {
+            $table->dropUnique('product_color_size_unique');
+            $table->dropForeign(['products_id']);
+            $table->dropForeign(['colors_id']);
+            $table->dropForeign(['sizes_id']);
+        });
+
+        Schema::dropIfExists('product_color_sizes');;
     }
 };

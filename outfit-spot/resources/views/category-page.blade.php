@@ -87,14 +87,34 @@
             </aside>
 
             <main class="col-md-9">
-                <h2>Mikiny</h2>
+                @switch($category->name)
+                    @case('hoodies')
+                        <h2>Mikiny</h2>
+                        @break
+
+                    @case('shirts')
+                        <h2>Tričká</h2>
+                        @break
+
+                    @case('jeans')
+                        <h2>Nohavice</h2>
+                        @break
+
+                    @case('shoes')
+                        <h2>Topánky</h2>
+                        @break
+                @endswitch
+
                 <div class="filters-active mb-3">
                     <span>Filter 1 ✕</span>
                     <span>Filter 2 ✕</span>
                     <span>Filter 3 ✕</span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
-                    <span>23 produktov</span>
+                    @php
+                        $totalVariants = $products_sum->sum('color_size_variants_count');
+                    @endphp
+                    <span>{{ $totalVariants }} produktov</span>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -110,86 +130,18 @@
 
                 </div>
                 <div class="product-grid">
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" title="AI Generated Image" src="../img/Mikina1.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="/product" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" title="AI Generated Image" src="../img/Mikina2.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina1.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina2.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina1.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina2.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina1.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina2.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina1.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
-                    <div class="card product">
-                        <img class="img-fluid product-img" alt="Product" src="../img/Mikina2.png">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Model Name</h5>
-                            <p class="card-text">Price</p>
-                        </div>
-                        <a href="productPage.html" class="stretched-link"></a>
-                    </div>
+                    @foreach($products as $product)
+                        @foreach($product->colorSizeVariants as $variant)
+                            <div class="card product">
+                                <img class="img-fluid product-img" alt="{{ $variant->mainImage->alt }}" title="AI Generated Image" src="{{ $variant->mainImage->image_path }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ $product->name }}</h5>
+                                    <p class="card-text">{{ $product->price }}€</p>
+                                </div>
+                                <a href="/product" class="stretched-link"></a>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
 
                 <nav class="mt-4">

@@ -23,6 +23,12 @@ class ProductColorSize extends Model
     public function images(){
         return $this->hasMany(ProductImage::class, 'product_color_sizes_id');
     }
+    public function mainImage()
+    {
+        return $this->hasOne(ProductImage::class, 'product_color_sizes_id')
+            ->where('is_main', true);
+    }
+
 
 }
 
