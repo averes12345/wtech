@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_color_sizes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('products_id')->nullable();
-            $table->integer('colors_id')->nullable();
-            $table->integer('sizes_id')->nullable();
+            $table->id();
+            $table->foreignId('products_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('colors_id')->constrained('colors')->onDelete('cascade');
+            $table->foreignId('sizes_id')->constrained('sizes')->onDelete('cascade');
             $table->integer('count_in_stock')->nullable()->default(0);
-            $table->timestamps();
+            $table->enum('status', ['in_stock', 'in_transit', 'sold_out'])->default('in_stock');
 
-            $table->unique(['products_id', 'colors_id', 'sizes_id'], 'product_color_size_products_id_colors_id_sizes_id_key');
+            $table->unique(['products_id', 'colors_id', 'sizes_id'], 'product_color_size_unique');
         });
     }
 

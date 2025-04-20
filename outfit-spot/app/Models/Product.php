@@ -8,10 +8,6 @@ use App\Models\ProductColorSize;
 
 class Product extends Model
 {
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'product_categories');
-    }
 
     public function colorSizeVariants(){
 

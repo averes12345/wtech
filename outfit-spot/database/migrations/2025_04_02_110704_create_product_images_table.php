@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_color_sizes_id')->nullable();
+            $table->id();
             $table->text('image_path')->nullable();
             $table->text('alt')->nullable();
-            $table->timestamps();
+            $table->boolean('is_main')->default(false);
+            $table->foreignId('product_color_sizes_id')->constrained('product_color_sizes')->onDelete('cascade');
         });
     }
 
