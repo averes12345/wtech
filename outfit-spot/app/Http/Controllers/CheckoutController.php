@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Country;
 use App\Models\Product;
+
 use App\Services\CartService;
 
 class CheckoutController extends Controller

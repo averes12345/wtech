@@ -24,10 +24,12 @@
 <main>
     <!-- Might want to include the bigger version of the image for 2k+ -->
     <img id="registration-page-img" src="../img/registration-page-640x960.jpg">
-    <form class="registration-form" id="f-this">
+    <form class="registration-form" id="f-this" method ="POST" action="{{route('login.submit')}}">
+            @csrf
+
             <h2 id="heading" style="text-align: center;">Register</h2>
             <input type="text" id="first-name" placeholder="first name">
-            <input type="text" id="second-name" placeholder="second name">
+            <input type="text" id="last-name" placeholder="second name">
             <input type="email" id="email" placeholder="email">
             <input type="password" id="password" placeholder="password">
             <button type="submit" class="button blue-button">Register</button>

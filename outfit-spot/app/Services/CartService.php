@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Product;
+
 use Illuminate\Support\Facades\Auth;
 
 class CartService
@@ -11,25 +12,23 @@ class CartService
     /**
      * Create a new class instance.
      */
-    public function getUserId(){
+    public function getUser(){
         return Auth::user() ?? Auth::guard('admin')->user();
     }
 
-    public function add(int $productId, int $quantity = 1): void /* quantity has to be unsigned */
+    public function add(int $productVariantId, int $quantity = 1): void /* quantity has to be unsigned */
     {
-        $product = Product::findOrFail($productId);
+        $user = $this->getUser();
+        if($user){
 
-        if($this->getUserId()){
            /* $this is where I should update the cart in the database */
         } else {
             $cart = session()->get('cart', []);
 
-            if (isset($cart[$productId])){
-                $cart[$productId]['quantity'] += $quantity;
+            if (isset($cart[$productVariantId ])){
+                $cart[$productVariantId ]['quantity'] += $quantity;
             } else {
-                $cart[$productId] = [
-                    'name' => $product->name,
-                    'price' => $product->price,
+                $cart[$productVariantId] = [
                     'quantity' => $quantity,
                 ];
             }
@@ -38,31 +37,32 @@ class CartService
         }
     }
 
-    public function remove(int $productId, int $quantity) :void /* quantity has to be unsigned */
+    public function remove(int $productVariantId, int $quantity = 1) :void /* quantity has to be unsigned */
     {
-        if ($this->getUserId()) {
+        $user = $this->getUser();
+        if ($user) {
            /* $this is where I should update the cart in the database */
         } else {
             $cart = session()->get('cart', []);
-            if (isset($cart[$productId])){
-                $cart[$productId]['quantity'] -= min($quantity, $cart[$productId]['quantity']);
+            if (isset($cart[$productVariantId])){
+                $cart[$productVariantId]['quantity'] -= min($quantity, $cart[$productVariantId]['quantity']);
             }
         }
         session()->put('cart',$cart);
     }
 
-    public function removeAll(int $productId) {
-        if ($this->getUserId()) {
+    public function removeAll(int $productVariantId) {
+        if ($this->getUser()->id) {
            /* $this is where I should update the cart in the database */
         } else {
             $cart = session()->get('cart', []);
-            $this->remove($productId, $cart[$productId]['quantity']);
+            $this->remove($productVariantId, $cart[$productVariantId]['quantity']);
         }
     }
 
     public function getCart(): array
     {
-        if($this->getUserId()){
+        if($this->getUser()->id){
             /* $this is where i need to implement getting the cart from the database */
         } else{
             return session()->get('cart', []);
