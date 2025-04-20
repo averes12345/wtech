@@ -27,7 +27,7 @@ class ProductImageSeeder extends Seeder
         $variants = ProductColorSize::all();
 
         foreach ($variants as $variant) {
-            foreach ($images as $image) {
+            foreach ($images as $index => $image) {
                 ProductImage::updateOrCreate(
                     [
                         'product_color_size_id' => $variant->id,
@@ -35,6 +35,7 @@ class ProductImageSeeder extends Seeder
                     ],
                     [
                         'alt' => $image['alt'],
+                        'is_main' => $index === 0,
                     ]
                 );
             }

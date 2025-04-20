@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('image_path')->nullable();
             $table->text('alt')->nullable();
+            $table->boolean('is_main')->default(false);
             $table->foreignId('product_color_size_id')->constrained('product_color_size')->onDelete('cascade');
             $table->timestamps();
         });

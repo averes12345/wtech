@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 /* I decided to merge the logic into a single controller */
@@ -19,9 +20,8 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/products', function () {
-    return view('category-page');
-});
+Route::get('/products', [CategoryController::class, 'index'])
+    ->name('products.category');
 
 //Route::get('/products/{id}', function ($id) {
 //    return view('product-page', ['id' => $id]);

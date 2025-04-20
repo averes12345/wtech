@@ -10,16 +10,21 @@ use Illuminate\Database\Seeder;
 
 class ProductColorSizeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $products = Product::all();
-        $colors   = Color::all();
-        $sizes    = Size::all();
+        $statuses = [
+            'in_stock',
+            'in_transit',
+            'sold_out',
+        ];
 
         foreach ($products as $product) {
+
+            $colors = Color::inRandomOrder()->take(3)->get();
+
+            $sizes  = Size::inRandomOrder()->take(5)->get();
+
             foreach ($colors as $color) {
                 foreach ($sizes as $size) {
                     ProductColorSize::updateOrCreate(
@@ -30,6 +35,7 @@ class ProductColorSizeSeeder extends Seeder
                         ],
                         [
                             'count_in_stock' => rand(0, 50),
+                            'status'         => $statuses[array_rand($statuses)],
                         ]
                     );
                 }
