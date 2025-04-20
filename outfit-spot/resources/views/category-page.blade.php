@@ -32,38 +32,26 @@
             <aside class="col-lg-3 mb-4 filter-sidebar">
                 <div class="mb-3">
                     <h5>Značky</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckNike">
-                        <label class="form-check-label" for="flexCheckNike">
-                            Nike
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckAdidas">
-                        <label class="form-check-label" for="flexCheckAdidas">
-                            Adidas
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckHollister">
-                        <label class="form-check-label" for="flexCheckHollister">
-                            Hollister
-                        </label>
+                    <div class="overflow-auto" style="max-height: 80px">
+                        @foreach($brands as $brand)
+                            <div class="form-check" style="margin-left: 10px">
+                                <input class="form-check-input" type="checkbox" value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
+                                <label class="form-check-label" for="brand-{{ $brand->id }}">
+                                    {{ $brand->name }}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="mb-3">
                     <h5>Farba</h5>
-                    <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2" type="checkbox">
-                        <span class="color-sample" style="background-color: #990000;"></span>
-                    </div>
-                    <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2" type="checkbox" value="">
-                        <span class="color-sample" style="background-color: #002499;"></span>
-                    </div>
-                    <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2" type="checkbox" value="">
-                        <span class="color-sample" style="background-color: #0faa00;"></span>
+                    <div class="overflow-auto" style="max-height: 80px">
+                        @foreach($colors as $color)
+                            <div class="form-check d-flex align-items-center" style="margin-left: 10px">
+                                <input class="form-check-input me-2" type="checkbox">
+                                <span class="color-sample" style="background-color: {{ $color->hex }};"></span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div>
@@ -96,7 +84,7 @@
                         <h2>Tričká</h2>
                         @break
 
-                    @case('jeans')
+                    @case('pants')
                         <h2>Nohavice</h2>
                         @break
 
@@ -112,9 +100,9 @@
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     @php
-                        $totalVariants = $products_sum->sum('color_size_variants_count');
+                        $totalProducts = $products->sum(fn($product) => $product->uniqueVariants->count());
                     @endphp
-                    <span>{{ $totalVariants }} produktov</span>
+                    <span>{{ $totalProducts }} produktov</span>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -131,7 +119,7 @@
                 </div>
                 <div class="product-grid">
                     @foreach($products as $product)
-                        @foreach($product->colorSizeVariants as $variant)
+                        @foreach($product->uniqueVariants as $variant)
                             <div class="card product">
                                 <img class="img-fluid product-img" alt="{{ $variant->mainImage->alt }}" title="AI Generated Image" src="{{ $variant->mainImage->image_path }}">
                                 <div class="card-body text-center">

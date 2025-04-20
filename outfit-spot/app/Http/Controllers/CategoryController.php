@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use function Symfony\Component\Translation\t;
@@ -23,19 +25,22 @@ class CategoryController extends Controller
 
     public function byCategory(Category $category)
     {
-        $products = $category->products()
-            ->with('colorSizeVariants.mainImage')
-            ->get();
-
-        $products_sum = $category
+        $products = $category
             ->products()
-            ->withCount('colorSizeVariants')
-            ->get();
+            ->with('colorSizeVariants.mainImage')
+            ->get()
+            ->map(function($product) {
+                $product->uniqueVariants = $product
+                    ->colorSizeVariants
+                    ->unique('colors_id')
+                    ->values();
+                return $product;
+            });
 
+        $brands = Brand::all();
+        $colors = Color::take(10)->get();
 
-        dump($products);
-
-        return view('category-page', compact('category','products', 'products_sum'));
+        return view('category-page', compact('category','products', 'brands', 'colors'));
     }
 
 
