@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_color_size', function (Blueprint $table) {
+        Schema::create('product_color_sizes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('products_id')->nullable();
             $table->integer('colors_id')->nullable();
             $table->integer('sizes_id')->nullable();
             $table->integer('count_in_stock')->nullable()->default(0);
+            $table->timestamps();
 
             $table->unique(['products_id', 'colors_id', 'sizes_id'], 'product_color_size_products_id_colors_id_sizes_id_key');
         });

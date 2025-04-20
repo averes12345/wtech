@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 10);
             $table->text('brand')->nullable();
+            $table->timestamps();
         });
         DB::statement("alter table \"products\" add column \"sex\" sex_enum null");
     }
