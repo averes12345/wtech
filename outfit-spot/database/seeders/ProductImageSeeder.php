@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductImage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\ProductColorSize;
+use App\Models\ProductImage;
 
 class ProductImageSeeder extends Seeder
 {
@@ -16,19 +16,28 @@ class ProductImageSeeder extends Seeder
         $images = [
             [
                 'image_path' => 'public/img/Mikina1.png',
-                'alt'        => 'Modra Mikina',
+                'alt'        => 'Modrá mikina',
             ],
             [
                 'image_path' => 'public/img/Mikina2.png',
-                'alt'        => 'Hneda Mikina',
+                'alt'        => 'Hnedá mikina',
             ],
         ];
 
-        foreach ($images as $image) {
-            ProductImage::updateOrCreate(
-                ['image_path' => $image['image_path']],
-                ['alt' => $image['alt']]
-            );
+        $variants = ProductColorSize::all();
+
+        foreach ($variants as $variant) {
+            foreach ($images as $image) {
+                ProductImage::updateOrCreate(
+                    [
+                        'product_color_size_id' => $variant->id,
+                        'image_path'            => $image['image_path'],
+                    ],
+                    [
+                        'alt' => $image['alt'],
+                    ]
+                );
+            }
         }
     }
 }

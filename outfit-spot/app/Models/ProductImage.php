@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Database\Factories\ProductImageFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
@@ -13,8 +13,8 @@ class ProductImage extends Model
         'alt',
     ];
 
-    public function variants()
+    public function productColorSize(): BelongsTo
     {
-        return $this->hasMany(ProductColorSize::class, 'product_image_id');
+        return $this->belongsTo(ProductColorSize::class, 'product_color_size_id');
     }
 }

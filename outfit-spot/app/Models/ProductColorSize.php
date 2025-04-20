@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductColorSize extends Model
 {
@@ -18,6 +19,11 @@ class ProductColorSize extends Model
         'count_in_stock',
     ];
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class, 'product_color_size_id');
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
@@ -29,9 +35,5 @@ class ProductColorSize extends Model
     public function size(): BelongsTo
     {
         return $this->belongsTo(Size::class);
-    }
-    public function productImage(): BelongsTo
-    {
-        return $this->belongsTo(ProductImage::class);
     }
 }
