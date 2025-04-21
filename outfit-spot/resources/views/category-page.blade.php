@@ -7,6 +7,13 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     />
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"
+        rel="stylesheet"
+    />
+
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
@@ -31,6 +38,9 @@
         <div class="row">
             <aside class="col-lg-3 mb-4 filter-sidebar">
                 <form action="{{ route('products.byCategory', ['category' => $category->name]) }}" method="GET">
+                    @if(request()->filled('type'))
+                        <input type="hidden" name="type" value="{{ request('type') }}">
+                    @endif
                     <div class="mb-3">
                         <h5>Značky</h5>
                         <div class="overflow-auto" style="max-height: 80px">
@@ -64,24 +74,34 @@
                                         type="checkbox"
                                         @checked(in_array($color->id, request('colors', [])))
                                     >
-                                    <span class="color-sample" style="background-color: {{ $color->hex }};"></span>
+                                    <label for="color-{{ $color->id }}">
+                                        <span class="color-sample" style="background-color: {{ $color->hex }};"></span>
+                                    </label>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div>
                         <h5>Cena</h5>
-                        <div>
-                            <p>Od</p>
-                            <label for="minPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
-                                                                      id="minPriceRange">
-                            <label for="minPrice"></label><input type="text" class="form-control" placeholder="min" id="minPrice">
-                        </div>
-                        <div class="mt-2">
-                            <p>Do</p>
-                            <label for="maxPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
-                                                                      id="maxPriceRange">
-                            <label for="maxPrice"></label><input type="text" class="form-control" placeholder="max" id="maxPrice">
+                        <div id="price-slider" class="mb-3"></div>
+
+                        <div class="d-flex justify-content-between">
+                            <input
+                                type="number"
+                                name="min_price"
+                                id="minPrice"
+                                class="form-control me-2"
+                                placeholder="Min"
+                                value="{{ request('min_price', '') }}"
+                            >
+                            <input
+                                type="number"
+                                name="max_price"
+                                id="maxPrice"
+                                class="form-control ms-2"
+                                placeholder="Max"
+                                value="{{ request('max_price', '') }}"
+                            >
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-3">
@@ -160,5 +180,47 @@
             </main>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var slider = document.getElementById('price-slider');
+                noUiSlider.create(slider, {
+                    start: [
+                        {{ request('min_price', 0) }},
+                        {{ request('max_price', 400) }}
+                    ],
+                    connect: true,
+                    range: { 'min': 0, 'max': 400 },
+                    step: 1,
+                    tooltips: false,
+                    format: {
+                        to: function (value) { return Math.round(value); },
+                        from: function (value) { return Number(value); }
+                    }
+                });
+
+                var inputMin = document.getElementById('minPrice');
+                var inputMax = document.getElementById('maxPrice');
+
+                slider.noUiSlider.on('update', function(values, handle) {
+                    if (handle === 0) {
+                        inputMin.value = values[0];
+                    } else {
+                        inputMax.value = values[1];
+                    }
+                });
+
+                inputMin.addEventListener('change', function() {
+                    slider.noUiSlider.set([this.value, null]);
+                });
+                inputMax.addEventListener('change', function() {
+                    slider.noUiSlider.set([null, this.value]);
+                });
+            });
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
+    @endpush
 @endsection
 

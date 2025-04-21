@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
 
-        Product::factory(50)->create();
+        Product::factory(100)->create();
 
 //    Product::create([
 //            'name'        => 'Classic Cotton T-Shirt',

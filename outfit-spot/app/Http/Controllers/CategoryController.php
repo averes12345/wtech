@@ -38,6 +38,13 @@ class CategoryController extends Controller
             $query->whereIn('brand_id', $request->brands);
         }
 
+        if ($request->filled('min_price')) {
+            $query->where('price','>=',$request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price','<=',$request->max_price);
+        }
+
         $query->with(['colorSizeVariants' => function($q) use($request) {
             if (request()->filled('colors')) {
                 $q->whereIn('colors_id', request('colors'));
@@ -53,8 +60,6 @@ class CategoryController extends Controller
                     ->values();
                 return $product;
             });
-
-        dump($products);
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();

@@ -29,10 +29,10 @@ class ProductColorSizeSeeder extends Seeder
 
         /* For every Product create 5 variants and for every color variant create 5 size variants*/
         foreach ($products as $product) {
-            $selected_colors = $colors->random(2);
+            $selected_colors = $colors->random(4);
 
             foreach ($selected_colors as $color) {
-                $selected_sizes = $sizes->random(5);
+                $selected_sizes = $sizes->random(3);
                 foreach ($selected_sizes as $size) {
                     ProductColorSize::create([
                         'products_id' => $product->id,
