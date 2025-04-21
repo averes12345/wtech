@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->decimal('price', 10);
-            $table->enum('sex', ['male', 'female', 'unisex'])->nullable();
+            $table->enum('type', ['male', 'female', 'kids'])->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->timestamps();

@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'price' => $this->faker->randomFloat(2, 5, 200),
-            'sex' => $this->faker->randomElement(['male', 'female', 'unisex']),
+            'type' => $this->faker->randomElement(['male', 'female', 'kids']),
             'category_id' => Category::inRandomOrder()->first()->id,
             'brand_id' => Brand::inRandomOrder()->first()->id,
             'created_at' => now(),

@@ -30,48 +30,64 @@
     <div class="container-fluid mt-4">
         <div class="row">
             <aside class="col-lg-3 mb-4 filter-sidebar">
-                <div class="mb-3">
-                    <h5>Značky</h5>
-                    <div class="overflow-auto" style="max-height: 80px">
-                        @foreach($brands as $brand)
-                            <div class="form-check" style="margin-left: 10px">
-                                <input class="form-check-input" type="checkbox" value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
-                                <label class="form-check-label" for="brand-{{ $brand->id }}">
-                                    {{ $brand->name }}
-                                </label>
-                            </div>
-                        @endforeach
+                <form action="{{ route('products.byCategory', ['category' => $category->name]) }}" method="GET">
+                    <div class="mb-3">
+                        <h5>Značky</h5>
+                        <div class="overflow-auto" style="max-height: 80px">
+                            @foreach($brands as $brand)
+                                <div class="form-check" style="margin-left: 10px">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="brands[]"
+                                        value="{{ $brand->id }}"
+                                        id="brand-{{ $brand->id }}"
+                                        @checked(in_array($brand->id, request('brands', [])))
+                                    >
+                                    <label class="form-check-label" for="brand-{{ $brand->id }}">
+                                        {{ $brand->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <h5>Farba</h5>
-                    <div class="overflow-auto" style="max-height: 80px">
-                        @foreach($colors as $color)
-                            <div class="form-check d-flex align-items-center" style="margin-left: 10px">
-                                <input class="form-check-input me-2" type="checkbox">
-                                <span class="color-sample" style="background-color: {{ $color->hex }};"></span>
-                            </div>
-                        @endforeach
+                    <div class="mb-3">
+                        <h5>Farba</h5>
+                        <div class="overflow-auto" style="max-height: 80px">
+                            @foreach($colors as $color)
+                                <div class="form-check d-flex align-items-center" style="margin-left: 10px">
+                                    <input
+                                        class="form-check-input me-2"
+                                        name="colors[]"
+                                        value="{{ $color->id }}"
+                                        id="color-{{ $color->id }}"
+                                        type="checkbox"
+                                        @checked(in_array($color->id, request('colors', [])))
+                                    >
+                                    <span class="color-sample" style="background-color: {{ $color->hex }};"></span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <h5>Cena</h5>
                     <div>
-                        <p>Od</p>
-                        <label for="minPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
-                                                                  id="minPriceRange">
-                        <label for="minPrice"></label><input type="text" class="form-control" placeholder="min" id="minPrice">
+                        <h5>Cena</h5>
+                        <div>
+                            <p>Od</p>
+                            <label for="minPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
+                                                                      id="minPriceRange">
+                            <label for="minPrice"></label><input type="text" class="form-control" placeholder="min" id="minPrice">
+                        </div>
+                        <div class="mt-2">
+                            <p>Do</p>
+                            <label for="maxPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
+                                                                      id="maxPriceRange">
+                            <label for="maxPrice"></label><input type="text" class="form-control" placeholder="max" id="maxPrice">
+                        </div>
                     </div>
-                    <div class="mt-2">
-                        <p>Do</p>
-                        <label for="maxPriceRange"></label><input type="range" class="form-range" min="0" max="1000"
-                                                                  id="maxPriceRange">
-                        <label for="maxPrice"></label><input type="text" class="form-control" placeholder="max" id="maxPrice">
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn btn-primary" type="submit">Filtrovať</button>
                     </div>
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <button class="btn btn-primary" type="submit">Filtrovať</button>
-                </div>
+                </form>
             </aside>
 
             <main class="col-md-9">

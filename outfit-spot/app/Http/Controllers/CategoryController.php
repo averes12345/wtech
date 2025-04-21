@@ -23,12 +23,29 @@ class CategoryController extends Controller
         return view('category-page');
     }
 
-    public function byCategory(Category $category)
+    public function byCategory(Category $category, Request $request)
     {
-        $products = $category
+
+        $query = $category
             ->products()
-            ->with('colorSizeVariants.mainImage')
-            ->get()
+            ->with('colorSizeVariants.mainImage');
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->filled('brands')) {
+            $query->whereIn('brand_id', $request->brands);
+        }
+
+        $query->with(['colorSizeVariants' => function($q) use($request) {
+            if (request()->filled('colors')) {
+                $q->whereIn('colors_id', request('colors'));
+            }
+            $q->with('mainImage');
+        }]);
+
+        $products = $query->get()
             ->map(function($product) {
                 $product->uniqueVariants = $product
                     ->colorSizeVariants
@@ -36,6 +53,8 @@ class CategoryController extends Controller
                     ->values();
                 return $product;
             });
+
+        dump($products);
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();
