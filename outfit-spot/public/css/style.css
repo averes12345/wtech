@@ -187,6 +187,10 @@ aside.filter-sidebar h5 {
     margin-left: 8px;
 }
 
+#price-slider .noUi-connect {
+    background: #b5b5b5;
+}
+
 :root {
     --border-color: #dee2e6;
     --background-color: #F7F7F7;
