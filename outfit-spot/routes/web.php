@@ -37,16 +37,16 @@ Route::get('/product', function () {
 
 /* show the checkout page, index the items in the cart*/
 Route::get('/checkout', [CheckoutController::class, 'index']);
-/* post the checkout form (validate the cart, create order)*/
-Route::post('/checkout', [CheckoutController::class,'store']);
 /* display if the everything was successfull */
 Route::get('/checkout/success', [CheckoutController::class, 'success']);
 /* cancel the order, checkout failiure */
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel']);
 /* update the ammount of a product variation in the cart */
-Route::patch('checkout/{productVariationId}', [CartController::class, 'update']);
+Route::patch('checkout/{productVariationId}', [CartController::class, 'update'])->name('cart.update');
 /* remove a specific variation of a product from the cart */
-Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy']);
+Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy'])-> name('cart.delete');
+/* */
+/* Route::post() */
 
 
 /* REGISTRATION PAGE METHODS */
@@ -68,6 +68,6 @@ Route::get('/test-redis', function () {
 });
 Route::get('/test-cart', function (){
     $cartservice = app(CartService::class);
-    $cartservice->add(1);
+    $cartservice->add(1, 1);
     return session()->get('cart', []);
     });

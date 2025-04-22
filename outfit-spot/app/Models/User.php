@@ -22,6 +22,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'cart_id',
     ];
 
     /**
@@ -46,4 +47,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-}
+
+    public function cart(){
+        return $this->belongsTo(Orders::class, 'order_id');
+    }
+ }
