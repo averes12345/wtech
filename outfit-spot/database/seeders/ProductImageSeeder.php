@@ -17,50 +17,50 @@ class ProductImageSeeder extends Seeder
     $dir = public_path('img');
         ProductImage::create([
             'product_color_sizes_id' => '1',
-            'image_path' => $dir . 'gpt-nike-shoe.png',
+            'image_path' =>  'img/gpt-nike-shoe.png',
             'alt' => 'An image of an orange nike running shoe.',
         ]);
 
         ProductImage::create([
             'product_color_sizes_id' => '2',
-            'image_path' => $dir . 'gpt-shirt-green.png',
+            'image_path' =>  'img/gpt-shirt-green.png',
             'alt' => 'An image of a green short-sleeved t-shirt.',
         ]);
         ProductImage::create([
             'product_color_sizes_id' => '3',
-            'image_path' => $dir . 'gpt-shirt-red.png',
+            'image_path' =>  'img/gpt-shirt-red.png',
             'alt' => 'An image of a red short-sleeved t-shirt.',
         ]);
         ProductImage::create([
             'product_color_sizes_id' => '4',
-            'image_path' => $dir . 'gpt-shirt-white.png',
+            'image_path' =>  'img/gpt-shirt-white.png',
             'alt' => 'An image of a white short-sleeved t-shirt.',
         ]);
         ProductImage::create([
             'product_color_sizes_id' => '5',
-            'image_path' => $dir . 'gpt-shirt-orange.png',
+            'image_path' =>  'img/gpt-shirt-orange.png',
             'alt' => 'An image of an orange short-sleeved t-shirt.',
         ]);
 
         ProductImage::create([
             'product_color_sizes_id' => '6',
-            'image_path' => $dir . 'gpt-shoe-blue.png',
+            'image_path' =>  'img/gpt-shoe-blue.png',
             'alt' => 'An image of a blue running shoe.',
         ]);
         ProductImage::create([
             'product_color_sizes_id' => '7',
-            'image_path' => $dir . 'gpt-shoe-green.png',
+            'image_path' =>  'img/gpt-shoe-green.png',
             'alt' => 'An image of a green running shoe.',
         ]);
 
         ProductImage::create([
             'product_color_sizes_id' => '8',
-            'image_path' => $dir . 'gpt-shoe-red.png',
+            'image_path' =>  'img/gpt-shoe-red.png',
             'alt' => 'An image of a red running shoe.',
         ]);
          ProductImage::create([
             'product_color_sizes_id' => '9',
-            'image_path' => $dir . 'gpt-shoe-yellow.png',
+            'image_path' =>  'img/gpt-shoe-yellow.png',
             'alt' => 'An image of a yellow running shoe.',
         ]);
 

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('shipping_details_id')->nullable();
             $table->integer('payment_detaild_id')->nullable();
-            $table->timestampTz('date_created');
-            $table->timestampTz('data_ordered')->nullable();
+            $table->timestamps();
         });
     }
 

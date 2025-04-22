@@ -18,39 +18,50 @@
 @section('content')
 
     <main>
-        <div class="inner-grid review">
+        <div class="review inner-grid">
             <h4 class="bold-text">Review order</h4>
-            <div class="large-img" id="product-img-1"></div>
-            <div class="product-body" id="product-body-1">
-                <span class="product-information">
-                    <span class="product-name"><b>Nike shoe</b></span>
-                    <br>
-                    <span class="product-description">Sleek and lightweight black Nike running shoe designed for
-                        comfort, speed, and everyday performance.
-                    </span>
-                    <br>
-                    <span class="product-price">165.94€</span>
-                </span>
-                <div class="controls">
-                    <input type="number" value="1" min="0">
-                </div>
-            </div>
-            <div class="product-remove" id="product-">remove</div>
+
+            <!-- <div class="large-img" id="product-img-1"></div> -->
+            <!-- <div class="product-body" id="product-body-1"> -->
+            <!--     <span class="product-information"> -->
+            <!--         <span class="product-name"><b>Nike shoe</b></span> -->
+            <!--         <br> -->
+            <!--         <span class="product-description">Sleek and lightweight black Nike running shoe designed for -->
+            <!--             comfort, speed, and everyday performance. -->
+            <!--         </span> -->
+            <!--         <br> -->
+            <!--         <span class="product-price">165.94€</span> -->
+            <!--     </span> -->
+            <!--     <div class="controls"> -->
+            <!--         <input type="number" value="1" min="0"> -->
+            <!--     </div> -->
+            <!-- </div> -->
+            <!-- <div class="product-remove" id="product-">remove</div> -->
             @foreach ($products as $product)
-                <div class="large-img" id="product-img-1"></div>
-                <div class="product-body" id="product-body-1">
-                    <span class="product-information">
-                        <span class="product-name"><b>{{$product->name}}</b></span>
-                        <br>
-                        <span class="product-description">{{$product->description}}</span>
-                        <br>
-                        <span class="product-price">{{$product->price}}</span>
-                    </span>
-                    <div class="controls">
-                        <input type="number" value="{{$product->quantity}}" min="0">
+
+                <!-- <div class="large-img" id="product-img-1"></div> -->
+                <div class="cart-item">
+                    <img class="large-img" src="{{ $product['images'][0]}}" alt="Product Image">
+                    <div class="product-body" id="product-body-1">
+                        <span class="product-information">
+                            <span class="product-name"><b>{{$product['product_name']}}</b></span>
+                            <br>
+                            <span class="product-description">product-description</span>
+                            <br>
+                            <span class="product-price">{{$product['price'] * $product['quantity']}}</span>
+                        </span>
+                        <form action="{{route('cart.update', $product['product_variant_id'])}}" method='POST'class="controls">
+                            @csrf
+                            @method('PATCH')
+                            <input type="number" name="quantity" value="{{$product['quantity']}}" min="0">
+                        </form>
                     </div>
                 </div>
-            <div class="product-remove" id="product-">remove</div>
+            <form action="{{ route('cart.delete', $product['product_variant_id'])}}" method="POST"  class="product-remove" id="product-">
+                @csrf
+                @method('DELETE')
+                <button type="submit" style="all: unset;cursor:pointer;" class="product-remove">remove</button>
+            </form>
             @endforeach
         </div>
         <div class="inner-grid shipping">
@@ -100,15 +111,31 @@
         <div class="inner-grid summary">
             <h4 class="bold-text">Summary</h4>
             <!-- Dont even need all the stupid classes it just falls into the correct cells XD -->
-            <span class="items-anotation">Item(s)</span> <span class="value items-value">165.94€</span>
+            @php
+                $total = collect($products)->sum(function ($product) {
+                    return $product['price'] * $product['quantity'];
+                });
+            @endphp
+            <span class="items-anotation">Item(s)</span> <span class="value items-value">{{number_format($total, 2)}}</span>
             <span class="shipping-anotation">Shipping</span><span class="value shipping-value">14€</span>
             <!-- Probably not even necessart this is US bullshit  -->
             <span class="vat-anotation">VAT</span><span class="value vat-value">9€</span>
             <hr>
-            <span class="total-anotation">Order total</span><span class="value total-value">188.94</span>
+            <span class="total-anotation">Order total</span><span class="value total-value">{{$total}}</span>
             <button href="../src/temp.html" class="button continue-button">
                 <span class="button-text">Confirm and pay</span>
             </button>
         </div>
     </aside>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityInputs = document.querySelectorAll('.controls input[type="number"]');
+
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', function () {
+                    this.form.submit();
+                });
+            });
+        });
+    </script>
   @endsection
