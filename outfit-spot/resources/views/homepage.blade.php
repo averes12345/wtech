@@ -55,7 +55,7 @@
                         <h5 class="card-title mb-0">Tričká</h5>
                         <i class="bi bi-arrow-right fs-4"></i>
                     </div>
-                    <a href="tvoja-cielova-stranka.html" class="stretched-link"></a>
+                    <a href="/products/shirts" class="stretched-link"></a>
                 </div>
             </div>
             <div class="col-md-3 mb-4">
@@ -70,7 +70,7 @@
                         <h5 class="card-title mb-0">Mikiny</h5>
                         <i class="bi bi-arrow-right fs-4"></i>
                     </div>
-                    <a href="/products" class="stretched-link"></a>
+                    <a href="/products/hoodies" class="stretched-link"></a>
                 </div>
             </div>
             <div class="col-md-3 mb-4">
@@ -84,7 +84,7 @@
                         <h5 class="card-title mb-0">Nohavice</h5>
                         <i class="bi bi-arrow-right fs-4"></i>
                     </div>
-                    <a href="tvoja-cielova-stranka.html" class="stretched-link"></a>
+                    <a href="/products/pants" class="stretched-link"></a>
                 </div>
             </div>
             <div class="col-md-3 mb-4">
@@ -98,7 +98,7 @@
                         <h5 class="card-title mb-0">Topánky</h5>
                         <i class="bi bi-arrow-right fs-4"></i>
                     </div>
-                    <a href="tvoja-cielova-stranka.html" class="stretched-link"></a>
+                    <a href="/products/shoes" class="stretched-link"></a>
                 </div>
             </div>
         </div>

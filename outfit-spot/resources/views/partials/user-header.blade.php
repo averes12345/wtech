@@ -1,7 +1,7 @@
 <header>
     <div class="navbar-top">
         <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="/homepage">
+            <a class="navbar-brand" href="/">
                 <img src="{{asset('img/logo-white.svg')}}" alt="Logo" width="70" class=" align-text-top" />
             </a>
             <div class="search-wrapper w-100 my-2">
@@ -42,30 +42,43 @@
                         <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown"
                            href="#">Muži</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tričká</a></li>
-                            <li><a class="dropdown-item" href="#">Mikiny</a></li>
-                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
-                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ route('products.byCategory', ['category'=>'shirts','type'=>'male']) }}">
+                                    Tričká</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'hoodies','type'=>'male']) }}">
+                                    Mikiny</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'pants','type'=>'male']) }}">
+                                    Nohavice</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'shoes','type'=>'male']) }}">
+                                    Topánky</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown"
                            href="#">Ženy</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tričká</a></li>
-                            <li><a class="dropdown-item" href="#">Mikiny</a></li>
-                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
-                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'shirts','type'=>'female']) }}">
+                                    Tričká</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'hoodies','type'=>'female']) }}">
+                                    Mikiny</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'pants','type'=>'female']) }}">
+                                    Nohavice</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'shoes','type'=>'female']) }}">
+                                    Topánky</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle text-black mx-3" role="button" data-bs-toggle="dropdown"
                            href="#">Deti</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tričká</a></li>
-                            <li><a class="dropdown-item" href="#">Mikiny</a></li>
-                            <li><a class="dropdown-item" href="#">Nohavice</a></li>
-                            <li><a class="dropdown-item" href="#">Topánky</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'shirts','type'=>'kids']) }}">
+                                    Tričká</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'hoodies','type'=>'kids']) }}">
+                                    Mikiny</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'pants','type'=>'kids']) }}">
+                                    Nohavice</a></li>
+                            <li><a class="dropdown-item" href="{{ route('products.byCategory', ['category'=>'shoes','type'=>'kids']) }}">
+                                    Topánky</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

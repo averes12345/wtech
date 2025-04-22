@@ -43,7 +43,7 @@
             <div class="col-md-6">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina1.png">
                     <div class="col-md-6 text-center">
-                        <img src="{{asset('/img/Mikina1.png')}}" alt="Produkt" class="img-fluid main-image" />
+                        <img src="{{asset('/img/hoodie-blue.png')}}" alt="Produkt" class="img-fluid main-image" />
                     </div>
                 </a>
 
