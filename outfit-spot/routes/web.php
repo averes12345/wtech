@@ -37,16 +37,25 @@ Route::get('/product', function () {
 
 /* show the checkout page, index the items in the cart*/
 Route::get('/checkout', [CheckoutController::class, 'index']);
+
 /* display if the everything was successfull */
 Route::get('/checkout/success', [CheckoutController::class, 'success']);
 /* cancel the order, checkout failiure */
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel']);
+
+/* shipping */
+/* post the shipping info */
+Route::post('checkout/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
+
+/* payment */
+/* post the payment info*/
+Route::post('checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+
+/* cart */
 /* update the ammount of a product variation in the cart */
 Route::patch('checkout/{productVariationId}', [CartController::class, 'update'])->name('cart.update');
 /* remove a specific variation of a product from the cart */
 Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy'])-> name('cart.delete');
-/* */
-/* Route::post() */
 
 
 /* REGISTRATION PAGE METHODS */
