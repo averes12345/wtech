@@ -130,7 +130,7 @@
                 @endswitch
 
                 <div class="d-flex justify-content-between mb-2">
-                    <span>{{ $totalProducts }} produktov</span>
+                    <span>{{ $products->total() }} produktov</span>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -151,14 +151,8 @@
                             @if($product->mainImage)
                                 <img
                                     class="img-fluid product-img"
-                                    src="{{ asset('storage/'.$product->mainImage->image_path) }}"
+                                    src="{{ asset($product->mainImage->image_path) }}"
                                     alt="{{ $product->mainImage->alt }}"
-                                >
-                            @else
-                                <img
-                                    class="img-fluid product-img"
-                                    src="{{ asset('img/placeholder.png') }}"
-                                    alt="No image"
                                 >
                             @endif
 
@@ -167,7 +161,7 @@
                                 <p class="card-text">{{ number_format($product->price,2) }} €</p>
                             </div>
 
-                                <a href="/product" class="stretched-link"></a>
+                                <a href="{{ route('product.show', [ 'product'=>$product->name, 'currentVariant'=>$product->variant->id ]) }}" class="stretched-link"></a>
                         </div>
                     @endforeach
                 </div>

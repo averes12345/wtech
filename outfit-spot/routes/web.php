@@ -2,6 +2,7 @@
 
 use App\CartService as AppCartService;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 /* I decided to merge the logic into a single controller */
@@ -27,9 +28,8 @@ Route::get('/', function () {
 Route::get('/products/{category:name}', [CategoryController::class, 'byCategory'])
     ->name('products.byCategory');
 
-Route::get('/product', function () {
-    return view('product-page');
-});
+Route::get('/product/{product:name}/{currentVariant:id}', [ProductController::class, 'show'])
+    ->name('product.show');
 
 
 

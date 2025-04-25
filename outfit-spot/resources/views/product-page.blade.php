@@ -28,12 +28,28 @@
 @endsection
 
 @section('content')
+    @php
+        $productType = [
+            'male' => 'Muži',
+            'female' => 'Ženy',
+            'kids' => 'Deti'
+        ];
+        $productCategory = [
+            'shirts' => 'Tričká',
+            'hoodies' => 'Mikiny',
+            'pants' => 'Nohavice',
+            'shoes' => 'Topánky'
+        ];
+
+        $typeLabel = $productType[$product->type] ?? null;
+        $categoryLabel = $productCategory[$category->name] ?? null;
+    @endphp
     <div class="container">
         <nav class="breadcrumb m-3">
-            <a class="breadcrumb-item" href="/homepage">Home</a>
-            <a class="breadcrumb-item" href="../src/categoryPage.html">Muži</a>
-            <a class="breadcrumb-item" href="../src/categoryPage.html">Mikiny</a>
-            <span class="breadcrumb-item active">Nike Mikina</span>
+            <a class="breadcrumb-item" href="/">Home</a>
+            <a class="breadcrumb-item" href="{{ route('products.byCategory', ['category' => $category->name, 'type'=> $product->type]) }}">{{ $typeLabel }}</a>
+            <a class="breadcrumb-item" href="{{ route('products.byCategory', ['category'=> $category->name]) }}">{{ $categoryLabel }}</a>
+            <span class="breadcrumb-item active">  {{ "{$brand->name} - {$product->name}" }}</span>
         </nav>
     </div>
 
@@ -43,7 +59,8 @@
             <div class="col-md-6">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina1.png">
                     <div class="col-md-6 text-center">
-                        <img src="{{asset('/img/hoodie-blue.png')}}" alt="Produkt" class="img-fluid main-image" />
+                        <img src="{{ asset($currentVariant->mainImage->image_path) }}"
+                             alt="Produkt" class="img-fluid main-image" />
                     </div>
                 </a>
 
@@ -73,9 +90,9 @@
 
 
             <div class="col-md-6">
-                <h1>Nike Mikina</h1>
-                <p><strong>Popis</strong><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-                <div class="text-success h4">€ 9.99</div>
+                <h1>{{ $product->name }}</h1>
+                <p><strong>Popis</strong><br>{{ $product->description }}</p>
+                <div class="text-success h4">{{ $product->price }} €</div>
                 <div class="text-success mb-3">Na sklade</div>
 
                 <form class="row g-3 align-items-end">
@@ -86,16 +103,38 @@
                     <div class="col-auto">
                         <label for="size" class="form-label">Veľkosť</label>
                         <select id="size" class="form-select">
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
-                            <option>XXL</option>
+                           @foreach($sizes as $key)
+                               <option value="{{ $key->id }}">
+                                   {{ $key->size }}
+                               </option>
+                           @endforeach
                         </select>
                     </div>
                     <div class="col-auto">
-                        <label class="form-label mb-3">Farba</label><br>
-                        <span class="color-sample mt-1" style="background-color: #002499;"></span>
+                        <label class="form-label mb-2">Farba</label><br>
+                        @php
+                            $colorsLabel = [
+                                'red'    => ['symbol' => '🔴', 'label' => 'Červená'],
+                                'green'  => ['symbol' => '🟢', 'label' => 'Zelená'],
+                                'blue'   => ['symbol' => '🔵', 'label' => 'Modrá'],
+                                'yellow' => ['symbol' => '🟡', 'label' => 'Žltá'],
+                                'black'  => ['symbol' => '⚫', 'label' => 'Čierna'],
+                                'white'  => ['symbol' => '⚪', 'label' => 'Biela'],
+                                'orange' => ['symbol' => '🟠', 'label' => 'Oranžová'],
+                                'purple' => ['symbol' => '🟣', 'label' => 'Fialová'],
+                                'brown'  => ['symbol' => '🟤', 'label' => 'Hnedá'],
+                            ];
+                        @endphp
+
+                        <select name="color" class="form-select">
+                            @foreach($colors as $key)
+                                @if(isset($colorsLabel[$key->name]))
+                                    <option value="{{ $key->id }}">
+                                        {{ $colorsLabel[$key->name]['symbol'] }} {{ $colorsLabel[$key->name]['label'] }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">
@@ -106,4 +145,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    @include('partials.footer2')
 @endsection

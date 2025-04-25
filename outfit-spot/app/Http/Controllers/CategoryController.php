@@ -55,8 +55,6 @@ class CategoryController extends Controller
             ->paginate(9)
             ->withQueryString();
 
-        $totalProducts = $products->total();
-
         $products->getCollection()->transform(function($product) {
             if (request()->filled('colors')) {
                 $variant = $product->colorSizeVariants
@@ -70,13 +68,15 @@ class CategoryController extends Controller
                 ? $variant->mainImage
                 : null;
 
+            $product->variant = $variant;
+
             return $product;
         });
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();
 
-        return view('category-page', compact('category','products', 'brands', 'colors', 'totalProducts'));
+        return view('category-page', compact('category','products', 'brands', 'colors'));
     }
 
 
