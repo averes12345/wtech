@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/products/{category:name}', [CategoryController::class, 'byCategory'])
     ->name('products.byCategory');
 
-Route::get('/product/{product:name}/{currentVariant:id}', [ProductController::class, 'show'])
+Route::get('/product/{product:id}/{currentVariant:id}', [ProductController::class, 'show'])
     ->name('product.show');
 
 

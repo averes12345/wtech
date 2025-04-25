@@ -39,21 +39,16 @@ class ProductController extends Controller
     {
         $category = $product->category;
         $brand = $product->brand;
+
         $allVariants = $product->colorSizeVariants;
-        $currentVariant = $allVariants->firstWhere('id', $currentVariantId);
+        $currentVariant = ProductColorSize::where('id', $currentVariantId)->first();
         $currentVariant->mainImage = $currentVariant->mainImage ?? $currentVariant->images->first();
 
-        $colors = $allVariants
-            ->map->color
-            ->unique('id')
-            ->values();
-
         $sizes = $allVariants
-            ->map->size
-            ->unique('id')
+            ->where('colors_id', $currentVariant->colors_id)
             ->values();
 
-        return view('product-page', compact('product', 'category', 'brand', 'colors', 'sizes', 'currentVariant'));
+        return view('product-page', compact('product', 'category', 'brand', 'allVariants', 'sizes', 'currentVariant'));
     }
 
     /**

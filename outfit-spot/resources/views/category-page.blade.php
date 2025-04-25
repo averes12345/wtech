@@ -161,7 +161,7 @@
                                 <p class="card-text">{{ number_format($product->price,2) }} €</p>
                             </div>
 
-                                <a href="{{ route('product.show', [ 'product'=>$product->name, 'currentVariant'=>$product->variant->id ]) }}" class="stretched-link"></a>
+                                <a href="{{ route('product.show', [ 'product'=>$product->id, 'currentVariant'=>$product->variant->id ]) }}" class="stretched-link"></a>
                         </div>
                     @endforeach
                 </div>
