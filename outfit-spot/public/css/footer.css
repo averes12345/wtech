@@ -11,9 +11,11 @@ footer section {
     text-align: center;
 }
 
-footer section a {
+footer section a,
+footer section h5 {
     color: white;
 }
+
 
 .icon {
     width: 1em;

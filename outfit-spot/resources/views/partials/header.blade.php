@@ -9,10 +9,17 @@
             </button>
         </form>
     </div>
-    <div>
-        <a class="log-out" href="/login">
-            <div id="log-out-icon"></div>
+    <div style="display:flex;">
+        <a href="/" class="btn btn-link text-white me-3">
+            <p>Welcome admin, {{Auth::guard('admin')->user()->first_name}}!</p>
         </a>
+
+        <form action="{{ route('login.logout') }}" method="POST" id="logout-form">
+            @csrf
+        </form>
+        <button type="submit" form="logout-form" style="all: unset; cursor: pointer;" class="log-out">
+            <div id="log-out-icon"></div>
+        </button>
 
         <!--
         <a class="people-circle" href="../src/login-page.html">

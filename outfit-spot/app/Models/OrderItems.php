@@ -12,4 +12,16 @@ class OrderItems extends Model
         'specific_product_id',
         'quantity',
     ];
+
+    public function specificProduct()
+    {
+        return $this->belongsTo(ProductColorSize::class, 'specific_product_id');
+    }
+
+    public function product()
+    {
+        return $this->hasOneThrough(Product::class, ProductColorSize::class,'id' ,'id', 'specific_product_id', 'products_id');
+    }
+
+
 }

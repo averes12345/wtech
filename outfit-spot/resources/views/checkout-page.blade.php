@@ -41,7 +41,9 @@
 
                 <!-- <div class="large-img" id="product-img-1"></div> -->
                 <div class="cart-item">
-                    <img class="large-img" src="{{ $product['images'][0]}}" alt="Product Image">
+                    <a href="{{route('product')}}" title="Go to the product page" >
+                        <img class="large-img" src="{{ $product['images'][0]}}" alt="Product Image">
+                    </a>
                     <div class="product-body" id="product-body-1">
                         <span class="product-information">
                             <span class="product-name"><b>{{$product['product_name']}}</b></span>
@@ -56,33 +58,69 @@
                             <input type="number" name="quantity" value="{{$product['quantity']}}" min="0">
                         </form>
                     </div>
+                    <form action="{{ route('cart.delete', $product['product_variant_id'])}}" method="POST"  class="product-remove" id="product-">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="all: unset;cursor:pointer;" class="product-remove">remove</button>
+                    </form>
                 </div>
-            <form action="{{ route('cart.delete', $product['product_variant_id'])}}" method="POST"  class="product-remove" id="product-">
-                @csrf
-                @method('DELETE')
-                <button type="submit" style="all: unset;cursor:pointer;" class="product-remove">remove</button>
-            </form>
             @endforeach
         </div>
-        <div class="inner-grid shipping">
-            <h4 class="bold-text">Ship to</h4>
-            <label for="country"></label>
-            <select id="country">
-                <option value="" disabled selected>Select a country</option>
-                @foreach ($countries as $country)
-                    <option value="{{$country->code}}">{{ $country->name}}</option>
-                @endforeach
-            </select>
-            <input type="text" id="first-name" placeholder="first name">
-            <input type="text" id="last-name" placeholder="last name">
-            <input type="text" id="street-address" placeholder="street address">
-            <input type="text" id="city" placeholder="city">
-            <input type="text" id="region" placeholder="region">
-            <input type="text" id="zip-code" placeholder="zip">
-            <input type="email" id="email" placeholder="email">
-            <input type="tel" id="phone-number" placeholder="phone number">
-            <button id="submit" class="continue-button">Done
-            </button>
+        <div class="inner-grid {{$shippingDetails ? 'shipping-option' : 'shipping-details'}}">
+            @if(!$shippingDetails)
+                <h4 class="bold-text">Ship to</h4>
+                <form method="POST" action="{{route('checkout.shipping.details')}}" id="shipping_details_form" class="display-contents">
+                    @csrf
+                </form>
+                <input form="shipping_details_form" name="first_name" type="text" id="first-name" placeholder="first name" value="{{old('first_name', $user->shippingDetails->first_name ?? $user->first_name ?? '')}}">
+                <input form="shipping_details_form" name="last_name" type="text" id="last-name" placeholder="last name" value="{{old('last_name', $user->shippingDetails->$user->last_name  ?? $user->last_name ?? '')}}">
+                <input form="shipping_details_form" name="email" type="email" id="email" placeholder="email" value="{{old('email', $user->shippingDetails->email ?? $user->email ?? '')}}">
+                <input form="shipping_details_form" name="phone_number" type="tel" id="phone-number" placeholder="phone number" value="{{old('phone_number', $user->shippingDetails->phone ?? '')}}">
+                 <label for="country"></label>
+                <select form="shipping_details_form" name="country" id="country">
+                    <option value="" disabled selected>Select a country</option>
+                    @foreach ($countries as $country)
+                        <option value="{{$country->code}}">{{ $country->name}}</option>
+                    @endforeach
+                </select>
+               <input form="shipping_details_form" name="street_address" type="text" id="street-address" placeholder="street address" value="{{old('street_address', $user->shippingDetails->street_address ?? '')}}">
+                <input form="shipping_details_form" name="city" type="text" id="city" placeholder="city" value="{{old('city', $user->shippingDetails->city ?? '')}}">
+                <input form="shipping_details_form" name="region" type="text" id="region" placeholder="region" value="{{old('region', $user->shippingDetails->region ?? '')}}">
+                <input form="shipping_details_form" name="zip_code" type="text" id="zip-code" placeholder="zip" value="{{old('zip_code', $user->shippingDetails->zip_code ?? '')}}">
+                <button form="shipping_details_form" id="submit" class="continue-button" type="submit">Done</button>
+            @else
+                <!-- choose the shipping option here -->
+                <h4 class="bold-text">Ship with</h4>
+                <form method="POST" action="{{route('checkout.shipping.option')}}" id="shipping_option_form" class="display-contents">
+                    @csrf
+                </form>
+                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="ups-standard" id="shipping-option-ups-standard" onclick="updateShippingCost(this.value)">
+                <label for="shipping-option-ups-standard" class="shipping-option-subgrid">
+                    <div>
+                        <img src="{{asset('img/ups-logo.svg')}}" alt="UPS" class="small-img">
+                        <p>Standard</p>
+                    </div>
+                    <p> {{$shippingPrices['ups-standard']}} euro </p>
+                    <p> 5-7 business days </p>
+                </label>
+                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="ups-expedited" id="shipping-option-ups-worldwide-expedited" onclick="updateShippingCost(this.value)">
+                <label for="shipping-option-ups-worldwide-expedited" class="shipping-option-subgrid">
+                    <div>
+                        <img src="{{asset('img/ups-logo.svg')}}" alt="UPS" class="small-img">
+                        <p>Expedited</p>
+                    </div>
+                    <p> {{$shippingPrices['ups-expedited']}} euro </p>
+                    <p> 3-5 business days </p>
+                </label>
+                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="dhl-express" id="shipping-option-dhl-express" onclick="updateShippingCost(this.value)">
+                <label for="shipping-option-dhl-express"  class="shipping-option-subgrid">
+                    <div>
+                        <img src="{{asset('img/dhl-logo.svg')}}" alt="dhl express logo" class="large-img">
+                    </div>
+                    <p> {{$shippingPrices['dhl-express']}} euro </p>
+                    <p> 1-3 business days </p>
+                </label>
+            @endif
         </div>
         <div class="inner-grid payment">
             <h4 class="bold-text">Pay with</h4>
@@ -112,16 +150,16 @@
             <h4 class="bold-text">Summary</h4>
             <!-- Dont even need all the stupid classes it just falls into the correct cells XD -->
             @php
-                $total = collect($products)->sum(function ($product) {
+                $productTotal = collect($products)->sum(function ($product) {
                     return $product['price'] * $product['quantity'];
                 });
             @endphp
-            <span class="items-anotation">Item(s)</span> <span class="value items-value">{{number_format($total, 2)}}</span>
-            <span class="shipping-anotation">Shipping</span><span class="value shipping-value">14€</span>
+            <span class="items-anotation">Item(s)</span> <span class="value items-value">{{number_format($productTotal, 2) . '€'}}</span>
+            <span class="shipping-anotation">Shipping</span><span class="value shipping-value" id="shipping-cost-display">0€</span>
             <!-- Probably not even necessart this is US bullshit  -->
-            <span class="vat-anotation">VAT</span><span class="value vat-value">9€</span>
+            <span class="vat-anotation">VAT</span><span class="value vat-value" id="vat-display">{{number_format($productTotal * 0.2, 2) . '€'}}</span>
             <hr>
-            <span class="total-anotation">Order total</span><span class="value total-value">{{$total}}</span>
+            <span class="total-anotation">Order total</span><span class="value total-value" id="order-total-display">{{number_format($productTotal * 1.2, 2) . '€'}}</span>
             <button href="../src/temp.html" class="button continue-button">
                 <span class="button-text">Confirm and pay</span>
             </button>
@@ -137,5 +175,22 @@
                 });
             });
         });
+    </script>
+    <script>
+        const shippingPrices = @json($shippingPrices);
+
+       function updateShippingCost(shippingMethod) {
+        const shippingCost = shippingPrices[shippingMethod] || 0;
+        const productTotal = parseFloat('{{ $productTotal }}');
+        const vatDisplay = document.getElementById('vat-display');
+        const orderTotal = document.getElementById('order-total-display');
+
+        document.getElementById('shipping-cost-display').innerText = shippingCost.toFixed(2) + '€' ;
+
+        const vat = 0.2 * (productTotal + shippingCost);
+
+        vatDisplay.innerText = vat.toFixed(2) + '€';
+        orderTotal.innerText = (productTotal + shippingCost +  vat).toFixed(2) + '€';
+        }
     </script>
   @endsection

@@ -49,6 +49,12 @@ class User extends Authenticatable
     }
 
     public function cart(){
-        return $this->belongsTo(Orders::class, 'order_id');
+        return $this->belongsTo(Orders::class, 'cart_id');
+    }
+    public function shippingDetails(){
+        return $this->belongsTo(ShippingDetails::class, 'saved_shipping_preference');
+    }
+    public function paymentDetails(){
+        return $this->belongsTo(PaymentDetails::class, 'saved_payment_details');
     }
  }

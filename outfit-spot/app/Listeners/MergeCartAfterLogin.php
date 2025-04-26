@@ -2,8 +2,10 @@
 
 namespace App\Listeners;
 
+use App\Services\CartService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Auth\Events\Login;
 
 class MergeCartAfterLogin
 {
@@ -12,14 +14,14 @@ class MergeCartAfterLogin
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(Login $event): void
     {
-        //
+        $cartservice = app(CartService::class);
+        $cartservice->mergeCartOnLogin($event->user);
     }
 }

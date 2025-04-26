@@ -13,6 +13,7 @@ use App\Http\Controllers\RegistrationController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginFrom')->name('login');
     Route::post('/login', 'login')->name('login.submit');
+    Route::post('/logout', 'logout')->name('login.logout');
 });
 
 Route::middleware(['auth:admin']) ->group(function () {
@@ -29,7 +30,7 @@ Route::get('/products/{category:name}', [CategoryController::class, 'byCategory'
 
 Route::get('/product', function () {
     return view('product-page');
-});
+})->name('product');
 
 
 
@@ -45,8 +46,9 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel']);
 
 /* shipping */
 /* post the shipping info */
-Route::post('checkout/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
+Route::post('checkout/shipping-details', [CheckoutController::class, 'shippingDetails'])->name('checkout.shipping.details');
 
+Route::post('checkout/shipping-option', [CheckoutController::class, 'shippingOption'])->name('checkout.shipping.option');
 /* payment */
 /* post the payment info*/
 Route::post('checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
@@ -75,8 +77,8 @@ Route::get('/test-redis', function () {
     Redis::set('test-key', 'working');
     return Redis::get('test-key');
 });
-Route::get('/test-cart', function (){
+Route::get('/test-cart/{productVariationId}/{quantity}', function ($productVariationId, $quantity){
     $cartservice = app(CartService::class);
-    $cartservice->add(1, 1);
+    $cartservice->add($productVariationId, $quantity);
     return session()->get('cart', []);
     });

@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('shipping_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('country_id', 2)->nullable();
-            $table->text('street_address')->nullable();
-            $table->text('city')->nullable();
+            $table->text('first_name');
+            $table->text('last_name');
+            $table->text('email');
+            $table->integer('phone')->nullable();
+            $table->char('country_id', 2);
+            $table->text('street_address');
+            $table->text('city');
             $table->text('region')->nullable();
-            $table->text('zip_code')->nullable();
+            $table->text('zip_code');
+            $table->timestamps();
         });
     }
 
