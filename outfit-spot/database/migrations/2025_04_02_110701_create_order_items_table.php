@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\ProductColorSize;
 
 return new class extends Migration
 {
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('orders_id');
-            $table->integer('specific_product_id');
+            $table->foreignIdFor(ProductColorSize::class, 'specific_product_id');
             $table->integer('quantity');
             $table->timestamps();
         });

@@ -24,10 +24,12 @@ class CartController extends Controller
        return redirect()->back();
     }
 
+
     public function destroy(Request $request, $id){
        $cartservice = app(CartService::class);
        $cartservice->delete($id);
         return redirect()->back();
         /* dd('success'); */
     }
+
 }

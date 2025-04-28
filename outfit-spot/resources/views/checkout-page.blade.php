@@ -66,65 +66,90 @@
                 </div>
             @endforeach
         </div>
-        <div class="inner-grid {{$shippingDetails ? 'shipping-option' : 'shipping-details'}}">
-            @if(!$shippingDetails)
-                <h4 class="bold-text">Ship to</h4>
+        <div class="inner-grid {{$hideDetails ? 'shipping-option' : 'shipping-details'}}">
+            <form method="POST" action="{{route('checkout.shipping.order')}}" id="shipping_and_payment_option" class="display-contents">
+                @csrf
+            </form>
+            @if(!$hideDetails)
+                <h4 class="bold-text" style="grid-column: span 2;">Ship to</h4>
                 <form method="POST" action="{{route('checkout.shipping.details')}}" id="shipping_details_form" class="display-contents">
                     @csrf
                 </form>
                 <input form="shipping_details_form" name="first_name" type="text" id="first-name" placeholder="first name" value="{{old('first_name', $user->shippingDetails->first_name ?? $user->first_name ?? '')}}">
+                <!-- <p><span style="color: red;">*</span> indicates required fields.</p> -->
+                <!-- <label for="first-name">First name</label> -->
                 <input form="shipping_details_form" name="last_name" type="text" id="last-name" placeholder="last name" value="{{old('last_name', $user->shippingDetails->$user->last_name  ?? $user->last_name ?? '')}}">
                 <input form="shipping_details_form" name="email" type="email" id="email" placeholder="email" value="{{old('email', $user->shippingDetails->email ?? $user->email ?? '')}}">
-                <input form="shipping_details_form" name="phone_number" type="tel" id="phone-number" placeholder="phone number" value="{{old('phone_number', $user->shippingDetails->phone ?? '')}}">
-                 <label for="country"></label>
+                <!-- <input form="shipping_details_form" name="phone_number" type="tel" id="phone-number" placeholder="phone number" value="{{old('phone_number', $user->shippingDetails->phone ?? '')}}" pattern="" title="Please enter a valid phone number."> -->
+                <label for="country"></label>
                 <select form="shipping_details_form" name="country" id="country">
-                    <option value="" disabled selected>Select a country</option>
+                    <option value="" disabled @selected(old('country', optional($user?->shippingDetails)?->country_id) == '')>
+                        Select a country
+                    </option>
                     @foreach ($countries as $country)
-                        <option value="{{$country->code}}">{{ $country->name}}</option>
+                        <option value="{{ $country->code}}" @selected(old('country', optional($user?->shippingDetails)?->country_id) == $country->code)>
+                            {{ $country->name }}
+                        </option>
                     @endforeach
                 </select>
                <input form="shipping_details_form" name="street_address" type="text" id="street-address" placeholder="street address" value="{{old('street_address', $user->shippingDetails->street_address ?? '')}}">
                 <input form="shipping_details_form" name="city" type="text" id="city" placeholder="city" value="{{old('city', $user->shippingDetails->city ?? '')}}">
                 <input form="shipping_details_form" name="region" type="text" id="region" placeholder="region" value="{{old('region', $user->shippingDetails->region ?? '')}}">
                 <input form="shipping_details_form" name="zip_code" type="text" id="zip-code" placeholder="zip" value="{{old('zip_code', $user->shippingDetails->zip_code ?? '')}}">
-                <button form="shipping_details_form" id="submit" class="continue-button" type="submit">Done</button>
+                <button form="shipping_details_form" id="submit" class="continue-button" type="submit">Proceed to Shipping</button>
             @else
                 <!-- choose the shipping option here -->
                 <h4 class="bold-text">Ship with</h4>
-                <form method="POST" action="{{route('checkout.shipping.option')}}" id="shipping_option_form" class="display-contents">
+                <form method="POST" action="{{route('checkout.shipping.order')}}" id="shipping_and_payment_option" class="display-contents">
                     @csrf
                 </form>
-                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="ups-standard" id="shipping-option-ups-standard" onclick="updateShippingCost(this.value)">
+                <input form="shipping_and_payment_option" class="payment box" type="radio" name="shipping_options" value="ups-standard" id="shipping-option-ups-standard" onclick="updateShippingCost(this.value)" required>
                 <label for="shipping-option-ups-standard" class="shipping-option-subgrid">
                     <div>
                         <img src="{{asset('img/ups-logo.svg')}}" alt="UPS" class="small-img">
                         <p>Standard</p>
                     </div>
-                    <p> {{$shippingPrices['ups-standard']}} euro </p>
+                    <p> {{$shippingPrices['ups-standard']}} € </p>
                     <p> 5-7 business days </p>
                 </label>
-                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="ups-expedited" id="shipping-option-ups-worldwide-expedited" onclick="updateShippingCost(this.value)">
+                <input form="shipping_and_payment_option" class="payment box" type="radio" name="shipping_options" value="ups-expedited" id="shipping-option-ups-worldwide-expedited" onclick="updateShippingCost(this.value)" required>
                 <label for="shipping-option-ups-worldwide-expedited" class="shipping-option-subgrid">
                     <div>
                         <img src="{{asset('img/ups-logo.svg')}}" alt="UPS" class="small-img">
                         <p>Expedited</p>
                     </div>
-                    <p> {{$shippingPrices['ups-expedited']}} euro </p>
+                    <p> {{$shippingPrices['ups-expedited']}} € </p>
                     <p> 3-5 business days </p>
                 </label>
-                <input form="shipping_option_form" class="payment box" type="radio" name="shipping_options" value="dhl-express" id="shipping-option-dhl-express" onclick="updateShippingCost(this.value)">
+                <input form="shipping_and_payment_option" class="payment box" type="radio" name="shipping_options" value="dhl-express" id="shipping-option-dhl-express" onclick="updateShippingCost(this.value)" required>
                 <label for="shipping-option-dhl-express"  class="shipping-option-subgrid">
                     <div>
                         <img src="{{asset('img/dhl-logo.svg')}}" alt="dhl express logo" class="large-img">
                     </div>
-                    <p> {{$shippingPrices['dhl-express']}} euro </p>
+                    <p> {{$shippingPrices['dhl-express']}} € </p>
                     <p> 1-3 business days </p>
                 </label>
+<!-- style="all: unset;cursor:pointer;"  -->
+<!-- style="grid-column: span 4; width: 30%;" -->
+                <form method="POST" action="{{route('checkout.shipping.option')}}" id="shipping_information_reenter" class="display-contents">
+                    @csrf
+                </form>
+
+                <button form="shipping_information_reenter" style="all: unset;cursor:pointer;grid-column: 4; grid-row: 1;" id="submit" class="continue-button" type="submit" title="reenter the shipping information">
+                    <div style="display:grid;justify-items:end; align-items:start;height:100%;">
+                        <img src="{{asset('img/return.svg')}}" alt="back arrow" class="tiny-img">
+                    <div>
+                </button>
             @endif
         </div>
         <div class="inner-grid payment">
             <h4 class="bold-text">Pay with</h4>
-            <input class="payment box" type="radio" name="payment-method" value="card" id="card">
+            <!-- @if($hideDetails) -->
+            <!--     <form method="POST" action="{{route('checkout.shipping.order')}}" id="shipping_and_payment_option" class="display-contents"> -->
+            <!--         @csrf -->
+            <!--     </form> -->
+            <!-- @endif -->
+            <input form="shipping_and_payment_option" class="payment box" type="radio" name="payment-method" value="card" id="card" required>
             <label for="card">
                 <div class="card">
                     <div class="small-img" id="visa"> </div>
@@ -132,11 +157,11 @@
                     <div class="small-img" id="american-express"></div>
                 </div>
             </label>
-            <input class="payment box" type="radio" name="payment-method" value="google-pay" id="google-pay">
+            <input form="shipping_and_payment_option" class="payment box" type="radio" name="payment-method" value="google-pay" id="google-pay" required>
             <label for="google-pay">
                 <div class="large-img" id="google-pay"></div>
             </label>
-            <input class="payment box" type="radio" name="payment-method" value="apple-pay" id="apple-pay">
+            <input form="shipping_and_payment_option" class="payment box" type="radio" name="payment-method" value="apple-pay" id="apple-pay" required>
             <label for="apple-pay">
                 <div class="large-img" id="apple-pay"></div>
             </label>
@@ -160,9 +185,16 @@
             <span class="vat-anotation">VAT</span><span class="value vat-value" id="vat-display">{{number_format($productTotal * 0.2, 2) . '€'}}</span>
             <hr>
             <span class="total-anotation">Order total</span><span class="value total-value" id="order-total-display">{{number_format($productTotal * 1.2, 2) . '€'}}</span>
-            <button href="../src/temp.html" class="button continue-button">
+            <button form="shipping_and_payment_option" type="submit" class="button continue-button">
                 <span class="button-text">Confirm and pay</span>
             </button>
+            @error('shipping_options')
+                <div>{{ $message }}</div>
+            @enderror
+
+            @error('payment-method')
+                <div>{{ $message }}</div>
+            @enderror
         </div>
     </aside>
     <script>
@@ -193,4 +225,46 @@
         orderTotal.innerText = (productTotal + shippingCost +  vat).toFixed(2) + '€';
         }
     </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            console.log('Loaded inputs', document.querySelectorAll('input[form="shipping_and_payment_option"]').length);
+            document.querySelectorAll('input[form="shipping_and_payment_option"]').forEach(function(input){
+                input.addEventListener('change', function(){
+                    console.log('Saving', input.name, input.value);
+                    localStorage.setItem(input.name, input.value);
+                });
+            });
+            //made to work for input as well, but is probably not necessary
+            document.querySelectorAll('input[form="shipping_and_payment_option"]').forEach(function(input){
+                const savedValue = localStorage.getItem(input.name);
+                if(savedValue){
+                    if(input.type === 'radio'){
+                        if(input.value === savedValue){
+                            console.log('loading', input.name, input.value);
+                            input.checked = true;
+                        }
+                    } else{
+                        console.log('what am I doing?', input.name, input.value);
+                        input.value = savedValue;
+                    }
+                }
+            });
+            const savedShippingOption = localStorage.getItem('shipping_options');
+            if(savedShippingOption){
+                updateShippingCost(savedShippingOption);
+            }
+        });
+    </script>
+
+    @if(!$hideDetails)
+        <script>
+            const emailInput = document.getElementById('email');
+
+            emailInput.addEventListener('blur', function() {
+                if (!emailInput.checkValidity()) {
+                    emailInput.reportValidity();
+                }
+            });
+        </script>
+    @endif
   @endsection

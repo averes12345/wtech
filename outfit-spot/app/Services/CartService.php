@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\ProductColorSize;
+use App\Models\ShippingDetails;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Orders;
@@ -10,6 +11,7 @@ use App\Models\OrderItems;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CartService
 {
@@ -24,8 +26,11 @@ class CartService
     {
         /* dd($productVariantId, $quantity); */
         $productVariant = ProductColorSize::find($productVariantId); // should make sure an incorrect id gets here
+        if($productVariant->count_in_stock <= 0){
+            return;
+        }
         $user = $this->getUser();
-        $quantity = min($quantity, $productVariant->count_in_stock); // make sure you dont add more that can be in stock
+        /* $quantity = min($quantity, $productVariant->count_in_stock); // make sure you dont add more that can be in stock */
 
         if($user){ // user is logged in
            if(!$user->cart_id){ // user does not have a cart yet
@@ -35,19 +40,19 @@ class CartService
            }
            $order_item = OrderItems::where('orders_id', $user->cart_id)->where('specific_product_id', $productVariantId)->first();
            if($order_item){ // user has the item we want to add in the cart
-                $order_item->quantity += $quantity;
+                $order_item->quantity = min($quantity + $order_item->quantity, $productVariant->count_in_stock);
                 $order_item->save();
            }else{ // user does not have the item we want to add in the cart
-               OrderItems::create(['orders_id' => $user->cart_id, 'specific_product_id' => $productVariantId, 'quantity' => $quantity]);
+               OrderItems::create(['orders_id' => $user->cart_id, 'specific_product_id' => $productVariantId, 'quantity' => min($quantity,  $productVariant->count_in_stock)]);
            }
         } else { // user is not logged in
             $cart = session()->get('cart', []);
 
             if (isset($cart[$productVariantId ])){ // user has the item we want to add in the cart
-                $cart[$productVariantId ]['quantity'] += $quantity;
+                $cart[$productVariantId ]['quantity'] += min($quantity + $cart[$productVariantId]['quantity'], $productVariant->count_in_stock);
             } else { // user does not have the item we want to add in the cart
                 $cart[$productVariantId] = [
-                    'quantity' => $quantity,
+                    'quantity' => min($quantity, $productVariant->count_in_stock),
                 ];
             }
 
@@ -100,7 +105,10 @@ class CartService
     public function getItemQuantity(int $productVariantId){
         $user = $this->getUser();
         if($user){
-           return OrderItems::where('orders_id', $user->cart_id)->where('specific_product_id', $productVariantId)->first()->quantity;
+           return OrderItems::where('orders_id', $user->cart_id)->where('specific_product_id', $productVariantId)->first()->quantity ?? 0;
+        }
+        if(!session->get('cart' []) || array_key_exists($productVariantId, session->get('cart'))){
+            return 0;
         }
         return session()->get('cart', [])[$productVariantId]['quantity'];
     }
@@ -125,7 +133,7 @@ class CartService
                'price' => $item?->product?->price,
                'stock' => $item?->count_in_stock,
             ];
-        })->toArray();
+        })->sortBy([['product_name', 'asc'], ['product_variant_id', 'asc']])->toArray();
         } else{
 
             $cart = session()->get('cart', []);
@@ -149,13 +157,104 @@ class CartService
                 'images' => $variant?->images?->pluck('image_path')->toArray() ?? [],
                 'price' => $variant?->product?->price,
                 'stock' => $variant?->count_in_stock,
-            ];})->values()->toArray();
+            ];})->sortBy('product_name')->values()->toArray();
+
             return $mappedCart;
         }
     }
+    public function productCount(){
+        $user = $this->getUser();
+        if($user){ // user is logged in
+           if (!$user->cart_id){ // user has no cart
+                return 0;
+           }
+           $cartItems = $user->cart->items;
+        }else{
+            $cartItems = session->get('cart');
+        }
+        return count($cartItems);
+    }
+
+    public function buy(){
+        return DB::transaction(function () {
+            $user = $this->getUser();
+            if($user){
+                if(!$user->cart_id){
+                        /* need to name this apropriatly */
+                        throw new \Exception('User does not have a cart', 1);
+                }
+               $cartItems = $user->cart->items;
+               $products = ProductColorSize::whereIn('id', $cartItems->pluck('specific_product_id')->toArray())->get();
+               /* dump($cartItems, $products); */
+               foreach($products as $product){
+                    /* dd($cartItems->firstWhere('specific_product_id', $product->id)); */
+                   $cartItemQuantity = $cartItems->firstWhere('specific_product_id', $product->id)->quantity;
+                   /* dd($cartItemQuantity); */
+                    if($product->count_in_stock >= $cartItemQuantity){
+                        $product->count_in_stock -= $cartItemQuantity;
+                    }else { //something went wrong cancel the order and return false
+                        /* need to name this apropriatly */
+                        throw new \Exception('Count in cart > count in stock', 2);
+                    }
+                    /* dump($user); */
+                    $order = Orders::find($user->cart_id);
+                    $userShippingDetails = ShippingDetails::find($user->saved_shipping_preference);
+                    $orderShippingDetails = $userShippingDetails->replicate();
+                    $orderShippingDetails->save();
+                    $order->shipping_details_id = $orderShippingDetails->id;
+                    $order->save();
+                    $user->cart_id = null;
+                    $user->save();
+                    $products->each->save();
+                }
+            } else {
+                $cart = session()->get('cart');
+                if(!$cart || sizeof($cart) == 0){
+                    throw new \Exception('User does not have a cart', 1);
+                }
+                $order = session->get('shippingDetails');
+                $products = ProductColorSize::whereIn('id', array_keys($cart))->get();
+                foreach($products as  $product){
+                    if($product->count_in_stock >= $cart[$product->id]){
+                        $product->count_in_stock -= $cart[$product->id];
+                    }
+                    else{
+                        /* need to name this apropriatly */
+                        throw new \Exception('Count in cart > count in stock', 2);
+                    }
+                }
+                $orderShippingDetails = ShippingDetails::create([
+                    'first_name' => $order['first_name'],
+                    'last_name' => $order['last_name'],
+                    'email' => $order['email'],
+                    'phone' => $order['phone_number'],
+                    'country_id' => $order['country'],
+                    'street_address' => $order['street_address'],
+                    'city' => $order['city'],
+                    'region' => $order['region'],
+                    'zip_code' => $order['zip_code'],
+                    ]);
+                $orderShippingDetails->save();
+                $order = Orders::create([
+                'user_id' => null,
+                'shipping_details_id' => $orderShippingDetails->id,
+                ]);
+
+                foreach ($cart as $productVariantId => $item){
+                   OrderItems::create([
+                       'orders_id' => $orderShippingDetails->id,
+                       'specific_product_id' => $productVariantId,
+                       'quantity' => $item['quantity'],
+                   ]);
+                }
+                $products->each->save();
+            }
+            return $orderShippingDetails;
+        });
+    }
 
 
-    public function mergeCartOnLogin(User $user)
+    public function mergeSessionAfterLogin(User $user)
     {
         $sessionCart = session()->get('cart',[]);
 

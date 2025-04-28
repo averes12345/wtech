@@ -37,9 +37,10 @@ Route::get('/product', function () {
 /* CHECKOUT PAGE METHODS */
 
 /* show the checkout page, index the items in the cart*/
-Route::get('/checkout', [CheckoutController::class, 'index']);
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 /* display if the everything was successfull */
+Route::post('/checkout/order', [CheckoutController::class, 'order'])->name('checkout.shipping.order');
 Route::get('/checkout/success', [CheckoutController::class, 'success']);
 /* cancel the order, checkout failiure */
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel']);

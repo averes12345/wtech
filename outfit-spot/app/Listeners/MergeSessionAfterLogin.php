@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Auth\Events\Login;
 
-class MergeCartAfterLogin
+class MergeSessionAfterLogin
 {
     /**
      * Create the event listener.
@@ -22,6 +22,6 @@ class MergeCartAfterLogin
     public function handle(Login $event): void
     {
         $cartservice = app(CartService::class);
-        $cartservice->mergeCartOnLogin($event->user);
+        $cartservice->mergeSessionAfterLogin($event->user);
     }
 }
