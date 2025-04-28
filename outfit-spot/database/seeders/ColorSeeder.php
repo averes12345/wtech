@@ -40,10 +40,8 @@ class ColorSeeder extends Seeder
         "yellow" => "#FFFF00",
         "black" => "#000000",
         "white" => "#FFFFFF",
-        "gray" => "#808080",
         "orange" => "#FFA500",
         "purple" => "#800080",
-        "pink" => "#FFC0CB",
         "brown" => "#A52A2A",
         ];
 

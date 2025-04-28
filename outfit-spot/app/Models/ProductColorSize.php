@@ -13,16 +13,18 @@ class ProductColorSize extends Model
     public function color(){
         return $this->belongsTo(Color::class, 'colors_id');
     }
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'products_id');
-    }
+
     public function size(){
         return $this->belongsTo(Size::class, 'sizes_id');
     }
+
     public function images(){
 
       return $this->hasMany(ProductImage::class, 'product_color_sizes_id');
+    }
+
+    public function product(){
+        return $this->belongsTo(Product::class, 'products_id');
     }
 
     public function getIdFromForeignKeys(int $productId, int $colorId, int $sizeId){

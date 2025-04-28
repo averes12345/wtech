@@ -45,21 +45,33 @@ class CategoryController extends Controller
             $query->where('price','<=',$request->max_price);
         }
 
-        $query->with(['colorSizeVariants' => function($q) use($request) {
-            if (request()->filled('colors')) {
-                $q->whereIn('colors_id', request('colors'));
-            }
-            $q->with('mainImage');
-        }]);
-
-        $products = $query->get()
-            ->map(function($product) {
-                $product->uniqueVariants = $product
-                    ->colorSizeVariants
-                    ->unique('colors_id')
-                    ->values();
-                return $product;
+        if ($request->filled('colors')) {
+            $query->whereHas('colorSizeVariants', function($q) use ($request) {
+                $q->whereIn('colors_id', $request->colors);
             });
+        }
+
+        $products = $query
+            ->paginate(9)
+            ->withQueryString();
+
+        $products->getCollection()->transform(function($product) {
+            if (request()->filled('colors')) {
+                $variant = $product->colorSizeVariants
+                    ->whereIn('colors_id', request('colors'))
+                    ->first();
+            } else{
+                $variant = $product->colorSizeVariants->first();
+            }
+
+            $product->mainImage = $variant
+                ? $variant->mainImage
+                : null;
+
+            $product->variant = $variant;
+
+            return $product;
+        });
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();

@@ -34,7 +34,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4" style="height: 100%;">
         <div class="row">
             <aside class="col-lg-3 mb-4 filter-sidebar">
                 <form action="{{ route('products.byCategory', ['category' => $category->name]) }}" method="GET">
@@ -129,16 +129,8 @@
                         @break
                 @endswitch
 
-                <div class="filters-active mb-3">
-                    <span>Filter 1 ✕</span>
-                    <span>Filter 2 ✕</span>
-                    <span>Filter 3 ✕</span>
-                </div>
                 <div class="d-flex justify-content-between mb-2">
-                    @php
-                        $totalProducts = $products->sum(fn($product) => $product->uniqueVariants->count());
-                    @endphp
-                    <span>{{ $totalProducts }} produktov</span>
+                    <span>{{ $products->total() }} produktov</span>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -155,26 +147,50 @@
                 </div>
                 <div class="product-grid">
                     @foreach($products as $product)
-                        @foreach($product->uniqueVariants as $variant)
-                            <div class="card product">
-                                <img class="img-fluid product-img" alt="{{ $variant->mainImage->alt }}" title="AI Generated Image" src="{{ $variant->mainImage->image_path }}">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">{{ $product->name }}</h5>
-                                    <p class="card-text">{{ $product->price }}€</p>
-                                </div>
-                                <a href="/product" class="stretched-link"></a>
+                        <div class="card product">
+                            @if($product->mainImage)
+                                <img
+                                    class="img-fluid product-img"
+                                    src="{{ asset($product->mainImage->image_path) }}"
+                                    alt="{{ $product->mainImage->alt }}"
+                                >
+                            @endif
+
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">{{ number_format($product->price,2) }} €</p>
                             </div>
-                        @endforeach
+
+                                <a href="{{ route('product.show', [ 'product'=>$product->id, 'currentVariant'=>$product->variant->id ]) }}" class="stretched-link"></a>
+                        </div>
                     @endforeach
                 </div>
 
                 <nav class="mt-4">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled"><a class="page-link">⬅️</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">➡️</a></li>
+                        <li class="page-item @if($products->onFirstPage()) disabled @endif">
+                            <a class="page-link"
+                               href="{{ $products->previousPageUrl() }}"
+                               aria-label="Previous">
+                                ⬅️
+                            </a>
+                        </li>
+
+                        @for($i = 1; $i <= $products->lastPage(); $i++)
+                            <li class="page-item @if($i == $products->currentPage()) active @endif">
+                                <a class="page-link" href="{{ $products->url($i) }}">
+                                    {{ $i }}
+                                </a>
+                            </li>
+                        @endfor
+
+                        <li class="page-item @if(!$products->hasMorePages()) disabled @endif">
+                            <a class="page-link"
+                               href="{{ $products->nextPageUrl() }}"
+                               aria-label="Next">
+                                ➡️
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </main>
