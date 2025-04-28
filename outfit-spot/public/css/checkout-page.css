@@ -60,7 +60,7 @@ button {
 div.review {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     row-gap: 1rem;
     padding: 0 5%;
 }
@@ -68,7 +68,6 @@ div.review {
 div.cart-item {
     display: grid;
     width: 100%;
-    padding: 0 5%;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr auto;
     grid-template-areas: "img body body"
@@ -101,21 +100,25 @@ div.review form.product-remove {
 
 
 /* shipping styles */
-div.shipping {
+div.shipping-details {
     min-width: 250px;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-areas: "heading heading heading heading heading heading"
-        "country country country country country country"
         "first-name first-name first-name last-name last-name last-name"
+        "email email email email email email"
+        /* "phone-number phone-number phone-number phone-number phone-number phone-number" */
+        "country country country country country country"
         "street-address street-address street-address street-address street-address street-address"
         "city city region region zip zip"
-        "email email email email email email"
-        "phone-number phone-number phone-number phone-number phone-number phone-number"
         "submit submit submit submit submit submit";
     column-gap: 2%;
     row-gap: 1vh;
     padding: 0 5%;
+}
+
+form.display-contents {
+    display: contents;
 }
 
 div.shipping h4 {
@@ -138,12 +141,6 @@ div :is(input, select) {
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
 }
-
-/*
-div.shipping :is(input, select):focus {
-
-}
-*/
 
 #country {
     grid-area: country;
@@ -185,7 +182,7 @@ div.shipping :is(input, select):focus {
     grid-area: phone-number;
 }
 
-div.shipping button {
+div.shipping-details button {
     width: 30%;
     padding: 1px 2px;
     box-sizing: border-box;
@@ -198,6 +195,38 @@ div.shipping button {
     color: white;
 }
 
+/* shipping option styles */
+
+div.shipping-option {
+    max-height: calc(4*75px + 20px);
+    grid-template-columns: auto 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    column-gap: 15px;
+    align-items: center;
+    padding: 0 5%;
+}
+
+div.shipping-option h4 {
+    grid-column: span 3;
+}
+
+div.shipping-option label {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-column: span 3;
+}
+
+div.shipping-option label div,
+div.shipping-option label p {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: left;
+
+}
+
+
 /* payment styles */
 
 input.payment {
@@ -205,7 +234,7 @@ input.payment {
 }
 
 div.payment {
-    max-height: calc(3*75px + 3*15px);
+    max-height: calc(3*75px + 3*15px + 20px);
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto auto;
     column-gap: 15px;

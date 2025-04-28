@@ -11,20 +11,32 @@
                 </div>
             </div>
             <div class="d-flex">
-                @guest
-                    <a href="/login" class="btn btn-link text-white me-3">
-                        <i class="bi bi-person-circle fs-4"></i>
-                    </a>
-                @endguest
-                @auth
+                @if(Auth::guard('web')->check())
                     <!-- this should point to the profile page if we get to creating one -->
                     <a href="/" class="btn btn-link text-white me-3">
                         <p>Welcome, {{Auth::user()->first_name}}!</p>
                     </a>
-                @endauth
+                @elseif(Auth::guard('admin')->check())
+                    <!-- this should point to the profile page if we get to creating one -->
+                    <a href="/" class="btn btn-link text-white me-3">
+                        <p>Welcome admin, {{Auth::guard('admin')->user()->first_name}}!</p>
+                    </a>
+                @else
+                <a href="/login" class="btn btn-link text-white me-3">
+                    <i class="bi bi-person-circle fs-4"></i>
+                </a>
+                @endif
                 <a href="/checkout" class="btn btn-link text-white">
                     <i class="bi bi-cart fs-4"></i>
                 </a>
+               @if(Auth::guard('web')->check() || Auth::guard('admin')->check())
+                    <form action="{{ route('login.logout') }}" method="POST" id="logout-form" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="log-out btn btn-link text-white" style="border: none; background: none; cursor: pointer;">
+                            <i class="bi bi-box-arrow-right fs-4"></i>
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

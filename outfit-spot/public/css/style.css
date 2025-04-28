@@ -1,3 +1,4 @@
+
 html, body, main {
     height: 100%;
     margin: 0;
@@ -29,6 +30,7 @@ html, body, main {
     border-radius: 5px;
 }
 
+
 .dropdown-menu {
     position: absolute;
     background-color: #ffffff;
@@ -55,6 +57,7 @@ html, body, main {
     .main-navbar .nav-item:hover .dropdown-menu {
         display: block;
     }
+
     .main-navbar .dropdown-toggle {
         pointer-events: none;
     }
@@ -122,7 +125,7 @@ html, body, main {
 /*Category Page*/
 .product-grid {
     display: grid;
-    grid-template-columns:  repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
 }
 
@@ -151,17 +154,19 @@ html, body, main {
     cursor: pointer;
     margin-right: 5px;
 }
+
 aside.filter-sidebar {
     width: 100%;
     max-width: 280px;
     background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 10px;
     max-height: fit-content;
 }
+
 aside.filter-sidebar h5 {
     border-bottom: 1px solid #dee2e6;
     padding-bottom: 5px;

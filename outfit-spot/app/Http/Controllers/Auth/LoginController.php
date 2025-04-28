@@ -45,6 +45,20 @@ class LoginController extends Controller
         'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    //
+
+    public function logout(Request $request){
+       $user = Auth::user() ?? Auth::guard('admin')->user();
+
+        if ($user) {
+            if (Auth::guard('admin')->check()) {
+                Auth::guard('admin')->logout();
+            } elseif (Auth::guard('web')->check()) {
+                Auth::guard('web')->logout();
+            }
+        }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
 }
 

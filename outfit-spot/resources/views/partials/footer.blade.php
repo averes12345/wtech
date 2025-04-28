@@ -1,18 +1,22 @@
+
+<!-- should think about removing the h5 anchors since they dont point to anything-->
 <footer>
     <section class="help-&-contact">
         <h5>
-            <a href="../src/temp.html"> Help & Contact</a>
+            Help & Contact
         </h5>
         <p>
             <a href="../src/temp.html">Contact Us</a>
             <br>
             <a href="../src/temp.html">Returns</a>
+            <br>
+            <a href="../src/temp.html">Shipping</a>
         </p>
     </section>
 
     <section class="company">
         <h5>
-            <a href="../src/temp.html">Company</a>
+            Company
         </h5>
         <p>
             <a href="../src/temp.html">Company info</a>
@@ -25,7 +29,7 @@
 
     <section class="social-media">
         <h5>
-            <a href="../src/temp.html">Stay connected</a>
+            Stay connected
         </h5>
         <p>
             <a class="facebook-link" href="https://www.facebook.com">
