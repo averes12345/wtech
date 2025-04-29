@@ -51,6 +51,23 @@ class CategoryController extends Controller
             });
         }
 
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'alphabet-asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'alphabet-desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                case 'price-asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price-desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+            };
+        }
+
         $products = $query
             ->paginate(9)
             ->withQueryString();

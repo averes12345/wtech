@@ -131,18 +131,31 @@
 
                 <div class="d-flex justify-content-between mb-2">
                     <span>{{ $products->total() }} produktov</span>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                            Zoradiť podľa
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><a class="dropdown-item" href="#">Abecedy ↑</a></li>
-                            <li><a class="dropdown-item" href="#">Abecedy ↓</a></li>
-                            <li><a class="dropdown-item" href="#">Ceny ↑</a></li>
-                            <li><a class="dropdown-item" href="#">Ceny ↓</a></li>
+                    <details class="sort-dropdown">
+                        <summary>Zoradiť podľa</summary>
+                        <ul class="sort-list">
+                            <li>
+                                <a
+                                    href="{{ request()->fullUrlWithQuery(['sort' => 'alphabet-asc']) }}"
+                                >Abecedy ↑</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="{{ request()->fullUrlWithQuery(['sort' => 'alphabet-desc']) }}"
+                                >Abecedy ↓</a>
+                            </li>
+                            <li >
+                                <a
+                                    href="{{ request()->fullUrlWithQuery(['sort' => 'price-asc']) }}"
+                                    >Ceny ↑</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="{{ request()->fullUrlWithQuery(['sort' => 'price-desc']) }}"
+                                    >Ceny ↓</a>
+                            </li>
                         </ul>
-                    </div>
+                    </details>
 
                 </div>
                 <div class="product-grid">
@@ -196,12 +209,17 @@
             </main>
         </div>
     </div>
+@endsection
 
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var slider = document.getElementById('price-slider');
-                noUiSlider.create(slider, {
+@section('footer')
+    @include('partials.footer2')
+@endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var slider = document.getElementById('price-slider');
+            noUiSlider.create(slider, {
                     start: [
                         {{ request('min_price', 0) }},
                         {{ request('max_price', 400) }}
@@ -237,6 +255,5 @@
         </script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
-    @endpush
-@endsection
+@endpush
 
