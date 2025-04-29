@@ -107,7 +107,7 @@ class CartService
         if($user){
            return OrderItems::where('orders_id', $user->cart_id)->where('specific_product_id', $productVariantId)->first()->quantity ?? 0;
         }
-        if(!session->get('cart' []) || array_key_exists($productVariantId, session->get('cart'))){
+        if(!session()->get('cart', []) || array_key_exists($productVariantId, session()->get('cart'))){
             return 0;
         }
         return session()->get('cart', [])[$productVariantId]['quantity'];
@@ -122,8 +122,10 @@ class CartService
            }
            $cartItems = $user->cart->items;
             /* dd($cartItems[0]->specificProduct); */
+            /* dd($cartItems, $cartItems->find(13)->specificProduct, $cartItems->find(13)->specificProduct->id); */
            return $cartItems->map(function ($item) {
            return [
+               'product_id'        => $item->specificProduct->product->id,
                'product_variant_id' => $item->specific_product_id,
                'quantity' => $item->quantity,
                'color' => $item->specificProduct->color->name ?? null,
@@ -149,6 +151,7 @@ class CartService
             $variant = $productVariants[$variantId] ?? null;
 
             return [
+                'product_id'        => $variant->product->id,
                 'product_variant_id' => $variantId,
                 'quantity' => $item['quantity'],
                 'color' => $variant?->color?->name,
@@ -188,25 +191,35 @@ class CartService
                /* dump($cartItems, $products); */
                foreach($products as $product){
                     /* dd($cartItems->firstWhere('specific_product_id', $product->id)); */
-                   $cartItemQuantity = $cartItems->firstWhere('specific_product_id', $product->id)->quantity;
+                   $cartItem= $cartItems->firstWhere('specific_product_id', $product->id);
                    /* dd($cartItemQuantity); */
+                    if (!$cartItem) {
+                        throw new \Exception("Cart item for specific_product_id {$product->id} not found", 3);
+                    }
+                   $cartItemQuantity = $cartItem->quantity;
                     if($product->count_in_stock >= $cartItemQuantity){
                         $product->count_in_stock -= $cartItemQuantity;
                     }else { //something went wrong cancel the order and return false
                         /* need to name this apropriatly */
                         throw new \Exception('Count in cart > count in stock', 2);
                     }
-                    /* dump($user); */
-                    $order = Orders::find($user->cart_id);
-                    $userShippingDetails = ShippingDetails::find($user->saved_shipping_preference);
-                    $orderShippingDetails = $userShippingDetails->replicate();
-                    $orderShippingDetails->save();
-                    $order->shipping_details_id = $orderShippingDetails->id;
-                    $order->save();
-                    $user->cart_id = null;
-                    $user->save();
-                    $products->each->save();
                 }
+                /* dump(['user->cart_id' => $user->cart_id]); */
+                $order = Orders::find($user->cart_id);
+                $userShippingDetails = ShippingDetails::find($user->saved_shipping_preference);
+                $orderShippingDetails = $userShippingDetails->replicate();
+                $orderShippingDetails->save();
+                /* dump([ */
+                /*     'order' => $order, */
+                /*     'order_class' => get_class($order), */
+                /*     'orderShippingDetails' => $orderShippingDetails, */
+                /*     'orderShippingDetailsId' => $orderShippingDetails->id, */
+                /* ]); */
+                $order->shipping_details_id = $orderShippingDetails->id;
+                $order->save();
+                $user->cart_id = null;
+                $user->save();
+                $products->each->save();
             } else {
                 $cart = session()->get('cart');
                 if(!$cart || sizeof($cart) == 0){

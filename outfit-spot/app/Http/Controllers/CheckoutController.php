@@ -98,11 +98,28 @@ class CheckoutController extends Controller
     public function order(Request $request){
         //might want to transfer success/failiure logic into separate routes, and wrap buy into a transaction
 
+        $cartservice = app(CartService::class);
+        $user = $cartservice->getUser();
+        if($user){
+            $shippingDetails = $user?->shippingDetails;
+            /* $paymentDetails = $user?->paymentDetails; */
+        }else{
+             $shippingDetails = session()->get('shippingDetails');
+             /* $paymentDetails = session()->get('paymentDetails'); */
+        }
+        /* dd($shippingDetails); */
+
         $validator = Validator::make($request->all(), [
             'shipping_options' => ['required'],
             'payment-method' => ['required'],
         ]);
-
+        if(!$shippingDetails){
+            /* dd($shippingDetails); */
+            $validator->errors()->add('shipping_details', 'Please add the shipping details.');
+            return redirect('checkout')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
         if ($validator->fails()) {
             return redirect('checkout?hide-details=true')
                              ->withErrors($validator)

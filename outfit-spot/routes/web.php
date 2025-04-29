@@ -58,6 +58,8 @@ Route::post('checkout/payment', [CheckoutController::class, 'payment'])->name('c
 /* cart */
 /* update the ammount of a product variation in the cart */
 Route::patch('checkout/{productVariationId}', [CartController::class, 'update'])->name('cart.update');
+/* add to the cart */
+Route::post('checkout/{productVariantId}', [CartController::class, 'add'])->name('cart.add');
 /* remove a specific variation of a product from the cart */
 Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy'])-> name('cart.delete');
 

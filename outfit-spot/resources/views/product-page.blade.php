@@ -102,10 +102,11 @@
                     <div class="text-success h4">{{ $product->price }} €</div>
                     <div class="text-success mb-3">Na sklade</div>
 
-                    <form class="row g-3 align-items-end">
+                    <form action="{{route('cart.add', $currentVariant->id)}}" method='POST' class="row g-3 align-items-end">
+                        @csrf
                         <div class="col-2">
                             <label for="quantity" class="form-label">Počet</label>
-                            <input type="number" class="form-control" id="quantity" value="1" min="1">
+                            <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">
                         </div>
                         <div class="col-auto">
                             <label class="form-label mb-2">Farba</label><br>
@@ -186,7 +187,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('cart');
             btn.addEventListener('click', function(event) {
-                event.preventDefault();
+                <!-- event.preventDefault(); -->
                 const sizeSelect = document.getElementById('size');
                 const quantity = document.getElementById('quantity').value;
 

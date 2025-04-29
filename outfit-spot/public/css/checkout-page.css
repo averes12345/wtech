@@ -333,6 +333,14 @@ aside div.summary button {
     margin: 10px;
 }
 
+aside div.errors {
+    grid-column: span 2;
+}
+
+aside div.errors div {
+    color: red;
+}
+
 /* Grid staging*/
 header {
     grid-area: header;

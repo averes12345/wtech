@@ -17,5 +17,7 @@ class ShippingDetails extends Model
     'region',
     'zip_code',
     ];
+
+    protected  $table = 'shipping_details';
     //
 }

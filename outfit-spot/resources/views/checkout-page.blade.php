@@ -41,7 +41,7 @@
 
                 <!-- <div class="large-img" id="product-img-1"></div> -->
                 <div class="cart-item">
-                    <a href="{{route('product')}}" title="Go to the product page" >
+                    <a href="{{ route('product.show', ['currentVariant' => $product['product_variant_id'], 'product' => $product['product_id']]) }}" title="Go to the product page" >
                         <img class="large-img" src="{{ $product['images'][0]}}" alt="Product Image">
                     </a>
                     <div class="product-body" id="product-body-1">
@@ -188,13 +188,22 @@
             <button form="shipping_and_payment_option" type="submit" class="button continue-button">
                 <span class="button-text">Confirm and pay</span>
             </button>
-            @error('shipping_options')
-                <div>{{ $message }}</div>
-            @enderror
+            <div class="errors">
+                @error('shipping_details')
+                    <div>{{$message}}</div>
+                    <br>
+                @enderror
 
-            @error('payment-method')
-                <div>{{ $message }}</div>
-            @enderror
+                @error('shipping_options')
+                    <div>{{ $message }}</div>
+                    <br>
+                @enderror
+
+                @error('payment-method')
+                    <div>{{ $message }}</div>
+                    <br>
+                @enderror
+            <div>
         </div>
     </aside>
     <script>

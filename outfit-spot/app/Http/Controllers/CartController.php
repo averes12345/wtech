@@ -8,6 +8,7 @@ use App\Services\CartService;
 class CartController extends Controller
 {
      public function update(Request $request, $id){
+        /* dd($request); */
         $newQuantity = max(0, $request->input('quantity'));
 
         $cartservice = app(CartService::class);
@@ -30,6 +31,13 @@ class CartController extends Controller
        $cartservice->delete($id);
         return redirect()->back();
         /* dd('success'); */
+    }
+
+    public function add(Request $request, $id){
+        $cartservice = app(CartService::class);
+        $cartservice->add($id, $request->input('quantity'));
+
+        return redirect()->back();
     }
 
 }
