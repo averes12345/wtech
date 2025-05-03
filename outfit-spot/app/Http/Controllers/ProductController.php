@@ -7,8 +7,10 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColorSize;
+use App\Models\ProductImage;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ProductController extends Controller
 {
@@ -71,7 +73,11 @@ class ProductController extends Controller
         $brand = $request->input('brand');
         $color = $request->input('color');
         $sizes = $request->input('size', []);
-        $paths = $request->input('uploaded_paths', []);
+        $imagesInput = $request->input('images', '[]');
+
+        $paths = is_string($imagesInput)
+            ? json_decode($imagesInput, true)
+            : Arr::wrap($imagesInput);
 
         $productData = [
             'category_id' => $category,
@@ -84,9 +90,31 @@ class ProductController extends Controller
 
         $product = Product::create($productData);
 
-        return redirect()
-            ->route('adminHome')
-            ->with('success', 'Product created successfully.');
+        $variantIds = [];
+        foreach ($sizes as $size) {
+            $variant = $product->colorSizeVariants()->create([
+                'colors_id' => $color,
+                'sizes_id' => $size,
+                'count_in_stock' => $quantity,
+                'status' => 'in_stock',
+            ]);
+            $variantIds[] = $variant->id;
+        }
+
+        foreach ($variantIds as $variantId) {
+            foreach ($paths as $index => $path) {
+                ProductImage::create([
+                    'product_color_sizes_id' => $variantId,
+                    'image_path' => $path,
+                    'alt' => 'An image of a product.',
+                    'is_main' => ($index === 0),
+                ]);
+            }
+        }
+
+
+
+        return response()->noContent();
     }
 
     /**

@@ -265,12 +265,11 @@
                         method: 'POST',
                         body: formData,
                     })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
+                        .then(response => {
+                            if (response.status === 204) {
                                 alert('Produkt bol úspešne pridaný.');
                                 window.location.href = '{{ route('adminHome') }}';
-                            } else {
+                            }else {
                                 alert('Chyba pri pridávaní produktu.');
                             }
                         })
