@@ -18,9 +18,21 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::middleware(['auth:admin']) ->group(function () {
-    Route::get('/admin/home', fn () => view('admin-home-page'));
+    Route::get('/admin/home', fn () => view('admin-home-page'))->name('adminHome');
     /* all the other admin routes, which should be protected by the admin guard ei. redirect to the login page */
 });
+
+Route::middleware(['auth:admin']) ->group(function () {
+    Route::get('/admin/addProduct', [ProductController::class, 'create'] )->name('addProduct');
+});
+
+Route::post(
+    'admin/products/upload-image', [ProductController::class, 'uploadImage'])
+    ->name('admin.products.uploadImage');
+
+Route::post(
+    'admin/products/add', [ProductController::class, 'store'])
+    ->name('admin.products.store');
 
 Route::get('/', function () {
     return view('homepage');
@@ -62,6 +74,7 @@ Route::patch('checkout/{productVariationId}', [CartController::class, 'update'])
 Route::post('checkout/{productVariantId}', [CartController::class, 'add'])->name('cart.add');
 /* remove a specific variation of a product from the cart */
 Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy'])-> name('cart.delete');
+
 
 
 /* REGISTRATION PAGE METHODS */

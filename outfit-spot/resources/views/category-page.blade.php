@@ -34,7 +34,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid mt-4" style="height: 100%;">
+    <div class="container-fluid mt-4">
         <div class="row">
             <aside class="col-lg-3 mb-4 filter-sidebar">
                 <form action="{{ route('products.byCategory', ['category' => $category->name]) }}" method="GET">
@@ -110,7 +110,7 @@
                 </form>
             </aside>
 
-            <main class="col-md-9">
+            <main class="col-md-9" style="height: 100%">
                 @switch($category->name)
                     @case('hoodies')
                         <h2>Mikiny</h2>

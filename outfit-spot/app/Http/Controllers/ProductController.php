@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColorSize;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,15 +25,68 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        return view('admin-addProduct-page', compact('categories', 'brands', 'colors', 'sizes'));
     }
 
-    /**
+    public function uploadImage(Request $request)
+    {
+//        // Validácia prijatých súborov
+//        $request->validate([
+//            'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+//        ]);
+
+//        $urls = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                // Generuj unikátny názov súboru
+                $filename = $file->getClientOriginalName();
+                $file->move(public_path('img'), $filename);
+                $path = 'img/' . $filename;
+            }
+        }
+
+        return response()->json([
+            'path' => $path
+        ]);
+    }
+
+
+/**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $category = $request->input('category');
+        $type = $request->input('type');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $price = $request->input('price');
+        $quantity = $request->input('quantity');
+        $brand = $request->input('brand');
+        $color = $request->input('color');
+        $sizes = $request->input('size', []);
+        $paths = $request->input('uploaded_paths', []);
+
+        $productData = [
+            'category_id' => $category,
+            'type' => $type,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'brand_id' => $brand,
+        ];
+
+        $product = Product::create($productData);
+
+        return redirect()
+            ->route('adminHome')
+            ->with('success', 'Product created successfully.');
     }
 
     /**

@@ -2,7 +2,7 @@
     <div class="navbar-top">
         <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
             <a class="navbar-brand" href="/">
-                <img src="{{asset('img/logo-white.svg')}}" alt="Logo" width="70" class=" align-text-top" />
+                <img src="{{ asset('img/logo-white.svg') }}" alt="Logo" width="70" class=" align-text-top" />
             </a>
             <div class="search-wrapper w-100 my-2">
                 <div class="search-bar mx-auto">
