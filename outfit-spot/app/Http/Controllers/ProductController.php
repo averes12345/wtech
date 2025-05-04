@@ -128,6 +128,7 @@ class ProductController extends Controller
         $allVariants = $product->colorSizeVariants;
         $currentVariant = ProductColorSize::where('id', $currentVariantId)->first();
         $currentVariant->mainImage = $currentVariant->mainImage ?? $currentVariant->images->first();
+        $currentVariant->images = $currentVariant->images;
 
         $sizes = $allVariants
             ->where('colors_id', $currentVariant->colors_id)

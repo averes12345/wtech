@@ -170,7 +170,7 @@
                             @endif
 
                             <div class="card-body text-center">
-                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <h5 class="card-title">{{ "{$product->brand->name} {$product->name}" }}</h5>
                                 <p class="card-text">{{ number_format($product->price,2) }} €</p>
                             </div>
 

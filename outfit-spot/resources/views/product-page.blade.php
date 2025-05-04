@@ -68,14 +68,13 @@
                     </a>
 
                     <div class="d-flex gap-3 mt-3 thumbnail-container">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina1.png">
-                            <img src="../img/Mikina1.png" alt="Miniatúra 1" class="img-thumbnail"
-                                 style="width: 100px; height: 100px;">
-                        </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="../img/Mikina2.png">
-                            <img src="../img/Mikina2.png" alt="Miniatúra 2" class="img-thumbnail"
-                                 style="width: 100px; height: 100px;">
-                        </a>
+                        @foreach($currentVariant->images as $image)
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                <img src="{{ asset($image->image_path) }}" alt="Miniatúra 1" class="img-thumbnail"
+                                     style="width: 100px; height: 100px;">
+                            </a>
+
+                        @endforeach
                     </div>
 
                     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
