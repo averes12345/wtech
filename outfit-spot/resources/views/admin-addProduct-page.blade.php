@@ -257,10 +257,6 @@
                     formData.append('images', JSON.stringify(window.uploadedImagePaths));
                     formData.append('_token', '{{ csrf_token() }}');
 
-                    // for (const [key, value] of formData.entries()) {
-                    //     console.log(key, value);
-                    // }
-
                     fetch('{{ route('admin.products.store') }}', {
                         method: 'POST',
                         body: formData,

@@ -275,8 +275,6 @@
                 const fileInput = document.getElementById('image');
                 const preview = document.getElementById('preview');
 
-                // window.uploadedImagePaths = window.uploadedImagePaths || [];
-
                 uploadBtn.addEventListener('click', function() {
                     const files = fileInput.files;
                     if (!files.length) {
@@ -312,13 +310,11 @@
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
 
-                    // if (window.uploadedImagePaths.length < 1) {
-                    //     alert('Prosím, nahrajte obrázok.');
-                    //
-                    //     return;
-                    // }
+                    if (window.uploadedImagePaths.length < 1) {
+                        alert('Prosím, nahrajte obrázok.');
 
-                    // console.log(window.uploadedImagePaths.length)
+                        return;
+                    }
 
                     const formData = new FormData(form);
                     formData.append('images', JSON.stringify(window.uploadedImagePaths));

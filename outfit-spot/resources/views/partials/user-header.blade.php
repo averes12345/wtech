@@ -4,12 +4,23 @@
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('img/logo-white.svg') }}" alt="Logo" width="70" class=" align-text-top" />
             </a>
-            <div class="search-wrapper w-100 my-2">
+            <form action="{{ route('products.byName') }}" method="GET" class="search-wrapper w-100 my-2">
                 <div class="search-bar mx-auto">
-                    <input type="search" placeholder="Hľadať...">
-                    <button class="btn btn-outline-dark rounded-end-pill" type="submit"><i class="fas fa-search"></i></button>
+                    <input
+                        type="search"
+                        name="search"
+                        placeholder="Hľadať..."
+                        value="{{ request('search') }}"
+                        class="form-control"
+                    >
+                    <button
+                        class="btn btn-outline-dark rounded-end-pill"
+                        type="submit"
+                    >
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-            </div>
+            </form>
             <div class="d-flex">
                 @if(Auth::guard('web')->check())
                     <!-- this should point to the profile page if we get to creating one -->
