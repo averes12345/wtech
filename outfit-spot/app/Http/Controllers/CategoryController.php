@@ -33,7 +33,7 @@ class CategoryController extends Controller
         ];
 
         if ($request->filled('search')) {
-            $search = mb_strtolower($request->input('search'));  // prevedieme vyhľadávací reťazec na lowercase
+            $search = mb_strtolower($request->input('search'));
 
             $query->where(function($q) use ($search) {
                 $q->whereRaw('LOWER(name) LIKE ?', ["%{$search}%"])
