@@ -140,18 +140,86 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product, string $currentVariantId)
     {
-        //
+
+        $categories = Category::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        $currentCategory = $product->category;
+        $currentBrand = $product->brand;
+
+        $allVariants = $product->colorSizeVariants;
+        $currentVariant = ProductColorSize::where('id', $currentVariantId)->first();
+        $currentVariant->images = $currentVariant->images;
+
+        $imagePaths = $currentVariant->images->pluck('image_path')->toArray();
+
+        $currentSizes = $allVariants
+            ->where('colors_id', $currentVariant->colors_id)
+            ->values();
+
+        return view('admin-editProduct-page', compact('sizes', 'currentSizes','categories', 'brands', 'colors', 'product', 'currentCategory', 'currentBrand', 'currentVariant', 'imagePaths'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $productId)
     {
-        //
+        $product = Product::findOrFail($productId);
+
+        $color = $request->input('color');
+        $sizes = $request->input('size', []);
+        $imagesInput = $request->input('images', '[]');
+        $quantity = $request->input('quantity');
+
+        $product->update([
+            'category_id' => $request->input('category'),
+            'type' => $request->input('type'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'brand_id' => $request->input('brand'),
+        ]);
+
+        ProductColorSize::where('products_id', $product->id)
+            ->where('colors_id', $color)
+            ->delete();
+
+
+
+        $variantIds = [];
+        foreach ($sizes as $size) {
+            $variant = $product->colorSizeVariants()->create([
+                'colors_id' => $color,
+                'sizes_id' => $size,
+                'count_in_stock' => $quantity,
+                'status' => 'in_stock',
+            ]);
+            $variantIds[] = $variant->id;
+        }
+
+        $paths = is_string($imagesInput)
+            ? json_decode($imagesInput, true)
+            : Arr::wrap($imagesInput);
+
+        foreach ($variantIds as $variantId) {
+            foreach ($paths as $index => $path) {
+                ProductImage::create([
+                    'product_color_sizes_id' => $variantId,
+                    'image_path' => $path,
+                    'alt' => 'An image of a product.',
+                    'is_main' => ($index === 0),
+                ]);
+            }
+        }
+
+        return response()->noContent();
     }
+
 
     /**
      * Remove the specified resource from storage.
