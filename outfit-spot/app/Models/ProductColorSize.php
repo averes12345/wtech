@@ -10,6 +10,10 @@ class ProductColorSize extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'products_id', 'colors_id', 'sizes_id', 'count_in_stock', 'status'
+    ];
+
     public function color(){
         return $this->belongsTo(Color::class, 'colors_id');
     }

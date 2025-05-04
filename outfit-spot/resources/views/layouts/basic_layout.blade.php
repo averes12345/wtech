@@ -16,12 +16,14 @@
             @yield('header')
         @endif
         @yield('content')
-        @if (! View::hasSection('footer'))
-            @include('partials.footer')
-        @else
-            @yield('footer')
-        @endif
 
+        @if(! Auth::guard('admin')->check())
+            @if (! View::hasSection('footer'))
+                @include('partials.footer')
+            @else
+                @yield('footer')
+            @endif
+        @endif
     @stack('scripts')
     </body>
 </html>

@@ -43,7 +43,7 @@
                 <input type="range">
             </div>
             <button type="submit">Filter</button>
-            <a href="admin-add-product.html" class="button-wrapper">
+            <a href="{{ route('addProduct') }}" class="button-wrapper">
                 <button type="button">Add an item</button>
             </a>
         </form>
