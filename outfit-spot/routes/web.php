@@ -26,6 +26,13 @@ Route::middleware(['auth:admin']) ->group(function () {
     Route::get('/admin/addProduct', [ProductController::class, 'create'] )->name('addProduct');
 });
 
+Route::get('/admin/editProduct/{product:id}/{currentVariant:id}', [ProductController::class, 'edit'])
+    ->name('admin.products.edit');
+
+Route::put(
+    'admin/products/update/{product:id}', [ProductController::class, 'update'])
+    ->name('admin.products.update');
+
 Route::post(
     'admin/products/upload-image', [ProductController::class, 'uploadImage'])
     ->name('admin.products.uploadImage');
@@ -40,6 +47,9 @@ Route::get('/', function () {
 
 Route::get('/products/{category:name}', [CategoryController::class, 'byCategory'])
     ->name('products.byCategory');
+
+Route::get('/products', [CategoryController::class, 'byName'])
+    ->name('products.byName');
 
 
 Route::get('/product/{product:id}/{currentVariant:id}', [ProductController::class, 'show'])

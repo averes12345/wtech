@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 @endpush
 
-@section('title', 'Add Product')
+@section('title', 'Edit Product')
 
 @section('favicon')
     {{ asset('img/logo-white.svg') }}
@@ -37,42 +37,44 @@
             <i class="bi bi-arrow-left"></i> Späť
         </a>
 
-        <h2>Pridanie produktu</h2>
+        <h2>Upravenie produktu</h2>
 
-        <form id="addProductForm">
+        <form id="editProductForm">
             <div class="row">
                 <div class="col-md-6">
 
                     <div class="mb-3">
-                        <label class="form-label" for="brand">Kategória</label>
+                        <label class="form-label" for="category">Kategória</label>
                         <select id="category" name="category" class="form-select w-auto" required>
-                            <option value="" disabled selected>Vyberte kategóriu</option>
+                            <option value="" disabled>Vyberte kategóriu</option>
                             @foreach($categories as $category)
-                                @switch($category->name)
-                                    @case('shirts')
-                                        <option value="{{ $category->id }}">Tričká</option>
-                                        @break
-                                    @case('shoes')
-                                        <option value="{{ $category->id }}">Topánky</option>
-                                        @break
-                                    @case('pants')
-                                        <option value="{{ $category->id }}">Nohavice</option>
-                                        @break
-                                    @case('hoodies')
-                                        <option value="{{ $category->id }}">Mikiny</option>
-                                        @break
-                                @endswitch
+                                @php
+                                    switch($category->name) {
+                                        case 'shirts':   $label = 'Tričká'; break;
+                                        case 'shoes':    $label = 'Topánky'; break;
+                                        case 'pants':    $label = 'Nohavice'; break;
+                                        case 'hoodies':  $label = 'Mikiny'; break;
+                                        default:         $label = ucfirst($category->name);
+                                    }
+                                @endphp
+                                <option
+                                    value="{{ $category->id }}"
+                                    {{ ($currentCategory->id === $category->id ? 'selected' : '') }}
+                                >
+                                    {{ $label }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
 
                     <div class="mb-3">
                         <label class="form-label" for="type">Typ</label>
                         <select id="type" name="type" class="form-select w-auto" required>
                             <option value="" disabled selected>Vyberte typ</option>
-                                <option value="male">Muži</option>
-                                <option value="female">Ženy</option>
-                                <option value="kids">Deti</option>
+                            <option value="male" {{ ($product->type === 'male' ? 'selected' : '') }}>Muži</option>
+                            <option value="female" {{ ($product->type === 'female' ? 'selected' : '') }} >Ženy</option>
+                            <option value="kids" {{ ($product->type === 'kids' ? 'selected' : '') }}>Deti</option>
                         </select>
                     </div>
 
@@ -81,26 +83,34 @@
                         <select id="brand" name="brand" class="form-select w-auto" required>
                             <option value="" disabled selected>Vyberte značku</option>
                             @foreach($brands as $brand)
-                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                <option value="{{ $brand->id }}"
+                                    {{ ($currentBrand->id === $brand->id ? 'selected' : '') }}>
+                                    {{ $brand->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="product_name">Názov produktu</label>
-                        <input type="text" class="form-control" id="product_name" name="name" required>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ $product->name ?? '' }}"
+                            id="product_name"
+                            name="name" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="product_description">Popis produktu</label>
-                        <textarea class="form-control" id="product_description" name="description" rows="3" required></textarea>
+                        <textarea class="form-control" id="product_description" name="description" rows="3" required>{{ $product->description ?? '' }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="price">Cena</label>
                         <div class="input-group">
                             <span class="input-group-text">€</span>
-                            <input type="number" min="0" max="400" step="0.01" class="form-control" id="price" name="price" required>
+                            <input type="number" value="{{ $product->price }}" min="0" max="400" step="0.01" class="form-control" id="price" name="price" required>
                         </div>
                     </div>
 
@@ -108,7 +118,7 @@
                         <label class="form-label" for="quantity">Počet</label>
                         <div class="input-group">
                             <span class="input-group-text">ks</span>
-                            <input type="number" min="1" class="form-control w-auto" id="quantity" name="quantity" placeholder="0" required>
+                            <input type="number" value="{{ $currentVariant->count_in_stock }}" min="1" class="form-control w-auto" id="quantity" name="quantity" placeholder="0" required>
                         </div>
                     </div>
 
@@ -134,11 +144,20 @@
                                     $label = $slovakColors[$key] ?? $color->name;
                                 @endphp
                                 <div class="col">
-                                    <input class="form-check-input mt-2" type="radio" name="color" id="color-{{ ltrim($color->hex, '#') }}" value="{{ $color->id }}" required>
+                                    <input
+                                        class="form-check-input mt-2"
+                                        type="radio"
+                                        name="color"
+                                        id="color-{{ ltrim($color->hex, '#') }}"
+                                        value="{{ $color->id }}"
+                                        disabled
+                                        {{ ($currentVariant->colors_id === $color->id ? 'checked' : '') }}
+                                        required>
                                     <div class="color-sample mt-2" style="background-color: {{ $color->hex }};"></div>
                                     <label class="form-label d-block" for="color-{{ ltrim($color->hex, '#') }}">{{ $label}}</label>
                                 </div>
                             @endforeach
+                            <input type="hidden" name="color" value="{{ $currentVariant->colors_id }}">
                         </div>
                     </div>
 
@@ -158,11 +177,22 @@
                                         $shoesSizes[] = $s;
                                     }
                                 }
+
+                                 $currentSizeIds = $currentSizes->pluck('sizes_id')->toArray();
+
+
+                                $selectedSizes = old('size', $currentSizeIds);
                             @endphp
 
-                        @foreach($shirtSizes as $size)
+                            @foreach($shirtSizes as $size)
                                 <div class="form-check" data-type="clothing">
-                                    <input class="form-check-input" type="checkbox" name="size[]" id="size-{{ $size->id }}" value="{{ $size->id }}">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="size[]"
+                                        id="size-{{ $size->id }}"
+                                        value="{{ $size->id }}"
+                                        {{ in_array($size->id, (array) $selectedSizes) ? 'checked' : '' }}>
                                     <label class="form-label d-block" for="size-{{ $size->id }}">{{ $size->size }}</label>
                                 </div>
                             @endforeach
@@ -189,26 +219,61 @@
                             </div>
                         </div>
 
-                        <div id="preview" class="d-flex justify-content-between gap-2 mt-3"></div>
+                        <div id="preview" class="d-flex flex-row flex-nowrap gap-2 mt-3 overflow-auto"
+                             style="overflow-x: auto; overflow-y: hidden;">
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-end my-4">
-                    <button class="btn btn-success" type="submit">Pridať produkt</button>
+                    <button class="btn btn-success" type="submit">Aktualizovať produkt</button>
                 </div>
             </div>
         </form>
     </div>
     @push('scripts')
         <script>
+            window.uploadedImagePaths = @json($imagePaths ?? []);
+
+            window.uploadedImagePaths.forEach((path, index) => {
+
+                const container = document.createElement('div');
+                container.style.position = 'relative';
+                container.style.marginRight = '8px';
+
+
+                const img = document.createElement('img');
+                img.src = '/' + path;
+                img.classList.add('img-fluid', 'rounded');
+                img.style.maxWidth = '360px';
+                img.style.maxHeight = '360px';
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.innerHTML = '&times;';
+                btn.classList.add('btn', 'btn-sm', 'btn-danger');
+                btn.style.position = 'absolute';
+                btn.style.top = '4px';
+                btn.style.right = '4px';
+                btn.style.padding = '0 6px';
+                btn.style.lineHeight = '1';
+
+                btn.addEventListener('click', () => {
+                    window.uploadedImagePaths.splice(index, 1);
+                    container.remove();
+                });
+
+                container.appendChild(img);
+                container.appendChild(btn);
+                preview.appendChild(container);
+            });
+
             document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('addProductForm')
+                const form = document.getElementById('editProductForm')
                 const uploadBtn = document.getElementById('uploadImageButton');
                 const fileInput = document.getElementById('image');
                 const preview = document.getElementById('preview');
-
-                window.uploadedImagePaths = window.uploadedImagePaths || [];
 
                 uploadBtn.addEventListener('click', function() {
                     const files = fileInput.files;
@@ -251,22 +316,29 @@
                         return;
                     }
 
-                    // console.log(window.uploadedImagePaths.length)
-
                     const formData = new FormData(form);
                     formData.append('images', JSON.stringify(window.uploadedImagePaths));
                     formData.append('_token', '{{ csrf_token() }}');
+                    formData.append('_method', 'PUT');
 
-                    fetch('{{ route('admin.products.store') }}', {
+                    for (const [key, value] of formData.entries()) {
+                        console.log(key, value);
+                    }
+
+                    fetch('{{ route('admin.products.update', $product->id) }}', {
                         method: 'POST',
-                        body: formData,
+                        credentials: 'same-origin',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: formData
                     })
                         .then(response => {
                             if (response.status === 204) {
-                                alert('Produkt bol úspešne pridaný.');
+                                alert('Produkt bol úspešne aktualizovaný.');
                                 window.location.href = '{{ route('adminHome') }}';
                             }else {
-                                alert('Chyba pri pridávaní produktu.');
+                                alert('Chyba pri aktualizovaní produktu.');
                             }
                         })
                         .catch(() => alert('Chyba pri pridávaní produktu.'));

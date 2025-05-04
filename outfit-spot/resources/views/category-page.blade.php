@@ -37,7 +37,15 @@
     <div class="container-fluid mt-4">
         <div class="row">
             <aside class="col-lg-3 mb-4 filter-sidebar">
-                <form action="{{ route('products.byCategory', ['category' => $category->name]) }}" method="GET">
+                @php
+                    $formAction = request()->filled('search')
+                        ? route('products.byName')
+                        : route('products.byCategory', ['category' => $category->name]);
+                @endphp
+                <form action="{{ $formAction }}" method="GET">
+                    @if(request()->filled('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                    @endif
                     @if(request()->filled('type'))
                         <input type="hidden" name="type" value="{{ request('type') }}">
                     @endif
@@ -127,6 +135,8 @@
                     @case('shoes')
                         <h2>Topánky</h2>
                         @break
+                    @default
+                        <h2>{{ ucfirst($category->search) }}</h2>
                 @endswitch
 
                 <div class="d-flex justify-content-between mb-2">
