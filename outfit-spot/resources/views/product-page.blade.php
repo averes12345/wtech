@@ -152,8 +152,11 @@
                             <label for="size" class="form-label">Veľkosť</label>
                             <select id="size" class="form-select">
                                 @foreach($sizes as $key)
-                                    <option value="{{ $key->id }}">
-                                        {{$key->size->size}}</option>
+                                    <option
+                                        value="{{ $key->id }}"
+                                        @selected($key->sizes_id == $currentVariant->sizes_id)
+                                    >
+                                        {{$key->size->size}}
                                     </option>
                                 @endforeach
                             </select>
