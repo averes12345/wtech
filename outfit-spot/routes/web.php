@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\AdminHome;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginFrom')->name('login');
@@ -18,28 +19,17 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::middleware(['auth:admin']) ->group(function () {
-    Route::get('/admin/home', fn () => view('admin-home-page'))->name('adminHome');
+    Route::get('/admin/home', [AdminHome::class, 'index'])->name('adminHome');
+    Route::get('/admin/addProduct', [ProductController::class, 'create'] )->name('addProduct');
+    Route::get('/admin/editProduct/{product:id}/{currentVariant:id}', [ProductController::class, 'edit'])->name('admin.products.edit');
+
+    Route::put( 'admin/products/update/{product:id}', [ProductController::class, 'update']) ->name('admin.products.update');
+
+    Route::post( 'admin/products/upload-image', [ProductController::class, 'uploadImage']) ->name('admin.products.uploadImage');
+    Route::post( 'admin/products/add', [ProductController::class, 'store']) ->name('admin.products.store');
     /* all the other admin routes, which should be protected by the admin guard ei. redirect to the login page */
 });
 
-Route::middleware(['auth:admin']) ->group(function () {
-    Route::get('/admin/addProduct', [ProductController::class, 'create'] )->name('addProduct');
-});
-
-Route::get('/admin/editProduct/{product:id}/{currentVariant:id}', [ProductController::class, 'edit'])
-    ->name('admin.products.edit');
-
-Route::put(
-    'admin/products/update/{product:id}', [ProductController::class, 'update'])
-    ->name('admin.products.update');
-
-Route::post(
-    'admin/products/upload-image', [ProductController::class, 'uploadImage'])
-    ->name('admin.products.uploadImage');
-
-Route::post(
-    'admin/products/add', [ProductController::class, 'store'])
-    ->name('admin.products.store');
 
 Route::get('/', function () {
     return view('homepage');
@@ -59,23 +49,27 @@ Route::get('/product/{product:id}/{currentVariant:id}', [ProductController::clas
 
 /* CHECKOUT PAGE METHODS */
 
-/* show the checkout page, index the items in the cart*/
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::controller(CheckoutController::class)->group(function () {
+    /* show the checkout page, index the items in the cart*/
+    Route::get('/checkout', 'index')->name('checkout');
 
-/* display if the everything was successfull */
-Route::post('/checkout/order', [CheckoutController::class, 'order'])->name('checkout.shipping.order');
-Route::get('/checkout/success', [CheckoutController::class, 'success']);
-/* cancel the order, checkout failiure */
-Route::get('/checkout/cancel', [CheckoutController::class, 'cancel']);
+    /* submit the order and redirect to success / failiure */
+    Route::post('/checkout/order', 'order')->name('checkout.shipping.order');
+    /* display if the everything was successfull */
+    Route::get('/checkout/success', 'success');
+    /* cancel the order, checkout failiure */
+    Route::get('/checkout/cancel', 'cancel');
 
-/* shipping */
-/* post the shipping info */
-Route::post('checkout/shipping-details', [CheckoutController::class, 'shippingDetails'])->name('checkout.shipping.details');
+    /* shipping */
+    /* post the shipping details */
+    Route::post('checkout/shipping-details', 'shippingDetails')->name('checkout.shipping.details');
+    /* post the shipping option */
+    Route::post('checkout/shipping-option', 'shippingOption')->name('checkout.shipping.option');
+    /* post the payment info */
+    Route::post('checkout/payment', 'payment')->name('checkout.payment');
+});
 
-Route::post('checkout/shipping-option', [CheckoutController::class, 'shippingOption'])->name('checkout.shipping.option');
-/* payment */
-/* post the payment info*/
-Route::post('checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+
 
 /* cart */
 /* update the ammount of a product variation in the cart */

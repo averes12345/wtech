@@ -49,7 +49,7 @@ class CartService
             $cart = session()->get('cart', []);
 
             if (isset($cart[$productVariantId ])){ // user has the item we want to add in the cart
-                $cart[$productVariantId ]['quantity'] += min($quantity + $cart[$productVariantId]['quantity'], $productVariant->count_in_stock);
+                $cart[$productVariantId ]['quantity'] = min($quantity + $cart[$productVariantId]['quantity'], $productVariant->count_in_stock);
             } else { // user does not have the item we want to add in the cart
                 $cart[$productVariantId] = [
                     'quantity' => min($quantity, $productVariant->count_in_stock),
@@ -107,7 +107,7 @@ class CartService
         if($user){
            return OrderItems::where('orders_id', $user->cart_id)->where('specific_product_id', $productVariantId)->first()->quantity ?? 0;
         }
-        if(!session()->get('cart', []) || array_key_exists($productVariantId, session()->get('cart'))){
+        if(!session()->get('cart', []) || !array_key_exists($productVariantId, session()->get('cart'))){
             return 0;
         }
         return session()->get('cart', [])[$productVariantId]['quantity'];
@@ -131,6 +131,7 @@ class CartService
                'color' => $item->specificProduct->color->name ?? null,
                'size' => $item->specificProduct->size->size ?? null,
                'product_name' => $item->specificProduct->product->name ?? null,
+               'product_description' => $item->product->description ?? null,
                'images' => $item?->specificProduct?->images?->pluck('image_path')->toArray() ?? [],
                'price' => $item?->product?->price,
                'stock' => $item?->count_in_stock,
@@ -157,6 +158,7 @@ class CartService
                 'color' => $variant?->color?->name,
                 'size' => $variant?->size?->size,
                 'product_name' => $variant?->product?->name,
+                'product_description' => $variant->product->description ?? null,
                 'images' => $variant?->images?->pluck('image_path')->toArray() ?? [],
                 'price' => $variant?->product?->price,
                 'stock' => $variant?->count_in_stock,

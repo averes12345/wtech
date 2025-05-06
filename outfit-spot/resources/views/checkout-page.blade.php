@@ -48,9 +48,9 @@
                         <span class="product-information">
                             <span class="product-name"><b>{{$product['product_name']}}</b></span>
                             <br>
-                            <span class="product-description">product-description</span>
+                            <span class="product-description">{{$product['product_description']}}</span>
                             <br>
-                            <span class="product-price">{{$product['price'] * $product['quantity']}}</span>
+                            <span class="product-price">{{number_format($product['price'] * $product['quantity'], 2)}} €</span>
                         </span>
                         <form action="{{route('cart.update', $product['product_variant_id'])}}" method='POST'class="controls">
                             @csrf

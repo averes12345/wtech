@@ -20,6 +20,7 @@ class CheckoutController extends Controller
         /* dd($hideDetails); */
         $cartservice = app(CartService::class);
         $products = $cartservice->getCart();
+        /* dump($products); */
 
         $countries = Country::all();
        /* dd($products, $countries); */

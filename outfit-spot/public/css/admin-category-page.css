@@ -49,6 +49,15 @@ aside {
     grid-area: aside;
 }
 
+aside .color-sample {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #444;
+    margin-left: 8px;
+}
+
 aside button {
     height: 40px;
     width: 80%;

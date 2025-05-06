@@ -14,30 +14,32 @@
     <aside>
         <form id="filter" class="inner-grid">
             <div>Brand</div>
-            <label>
-                <input type="checkbox" name="brand" value="Nike"> Nike
-            </label>
-            <label>
-                <input type="checkbox" name="brand" value="Adidas"> Adidas
-            </label>
-            <label>
-                <input type="checkbox" name="brand" value="Asics"> Asics
-            </label>
+            @foreach($brands as $brand)
+                <span>
+                    <input type="checkbox" name="brands[]" value="{{$brand->id}}" id="brand-{{$brand->id}}">
+                    <!-- @checked(in_array($brand->id, request('brands', []))) -->
+                    <label for="brand-{{ $brand->id }}">
+                        {{ $brand->name }}
+                    </label>
+                </span>
+            @endforeach
             <hr>
+
             <div>Color</div>
-            <label>
-                <input type="checkbox" name="color" value="Red"> Red <div class="circle"
-                    style="background-color: red;"></div>
-            </label>
-            <label>
-                <input type="checkbox" name="color" value="Blue"> Blue <div class="circle"
-                    style="background-color: blue;"></div>
-            </label>
-            <label>
-                <input type="checkbox" name="color" value="Green"> Green <div class="circle"
-                    style="background-color: green;"></div>
-            </label>
-            <hr>
+            @foreach($colors as $color)
+                <span>
+                    <input type="checkbox" name="colors[]" value="{{$color->id}}" id="color-{{$color->id}}">
+                    <!-- @checked(in_array($color->id, request('colors', []))) -->
+                    <label for="color-{{$color->id}}">
+                        <span style="display:flex; align-items:center;">
+                            {{$color->name}}
+                            <span class="color-sample" style="background-color: {{$color->hex}};"></span>
+                        </span>
+                    </label>
+                </span>
+            @endforeach
+           <hr>
+
             <div>Price</div>
             <div>
                 <input type="range">
@@ -75,30 +77,27 @@
                     </button>
                 </div>
             </div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-            <div class="item">1</div>
-            <div class="item">2</div>
-            <div class="item">3</div>
-
-            <div class="item">last</div>
+            @foreach($products as $pcs)
+                <div class="item">
+                    <div class="img-wrapper">
+                        <img src="{{asset($pcs->mainImage->image_path)}}" alt="{{$pcs->mainImage->alt}}" class="card-img">
+                    </div>
+                    <div class="description-wrapper">
+                        <div class="description">
+                           <h5> {{"{$pcs->product->brand->name} {$pcs->product->name}"}} </h5>
+                           <p> {{number_format($pcs->product->price,2)}} €</p>
+                        </div>
+                        <button class="edit">
+                            <a href="../src/admin-edit-product.html">
+                                <img src="../img/svg_repo-edit.svg" alt="" class="tiny-img">
+                            </a>
+                        </button>
+                        <button class="remove">
+                            <img src="../img/svg_repo-remove.svg" alt="" class="tiny-img">
+                        </button>
+                    </div>
+                </div>
+            @endforeach
 
         </div>
         <nav class="mt-4">

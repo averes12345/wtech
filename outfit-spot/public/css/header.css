@@ -35,6 +35,7 @@ search-wrapper {
     overflow: hidden;
 }
 
+
 .search-bar input[type="search"] {
     min-width: 0px;
     flex: 1;
