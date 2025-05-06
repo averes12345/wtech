@@ -25,14 +25,20 @@ class ProductColorSizeSeeder extends Seeder
 
         $colors = Color::all();
         $products = Product::all();
-        $sizes = Size::all();
 
-        /* For every Product create 5 variants and for every color variant create 5 size variants*/
+        $sizes = Size::all();
+        $clothingSizes = $sizes->filter(fn($s) => $s->id >= 1 && $s->id <= 6)->values();
+        $shoesSizes    = $sizes->filter(fn($s) => $s->id < 1 || $s->id > 6)->values();
+
         foreach ($products as $product) {
             $selected_colors = $colors->random(4);
 
+            $isClothing = $product->id >= 1 && $product->id <= 180;
+            $availableSizes = $isClothing ? $clothingSizes : $shoesSizes;
+
             foreach ($selected_colors as $color) {
-                $selected_sizes = $sizes->random(3);
+                $selected_sizes = $availableSizes->random(3);
+
                 foreach ($selected_sizes as $size) {
                     ProductColorSize::create([
                         'products_id' => $product->id,

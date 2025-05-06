@@ -14,113 +14,127 @@ class ProductImageSeeder extends Seeder
      */
     public function run(): void
     {
-//        ProductImage::create([
-//            'product_color_sizes_id' => '1',
-//            'image_path' =>  'img/gpt-nike-shoe.png',
-//            'alt' => 'An image of an orange nike running shoe.',
-//        ]);
-//
-//        ProductImage::create([
-//            'product_color_sizes_id' => '2',
-//            'image_path' =>  'img/gpt-shirt-green.png',
-//            'alt' => 'An image of a green short-sleeved t-shirt.',
-//        ]);
-//        ProductImage::create([
-//            'product_color_sizes_id' => '3',
-//            'image_path' =>  'img/gpt-shirt-red.png',
-//            'alt' => 'An image of a red short-sleeved t-shirt.',
-//        ]);
-//        ProductImage::create([
-//            'product_color_sizes_id' => '4',
-//            'image_path' =>  'img/gpt-shirt-white.png',
-//            'alt' => 'An image of a white short-sleeved t-shirt.',
-//        ]);
-//        ProductImage::create([
-//            'product_color_sizes_id' => '5',
-//            'image_path' =>  'img/gpt-shirt-orange.png',
-//            'alt' => 'An image of an orange short-sleeved t-shirt.',
-//        ]);
-//
-//        ProductImage::create([
-//            'product_color_sizes_id' => '6',
-//            'image_path' =>  'img/gpt-shoe-blue.png',
-//            'alt' => 'An image of a blue running shoe.',
-//        ]);
-//        ProductImage::create([
-//            'product_color_sizes_id' => '7',
-//            'image_path' =>  'img/gpt-shoe-green.png',
-//            'alt' => 'An image of a green running shoe.',
-//        ]);
-//
-//        ProductImage::create([
-//            'product_color_sizes_id' => '8',
-//            'image_path' =>  'img/gpt-shoe-red.png',
-//            'alt' => 'An image of a red running shoe.',
-//        ]);
-//         ProductImage::create([
-//            'product_color_sizes_id' => '9',
-//            'image_path' =>  'img/gpt-shoe-yellow.png',
-//            'alt' => 'An image of a yellow running shoe.',
-//        ]);
-
         $dir = '../img/';
-        $product_variants = ProductColorSize::all();
-        $images = [
-            [
-                'path' => $dir . 'gpt-nike-shoe.png',
-                'alt'  => 'An image of an orange nike running shoe.',
-            ],
-            [
-                'path' => $dir . 'gpt-shirt-green.png',
-                'alt'  => 'An image of a green short-sleeved t-shirt.',
-            ],
-            [
-                'path' => $dir . 'gpt-shirt-red.png',
-                'alt'  => 'An image of a red short-sleeved t-shirt.',
-            ],
-            [
-                'path' => $dir . 'gpt-shirt-white.png',
-                'alt'  => 'An image of a white short-sleeved t-shirt.',
-            ],
-            [
-                'path' => $dir . 'gpt-shirt-orange.png',
-                'alt'  => 'An image of an orange short-sleeved t-shirt.',
-            ],
-            [
-                'path' => $dir . 'gpt-shoe-blue.png',
-                'alt'  => 'An image of a blue running shoe.',
-            ],
-            [
-                'path' => $dir . 'gpt-shoe-green.png',
-                'alt'  => 'An image of a green running shoe.',
-            ],
-            [
-                'path' => $dir . 'gpt-shoe-red.png',
-                'alt'  => 'An image of a red running shoe.',
-            ],
-            [
-                'path' => $dir . 'gpt-shoe-yellow.png',
-                'alt'  => 'An image of a yellow running shoe.',
-            ],
-            [
-                'path' => $dir . 'hoodie-blue.png',
-                'alt'  => 'An image of a blue hoodie.',
-            ],
-            [
-                'path' => $dir . 'hoodie-brown.png',
-                'alt'  => 'An image of a brown hoodie.',
-            ],
+
+        $shirtsImages = [
+            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+        ];
+        $pantsImages = [
+            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+        ];
+        $hoodiesImages = [
+            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+        ];
+        $shoesImages = [
+            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
         ];
 
-        foreach ($product_variants as $product_variant) {
-            $img = $images[array_rand($images)];
 
-            ProductImage::create([
-                'product_color_sizes_id' => $product_variant->id,
-                'image_path' => $img['path'],
-                'alt' => $img['alt'],
-                'is_main' => true,
-            ]);
+
+        $product_variants = ProductColorSize::all();
+
+        foreach ($product_variants as $variant) {
+            switch ($variant->products_id) {
+                case 1:
+                    $pool = $shirtsImages;
+                    break;
+                case 2:
+                    $pool = $hoodiesImages;
+                    break;
+                case 3:
+                    $pool = $pantsImages;
+                    break;
+                case 4:
+                    $pool = $shoesImages;
+                    break;
+                default:
+                    $pool = $shirtsImages;
+            }
+
+            $candidates = array_values(
+                array_filter($pool, fn($img) => $img['color_id'] === $variant->colors_id)
+            );
+
+            if (empty($candidates)) {
+                $candidates = $pool;
+            }
+
+            foreach ($candidates as $index => $img) {
+                ProductImage::create([
+                    'product_color_sizes_id' => $variant->id,
+                    'image_path'             => $img['path'],
+                    'alt'                    => 'Product Image',
+                    'is_main'                => $index === 0,
+                ]);
+            }
         }
     }
 }

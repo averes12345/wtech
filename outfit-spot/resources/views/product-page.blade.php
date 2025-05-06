@@ -183,19 +183,11 @@
                 }
             });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const btn = document.getElementById('cart');
-            btn.addEventListener('click', function(event) {
-                <!-- event.preventDefault(); -->
-                const sizeSelect = document.getElementById('size');
-                const quantity = document.getElementById('quantity').value;
-
-                const selectedSizeId = sizeSelect.value;
-                console.log(
-                    `vybraný variant ID: ${selectedSizeId}` +
-                    `, počet: ${quantity}`
-                );
+        document.getElementById('size')
+            .addEventListener('change', function () {
+                if (this.value) {
+                    window.location.href = this.value;
+                }
             });
-        });
     </script>
 @endpush

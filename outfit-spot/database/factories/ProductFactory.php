@@ -19,12 +19,28 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
+
+        $features = [
+            'slim fit', 'relaxed fit', 'button-down', 'V-neck',
+            'crew neck', 'zip-up', 'drawstring waist', 'elastic cuffs',
+            'breathable fabric', 'water-resistant', 'distressed finish',
+            'acid wash effect', 'rolled cuffs', 'chunky knit',
+            'embroidered detailing', 'peplum waist', 'asymmetric hem',
+            'pleated design', 'layered ruffles', 'oversized silhouette'
+        ];
+
+        $featureSnippet = implode(' ', $this->faker->randomElements(
+            $features,
+            random_int(2, 5)
+        ));
+
+
         return [
-            'name' => $this->faker->word(),
-            'description' => $this->faker->sentence(),
-            'price' => $this->faker->randomFloat(2, 5, 350),
+            'name' => $this->faker->unique()->words(2, true),
+            'description'  => ucfirst($featureSnippet) . '.',
+            'price' => $this->faker->randomFloat(2, 5, 380),
             'type' => $this->faker->randomElement(['male', 'female', 'kids']),
-            'category_id' => Category::inRandomOrder()->first()->id,
+//            'category_id' => Category::inRandomOrder()->first()->id,
             'brand_id' => Brand::inRandomOrder()->first()->id,
             'created_at' => now(),
             'updated_at' => now(),
