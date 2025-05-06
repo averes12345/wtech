@@ -97,8 +97,6 @@ class ProductImageSeeder extends Seeder
             ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
         ];
 
-
-
         $product_variants = ProductColorSize::all();
 
         foreach ($product_variants as $variant) {

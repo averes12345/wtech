@@ -188,40 +188,39 @@
                         </div>
                     @endforeach
                 </div>
-
-                <nav class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item @if($products->onFirstPage()) disabled @endif">
-                            <a class="page-link"
-                               href="{{ $products->previousPageUrl() }}"
-                               aria-label="Previous">
-                                ⬅️
-                            </a>
-                        </li>
-
-                        @for($i = 1; $i <= $products->lastPage(); $i++)
-                            <li class="page-item @if($i == $products->currentPage()) active @endif">
-                                <a class="page-link" href="{{ $products->url($i) }}">
-                                    {{ $i }}
-                                </a>
-                            </li>
-                        @endfor
-
-                        <li class="page-item @if(!$products->hasMorePages()) disabled @endif">
-                            <a class="page-link"
-                               href="{{ $products->nextPageUrl() }}"
-                               aria-label="Next">
-                                ➡️
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </main>
         </div>
     </div>
 @endsection
 
 @section('footer')
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if($products->onFirstPage()) disabled @endif">
+                <a class="page-link"
+                   href="{{ $products->previousPageUrl() }}"
+                   aria-label="Previous">
+                    ⬅️
+                </a>
+            </li>
+
+            @for($i = 1; $i <= $products->lastPage(); $i++)
+                <li class="page-item @if($i == $products->currentPage()) active @endif">
+                    <a class="page-link" href="{{ $products->url($i) }}">
+                        {{ $i }}
+                    </a>
+                </li>
+            @endfor
+
+            <li class="page-item @if(!$products->hasMorePages()) disabled @endif">
+                <a class="page-link"
+                   href="{{ $products->nextPageUrl() }}"
+                   aria-label="Next">
+                    ➡️
+                </a>
+            </li>
+        </ul>
+    </nav>
     @include('partials.footer2')
 @endsection
 
