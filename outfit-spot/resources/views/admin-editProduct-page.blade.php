@@ -1,4 +1,4 @@
-@extends('layouts.basic_layout')
+@extends('layouts.admin_basic_layout')
 
 @push('styles')
     <link
@@ -27,9 +27,9 @@
     {{ asset('img/logo-white.svg') }}
 @endsection
 
-@section('header')
-    @include('partials.user-header')
-@endsection
+{{--@section('header')--}}
+{{--    @include('partials.user-header')--}}
+{{--@endsection--}}
 
 @section('content')
     <div class="container my-3" style="height: 100%">

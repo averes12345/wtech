@@ -148,7 +148,7 @@ class CategoryController extends Controller
         }
 
         $products = $query
-            ->paginate(9)
+            ->paginate(12)
             ->withQueryString();
 
         $products->getCollection()->transform(function($product) {
@@ -168,6 +168,8 @@ class CategoryController extends Controller
 
             return $product;
         });
+
+        dump($products);
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();

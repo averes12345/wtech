@@ -139,7 +139,7 @@
                                     @if(isset($colorsLabel[$color]))
                                         <option
                                             value="{{ $url }}"
-                                            @selected($variant->id == $currentVariant->id)
+                                            @selected($variant->colors_id == $currentVariant->colors_id)
                                         >
                                             {{ $colorsLabel[$color]['symbol'] }}
                                             {{ $colorsLabel[$color]['label'] }}

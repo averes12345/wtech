@@ -57,24 +57,24 @@ class ProductImageSeeder extends Seeder
             ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
         ];
         $hoodiesImages = [
-            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
-            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-hoodie-green.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-hoodie-green-2.png',  'color_id' => 2],
+            ['path' => $dir . 'gpt-hoodie-red.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-hoodie-red-2.png',  'color_id' => 1],
+            ['path' => $dir . 'gpt-hoodie-white.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-hoodie-white-2.png', 'color_id' => 6],
+            ['path' => $dir . 'gpt-hoodie-orange.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-hoodie-orange-2.png', 'color_id' => 7],
+            ['path' => $dir . 'gpt-hoodie-blue.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-hoodie-blue-2.png',  'color_id' => 3],
+            ['path' => $dir . 'gpt-hoodie-yellow.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-hoodie-yellow-2.png', 'color_id' => 4],
+            ['path' => $dir . 'gpt-hoodie-black.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-hoodie-black-2.png',  'color_id' => 5],
+            ['path' => $dir . 'gpt-hoodie-purple.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-hoodie-purple-2.png', 'color_id' => 8],
+            ['path' => $dir . 'gpt-hoodie-brown.png',  'color_id' => 9],
+            ['path' => $dir . 'gpt-hoodie-brown-2.png',  'color_id' => 9],
         ];
         $shoesImages = [
             ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
@@ -97,12 +97,11 @@ class ProductImageSeeder extends Seeder
             ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
         ];
 
-
-
-        $product_variants = ProductColorSize::all();
+        $product_variants = ProductColorSize::with('product')->get();
 
         foreach ($product_variants as $variant) {
-            switch ($variant->products_id) {
+
+            switch ($variant->product->category_id) {
                 case 1:
                     $pool = $shirtsImages;
                     break;
@@ -115,8 +114,6 @@ class ProductImageSeeder extends Seeder
                 case 4:
                     $pool = $shoesImages;
                     break;
-                default:
-                    $pool = $shirtsImages;
             }
 
             $candidates = array_values(
