@@ -1,21 +1,12 @@
 header {
     padding: 10px 24px;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    column-gap: 2%;
+    grid-template-columns: auto 3fr 1fr;
     grid-area: header;
     background-color: var(--footer-background-color);
     align-items: center;
 }
 
-.logo {
-    width: 100px;
-    height: 100px;
-
-    display: inline-block;
-    background-image: url('../img/logo-white.svg');
-    background-size: cover;
-}
 
 search-wrapper {
     width: 100%;
@@ -28,34 +19,32 @@ search-wrapper {
     display: flex;
     width: 100%;
     min-width: 0px;
-    max-width: 800px;
+    max-width: 750px;
     /* a really cool hack, but I might want to make it actually responsive time permitting */
     margin: 0 auto;
-    border-radius: 999px;
+    border-radius: 20px 0 0 20px;
     overflow: hidden;
 }
 
 
 .search-bar input[type="search"] {
     min-width: 0px;
+    height: 44px;
     flex: 1;
     border: none;
-    padding: 0.5rem 1rem;
+    border-radius: 20px 0 0 20px;
+    padding: 10px 15px;
     font-size: 1rem;
     outline: none;
 }
 
 .search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 20px 20px 0;
     background-color: #ffffff;
-
-    margin-top: -5px;
-    margin-right: -5px;
-    margin-bottom: -5px;
-
-    padding: 0 1rem;
-    font-size: 1.1rem;
     cursor: pointer;
-    border-left: 1px solid #ccc;
+    font-size: 1rem;
 }
 
 .search-bar button:hover {
@@ -74,14 +63,15 @@ search-wrapper {
 #people-circle,
 #cart-fill {
     display: inline-block;
-    height: 36px;
-    width: 36px;
-    margin: 0 10px;
+    height: 32px;
+    width: 24px;
 }
 
 #log-out-icon {
     background-image: url('../img/log-out-white.svg');
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 #people-circle {

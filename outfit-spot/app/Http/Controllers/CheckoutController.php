@@ -46,9 +46,26 @@ class CheckoutController extends Controller
         return view('checkout-page', ['countries' => $countries, 'products' => $products, 'user' => $user, 'shippingDetails' =>$shippingDetails, 'hideDetails'  => $hideDetails, 'shippingPrices' => $shippingPrices]);
     }
 
+    /* public function validateShippingDetails(Request $request){ */
+    /**/
+    /* } */
+
     public function shippingDetails(Request $request){
        $cartservice = app(CartService::class);
        $user = $cartservice->getUser();
+
+       $validator = $request->validate([
+        'first_name' => ['required', 'string'],
+        'last_name' => ['required', 'string'],
+        'email' => ['required', 'email'],
+        'phone' => ['nullable'],
+        'country' => ['required',  'exists:countries,code'],
+        'street_address' => ['required', 'string'],
+        'city' => ['required', 'string'],
+        'region' => ['nullable', 'string'],
+        'zip_code' => ['required', 'integer'],
+       ]);
+
 
        if(!$user){ // user is not signed in
            $shippingDetails = array();

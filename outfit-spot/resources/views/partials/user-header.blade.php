@@ -1,8 +1,8 @@
 <header>
     <div class="navbar-top">
         <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('img/logo-white.svg') }}" alt="Logo" width="70" class=" align-text-top" />
+            <a class="navbar-brand" href="/" style="height:75px;">
+                <img src="{{ asset('img/logo-white.svg') }}" alt="Logo" width="75" class=" align-text-top" />
             </a>
             <form action="{{ route('products.byName') }}" method="GET" class="search-wrapper w-100 my-2">
                 <div class="search-bar mx-auto">
@@ -24,12 +24,12 @@
             <div class="d-flex">
                 @if(Auth::guard('web')->check())
                     <!-- this should point to the profile page if we get to creating one -->
-                    <a href="/" class="btn btn-link text-white me-3">
+                    <!-- <a href="/" class="btn btn-link text-white me-3"> -->
                         <p>Welcome, {{Auth::user()->first_name}}!</p>
-                    </a>
+                    <!-- </a> -->
                 @elseif(Auth::guard('admin')->check())
                     <!-- this should point to the profile page if we get to creating one -->
-                    <a href="/" class="btn btn-link text-white me-3">
+                    <a href="/admin/home" class="btn btn-link text-white me-3">
                         <p>Welcome admin, {{Auth::guard('admin')->user()->first_name}}!</p>
                     </a>
                 @else

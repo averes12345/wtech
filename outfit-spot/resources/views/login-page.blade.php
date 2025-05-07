@@ -22,7 +22,7 @@
                 @csrf
 
                 <input class="input" type="email" id="login-page_mail" name="email" placeholder="email" required>
-                <input class="input" type="password" id="login-page_pass" name="password" placeholder="password">
+                <input class="input" type="password" id="login-page_pass" name="password" placeholder="password" required>
                 <input class="button continue-button" type="submit" id="login-page_continue" name="continue"
                     value="Log in">
             </form>

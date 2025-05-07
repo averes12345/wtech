@@ -3,6 +3,7 @@
 use App\CartService as AppCartService;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 /* I decided to merge the logic into a single controller */
@@ -20,6 +21,9 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::middleware(['auth:admin']) ->group(function () {
     Route::get('/admin/home', [AdminHome::class, 'index'])->name('adminHome');
+    Route::get('/admin/home/search', [AdminHome::class, 'index'])->name('products.find');
+    Route::delete('/admin/delete/{currentVariant:id}', [AdminHome::class, 'delete'])->name('product.delete');
+
     Route::get('/admin/addProduct', [ProductController::class, 'create'] )->name('addProduct');
     Route::get('/admin/editProduct/{product:id}/{currentVariant:id}', [ProductController::class, 'edit'])->name('admin.products.edit');
 

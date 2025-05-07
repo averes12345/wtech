@@ -50,8 +50,10 @@
                             <br>
                             <span class="product-description">{{$product['product_description']}}</span>
                             <br>
+                            <span class="product-price">{{$product['size']}}</span>
+                            <br>
                             <span class="product-price">{{number_format($product['price'] * $product['quantity'], 2)}} €</span>
-                        </span>
+                            <br>
                         <form action="{{route('cart.update', $product['product_variant_id'])}}" method='POST'class="controls">
                             @csrf
                             @method('PATCH')
@@ -189,20 +191,33 @@
                 <span class="button-text">Confirm and pay</span>
             </button>
             <div class="errors">
-                @error('shipping_details')
-                    <div>{{$message}}</div>
-                    <br>
-                @enderror
+                @if ($errors->any())
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
-                @error('shipping_options')
-                    <div>{{ $message }}</div>
-                    <br>
-                @enderror
-
-                @error('payment-method')
-                    <div>{{ $message }}</div>
-                    <br>
-                @enderror
+                <!-- @error('shipping_details') -->
+                <!--     <div>{{$message}}</div> -->
+                <!--     <br> -->
+                <!-- @enderror -->
+                <!---->
+                <!-- @error('shipping_options') -->
+                <!--     <div>{{ $message }}</div> -->
+                <!--     <br> -->
+                <!-- @enderror -->
+                <!---->
+                <!-- @error('payment-method') -->
+                <!--     <div>{{ $message }}</div> -->
+                <!--     <br> -->
+                <!-- @enderror -->
+                <!---->
+                <!-- @error('email') -->
+                <!--     <div>{{ $message }}</div> -->
+                <!--     <br> -->
+                <!-- @enderror -->
             <div>
         </div>
     </aside>

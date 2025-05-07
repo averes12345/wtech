@@ -15,10 +15,9 @@
 @section('header')
     @include('partials.simple-header')
 @endsection
-@section('body_class', 'grid')
 @section('content')
-    <main>
-        <p> This is the success page </p>
+    <main style="display: grid; width:100%; height: 90%;">
+        <h1 style="align-self: center; justify-self:center;"> Thank you for you purchase </h1>
     </main>
     <script>
         @if (!empty($clearLocalStorage) && $clearLocalStorage)

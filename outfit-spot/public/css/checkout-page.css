@@ -337,7 +337,7 @@ aside div.errors {
     grid-column: span 2;
 }
 
-aside div.errors div {
+aside div.errors li {
     color: red;
 }
 
@@ -377,6 +377,8 @@ footer {
 
     aside {
         width: 100%;
+        z-index: auto;
+        max-height: auto;
     }
 
 

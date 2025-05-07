@@ -12,12 +12,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Market Sans", Arial;
-    height: 100%;
+    min-height: 100%;
     margin-bottom: 0;
 }
 
 .grid {
-    height: 100%;
+    /* height: 100%; */
     /* for testing remove later*/
     display: grid;
     column-gap: 5vw;
@@ -82,6 +82,15 @@ aside label div {
 
 }
 
+#price-slider {
+    justify-self: center;
+    width: 80%;
+}
+
+#price-slider .noUi-connect {
+    background: #b5b5b5;
+}
+
 form button {
     justify-self: center;
 }
@@ -105,10 +114,10 @@ main {
 }
 
 div.products {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 200px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 250px;
     row-gap: 10px;
-    column-gap: 1vw;
+    column-gap: 10px;
 
 }
 
@@ -116,11 +125,13 @@ div.products {
 div.item {
     border: solid var(--border-color) 1px;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .description-wrapper {
     display: grid;
     grid-template-columns: 1fr auto auto;
+    column-gap: 5px;
 }
 
 div.img-wrapper {
@@ -129,9 +140,13 @@ div.img-wrapper {
     overflow: hidden;
 }
 
-main div.item button {
+main div.item button,
+main div.item form {
     background-color: white;
     border: none;
+    height: 24px;
+    width: 24px;
+    align-self: flex-end;
 }
 
 /* at media queries */
@@ -150,27 +165,45 @@ main div.item button {
     aside {
         margin-left: 0px;
         width: 100%;
+        height: auto;
+        max-height: none;
         position: initial;
+        z-index: auto;
     }
 
 }
 
-@media (max-width:734px) {
-    div.products {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        grid-auto-rows: 160px;
+/* @media (max-width:734px) { */
+/*     div.products { */
+/*         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); */
+/*         grid-auto-rows: 160px; */
+/**/
+/*     } */
+/**/
+/*     div.products h5 { */
+/*         font-size: 0.9em; */
+/*     } */
+/**/
+/*     div.img-wrapper { */
+/*         width: 100%; */
+/*         height: 80px; */
+/*         overflow: hidden; */
+/*     } */
+/* } */
 
+
+
+
+
+/* header */
+
+@media (max-width:500px) {
+    header div a {
+        display: none !important;
     }
 
-    div.img-wrapper {
-        width: 100%;
-        height: 120px;
-        overflow: hidden;
+    header div {
+        justify-self: center;
     }
-}
 
-@media (max-width:480px) {
-    .search-bar {
-        display: none;
-    }
 }
