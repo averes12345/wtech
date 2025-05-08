@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $products = $category->products;
 
-        dump($products);
+        /* dump($products); */
 
         return view('category-page');
     }
@@ -169,7 +169,7 @@ class CategoryController extends Controller
             return $product;
         });
 
-        dump($products);
+        /* dump($products); */
 
         $brands = Brand::all();
         $colors = Color::take(10)->get();

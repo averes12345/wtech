@@ -21,16 +21,16 @@
                     </button>
                 </div>
             </form>
-            <div class="d-flex">
+            <div class="d-flex" style="justify-content:center; align-items:center;">
                 @if(Auth::guard('web')->check())
                     <!-- this should point to the profile page if we get to creating one -->
                     <!-- <a href="/" class="btn btn-link text-white me-3"> -->
-                        <p>Welcome, {{Auth::user()->first_name}}!</p>
+                        <p style="color:white;margin-bottom:0;">Welcome, {{Auth::user()->first_name}}!</p>
                     <!-- </a> -->
                 @elseif(Auth::guard('admin')->check())
                     <!-- this should point to the profile page if we get to creating one -->
                     <a href="/admin/home" class="btn btn-link text-white me-3">
-                        <p>Welcome admin, {{Auth::guard('admin')->user()->first_name}}!</p>
+                        <p style="color:white;margin-bottom:0;">Welcome admin, {{Auth::guard('admin')->user()->first_name}}!</p>
                     </a>
                 @else
                 <a href="/login" class="btn btn-link text-white me-3">
