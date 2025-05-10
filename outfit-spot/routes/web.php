@@ -19,6 +19,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/logout', 'logout')->name('login.logout');
 });
 
+
 Route::middleware(['auth:admin']) ->group(function () {
     Route::get('/admin/home', [AdminHome::class, 'index'])->name('adminHome');
     Route::get('/admin/home/search', [AdminHome::class, 'index'])->name('products.find');
@@ -89,7 +90,7 @@ Route::delete('checkout/{productVariationId}', [CartController::class, 'destroy'
 /* display the registration page */
 Route::get('/registration', [RegistrationController::class, 'showForm']);
 /* submit the registration page form, create user, redirect to login */
-Route::post('/registration', [RegistrationController::class, 'store']);
+Route::post('/registration', [RegistrationController::class, 'store'])->name('register');
 
 /* TESTING ROUTES */
 use App\Services\CartService;

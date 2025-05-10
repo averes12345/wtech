@@ -2,7 +2,7 @@
 <!-- should think about removing the h5 anchors since they dont point to anything-->
 <footer>
     <section class="help-&-contact">
-        <h5>
+        <h5 style="color:white !important;">
             Help & Contact
         </h5>
         <p>
@@ -15,7 +15,7 @@
     </section>
 
     <section class="company">
-        <h5>
+        <h5 style="color:white !important;">
             Company
         </h5>
         <p>
@@ -28,7 +28,7 @@
     </section>
 
     <section class="social-media">
-        <h5>
+        <h5 style="color:white !important;">
             Stay connected
         </h5>
         <p>
