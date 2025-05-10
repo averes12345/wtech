@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ProductColorSize;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Seeder;
 use App\Models\ProductImage;
 
@@ -14,12 +14,11 @@ class ProductImageSeeder extends Seeder
      */
     public function run(): void
     {
-        $dir = '../img/';
 
-        $shirtsDir = '../img/shirts/';
-        $hoodiesDir = '../img/hoodies/';
-        $pantsDir = '../img/pants/';
-        $shoesDir = '../img/shoes/';
+        $shirtsDir = '/img/shirts/';
+        $hoodiesDir = '/img/hoodies/';
+        $pantsDir = '/img/pants/';
+        $shoesDir = '/img/shoes/';
 
         $shirtsImages = [
             ['path' => $shirtsDir . 'gpt-shirt-green.png',  'color_id' => 2],
@@ -42,24 +41,15 @@ class ProductImageSeeder extends Seeder
             ['path' => $shirtsDir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
         ];
         $pantsImages = [
-            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
-            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+            ['path' => $pantsDir . 'gpt-pants-green.png',  'color_id' => 2],
+            ['path' => $pantsDir . 'gpt-pants-red.png',  'color_id' => 1],
+            ['path' => $pantsDir . 'gpt-pants-white.png', 'color_id' => 6],
+            ['path' => $pantsDir . 'gpt-pants-orange.png', 'color_id' => 7],
+            ['path' => $pantsDir . 'gpt-pants-blue.png',  'color_id' => 3],
+            ['path' => $pantsDir . 'gpt-pants-yellow.png', 'color_id' => 4],
+            ['path' => $pantsDir . 'gpt-pants-black.png',  'color_id' => 5],
+            ['path' => $pantsDir . 'gpt-pants-purple.png', 'color_id' => 8],
+            ['path' => $pantsDir . 'gpt-pants-brown.png',  'color_id' => 9],
         ];
         $hoodiesImages = [
             ['path' => $hoodiesDir . 'gpt-hoodie-green.png',  'color_id' => 2],
@@ -82,24 +72,16 @@ class ProductImageSeeder extends Seeder
             ['path' => $hoodiesDir . 'gpt-hoodie-brown-2.png',  'color_id' => 9],
         ];
         $shoesImages = [
-            ['path' => $dir . 'gpt-shirt-green.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-green-2.png',  'color_id' => 2],
-            ['path' => $dir . 'gpt-shirt-red.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-red-2.png',  'color_id' => 1],
-            ['path' => $dir . 'gpt-shirt-white.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-white-2.png', 'color_id' => 6],
-            ['path' => $dir . 'gpt-shirt-orange.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-orange-2.png', 'color_id' => 7],
-            ['path' => $dir . 'gpt-shirt-blue.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-blue-2.png',  'color_id' => 3],
-            ['path' => $dir . 'gpt-shirt-yellow.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-yellow-2.png', 'color_id' => 4],
-            ['path' => $dir . 'gpt-shirt-black.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-black-2.png',  'color_id' => 5],
-            ['path' => $dir . 'gpt-shirt-purple.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-purple-2.png', 'color_id' => 8],
-            ['path' => $dir . 'gpt-shirt-brown.png',  'color_id' => 9],
-            ['path' => $dir . 'gpt-shirt-brown-2.png',  'color_id' => 9],
+            ['path' => $shoesDir . 'gpt-shoe-green.png',  'color_id' => 2],
+            ['path' => $shoesDir . 'gpt-shoe-red.png',  'color_id' => 1],
+            ['path' => $shoesDir . 'gpt-shoe-white.png', 'color_id' => 6],
+            ['path' => $shoesDir . 'gpt-shoe-orange.png', 'color_id' => 7],
+            ['path' => $shoesDir . 'gpt-shoe-orange-2.png', 'color_id' => 7],
+            ['path' => $shoesDir . 'gpt-shoe-blue.png',  'color_id' => 3],
+            ['path' => $shoesDir . 'gpt-shoe-yellow.png', 'color_id' => 4],
+            ['path' => $shoesDir . 'gpt-shoe-black.png',  'color_id' => 5],
+            ['path' => $shoesDir . 'gpt-shoe-purple.png', 'color_id' => 8],
+            ['path' => $shoesDir . 'gpt-shoe-brown.png',  'color_id' => 9],
         ];
 
         $product_variants = ProductColorSize::with('product')->get();
@@ -130,12 +112,35 @@ class ProductImageSeeder extends Seeder
             }
 
             foreach ($candidates as $index => $img) {
-                ProductImage::create([
-                    'product_color_sizes_id' => $variant->id,
-                    'image_path'             => $img['path'],
-                    'alt'                    => 'Product Image',
-                    'is_main'                => $index === 0,
-                ]);
+
+                //1. Vytáranie kopii obrázkov pre každú variantu
+//                $originalPath = public_path($img['path']);
+//
+//                $pathInfo = pathinfo($originalPath);
+//                $newFilename = $pathInfo['filename'] . '_' . $variant->id;
+//                $newPathDB = "../img/copies" . '/' . $newFilename;
+//                $newPath = public_path('img/copies/' . $newFilename);
+//
+//                if (!File::exists($newPath)) {
+//                    File::copy($originalPath, $newPath);
+//                }
+//
+//
+//                ProductImage::create([
+//                    'product_color_sizes_id' => $variant->id,
+//                    'image_path'             => $newPathDB,
+//                    'alt'                    => 'Product Image',
+//                    'is_main'                => $index === 0,
+//                ]);
+
+
+                //1. Obrázky sa zdielaju pre všetky varianty
+//                ProductImage::create([
+//                    'product_color_sizes_id' => $variant->id,
+//                    'image_path'             => $img['path'],
+//                    'alt'                    => 'Product Image',
+//                    'is_main'                => $index === 0,
+//                ]);
             }
         }
     }
