@@ -76,7 +76,7 @@ class CategoryController extends Controller
         }
 
         $products = $query
-            ->paginate(9)
+            ->paginate(12)
             ->withQueryString();
 
         $products->getCollection()->transform(function($product) {

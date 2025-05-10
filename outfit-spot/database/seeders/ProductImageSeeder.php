@@ -114,24 +114,24 @@ class ProductImageSeeder extends Seeder
             foreach ($candidates as $index => $img) {
 
                 //1. Vytáranie kopii obrázkov pre každú variantu
-//                $originalPath = public_path($img['path']);
-//
-//                $pathInfo = pathinfo($originalPath);
-//                $newFilename = $pathInfo['filename'] . '_' . $variant->id;
-//                $newPathDB = "../img/copies" . '/' . $newFilename;
-//                $newPath = public_path('img/copies/' . $newFilename);
-//
-//                if (!File::exists($newPath)) {
-//                    File::copy($originalPath, $newPath);
-//                }
-//
-//
-//                ProductImage::create([
-//                    'product_color_sizes_id' => $variant->id,
-//                    'image_path'             => $newPathDB,
-//                    'alt'                    => 'Product Image',
-//                    'is_main'                => $index === 0,
-//                ]);
+                $originalPath = public_path($img['path']);
+
+                $pathInfo = pathinfo($originalPath);
+                $newFilename = $pathInfo['filename'] . '_' . $variant->id;
+                $newPathDB = "../img/copies" . '/' . $newFilename;
+                $newPath = public_path('img/copies/' . $newFilename);
+
+                if (!File::exists($newPath)) {
+                    File::copy($originalPath, $newPath);
+                }
+
+
+                ProductImage::create([
+                    'product_color_sizes_id' => $variant->id,
+                    'image_path'             => $newPathDB,
+                    'alt'                    => 'Product Image',
+                    'is_main'                => $index === 0,
+                ]);
 
 
                 //1. Obrázky sa zdielaju pre všetky varianty
