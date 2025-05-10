@@ -169,8 +169,6 @@ class CategoryController extends Controller
             return $product;
         });
 
-        dump($products);
-
         $brands = Brand::all();
         $colors = Color::take(10)->get();
 
